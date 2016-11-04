@@ -22,28 +22,37 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   
+  <style type="text/css">
+    #navigation{
+      position: fixed;
+    }
+  </style>
 
 </head>
 <body>
-  <nav class="black" role="navigation">
+  <nav id = "navigation" class="black" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2">My Final Project</span></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#"><span class="white-text text-darken-2">Gonzalo Jordan</span></a></li>
+        <li><a href="#" onClick = "iam()"><span class="white-text text-darken-2">Gonzalo Jordan</span></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#"><span class="black-text text-darken-2">About</span></a></li>
+        <li><a href="#" onClick = "about()"><span class="black-text text-darken-2">About</span></a></li>
         <li><a href="/metodo/method.html"><span class="black-text text-darken-2">Start Method</span></a></li>
         <li><a href="#" onClick = "iam()"><span class="black-text text-darken-2" >I am Gonzalo Jordan</span></a></li>
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">Menu</i></a>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       
     </div>
   </nav>
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
+      <div class="row center"></div>
+      <div class="row center"></div>
+      <div class="row center"></div>
+      <div class="row center"></div>
         <h2 class="header center teal-text text-lighten-2"><strong>Fuzzy Multi-Criteria Method of Group Decision Making</strong></h2>
         <div class="row center"></div>
         <div class="row center"></div>
@@ -211,6 +220,11 @@ All this serves as the basis to be taken as a general objective of this work to 
 
   function iam(){
     bootbox.alert("I am Gonzalo and this is my final test to become an informatic engineer");
+  }
+
+  function about(){
+    bootbox.alert("This a Method to Estimate the best alternative for a problem with 'me' alternatives 'and' criteria and 'k' decisors");
+
   }
   </script>
 
