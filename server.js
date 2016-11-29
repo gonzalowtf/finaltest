@@ -17,7 +17,8 @@ app.use('/files', express.static(__dirname + '/files'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/js', express.static(__dirname + '/js'));
-app.use('/metodo', express.static(__dirname + '/metodo'));
+app.use('/method', express.static(__dirname + '/method'));
+
 
 
 server.listen(port,function(err){
