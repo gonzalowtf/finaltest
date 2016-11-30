@@ -75,20 +75,51 @@
 
     <div class="row">
       <div class="col s3">
-      <div class="container col s12 grey darken-1">
+      <div class="row"></div>
+      <div class="container col s12 white">
       	<div class="row">
       	<div class="card-panel teal lighten-1 flow-text white-text z-depth-3"><center><span id="problems">Problems</span></center></div>
       	</div>
       	<div class="row">
-      		<ul class="collection with-header">
+      		<ul class="collection collapsible collapsible-accordion">
         
-        <li class="collection-item"><div>Problem 1<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Problem 2<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Problem 3<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Problem 4<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+<li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 1</a>
+              <div class="collapsible-body">
+                <ul>
+                  <center><li><a href = "#">Decisors</a></li></center>
+                  <center><li><a href = "#">Criterias</a></li></center>
+                  <center><li><a href = "#">Alternatives</a></li></center>
+                </ul>
+              </div>
+         <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 2</a>
+              <div class="collapsible-body">
+                <ul>
+                  <center><li><a href = "#">Decisors</a></li></center>
+                  <center><li><a href = "#">Criterias</a></li></center>
+                  <center><li><a href = "#">Alternatives</a></li></center>
+                </ul>
+              </div>
+               <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 3</a>
+              <div class="collapsible-body">
+                <ul>
+                  <center><li><a href = "#">Decisors</a></li></center>
+                  <center><li><a href = "#">Criterias</a></li></center>
+                  <center><li><a href = "#">Alternatives</a></li></center>
+                </ul>
+              </div>
+               <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 4</a>
+              <div class="collapsible-body">
+                <ul>
+                  <center><li><a href = "#">Decisors</a></li></center>
+                  <center><li><a href = "#">Criterias</a></li></center>
+                  <center><li><a href = "#">Alternatives</a></li></center>
+                </ul>
+              </div>
       </ul>
       	</div>
       	</div>
+      	<div class="row"></div>
+      	<div class="container col s12 white">
       	<div class="row">
       		<div class="card-panel teal lighten-1 flow-text white-text z-depth-3"><center><span id="enter">Enter New</span></center></div>
       	</div>
@@ -108,18 +139,19 @@
 			      </div>
            </form>
 		</div>
+		</div>
       	
       </div>
        <div class="divider"></div>
 
       <div class="col s8 " id= "content">
       <div class="row"><center><h4><span id="table">Table contents</span></h4></center></div>
-      <table class ="responsive-table highlight red lighten-2 z-depth-2">
+      <table class ="responsive-table highlight red lighten-2 z-depth-2 bordered">
         <thead>
           <tr>
               <th data-field="id"><span class = "white-text text-darken-2">Name</span></th>
-              <th data-field="name"><span class = "white-text text-darken-2">Item Name</span></th>
-              <th data-field="price"><span class = "white-text text-darken-2">Item Price</span></th>
+              <th data-field="name"><span class = "white-text text-darken-2">Rating</span></th>
+              <th data-field="price"><span class = "white-text text-darken-2">Fuzzy Value</span></th>
           </tr>
         </thead>
 
@@ -208,11 +240,11 @@
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="material-icons">clear_all</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">spellcheck</i></a></li>
-      <li><a class="btn-floating blue darken-1"><i class="material-icons">library_books</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">perm_identity</i></a></li>
-      <li><a class="btn-floating teal"><i class="material-icons">add</i></a></li>
+      <li><a class="btn-floating red btn tooltipped" data-position="top" data-delay="50" data-tooltip="Results"><i class="material-icons">clear_all</i></a></li>
+      <li><a class="btn-floating yellow darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Alternatives"><i class="material-icons">spellcheck</i></a></li>
+      <li><a class="btn-floating blue darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Criterias"><i class="material-icons">library_books</i></a></li>
+      <li><a class="btn-floating green btn tooltipped" data-position="top" data-delay="50" data-tooltip="Decisors"><i class="material-icons">perm_identity</i></a></li>
+      <li><a class="btn-floating teal btn tooltipped" data-position="top" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></li>
     </ul>
   </div>
 
