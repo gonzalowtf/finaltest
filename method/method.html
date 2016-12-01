@@ -129,11 +129,29 @@
 			     <div class="row">
 			        <div class="input-field col s12">
 			          <input id="first_name" type="text" class="validate">
-			          <label for="first_name" data-error="wrong" data-success="right">Problem Name</label>
+			          <label for="first_name" data-error="wrong" data-success="right" class = "teal-text text-darken-2">Problem Name</label>
 			        </div>
 			      </div>
+            <div class="row">
+            <center><label> <span class = "teal-text text-darken-2">Decisors</span></label></center>
+               <p class="range-field">
+                <input type="range" id="decisorsQ" min="0" max="30" value="4" />
+              </p>
+            </div>
+            <div class="row">
+            <center><label><span class = "teal-text text-darken-2">Criterias</span></label></center>
+               <p class="range-field">
+                <input type="range" id="criteriasQ" min="0" max="30"  value="4" />
+              </p>
+            </div>
+            <div class="row">
+            <center><label><span class = "teal-text text-darken-2">Alternatives</span></label></center>
+               <p class="range-field">
+                <input type="range" id="alternativesQ" min="0" max="100" value="8" />
+              </p>
+            </div>  
       		      <div class="row">
-			      	<center><button class="btn waves-effect waves-light" type="submit" name="action">add
+			      	<center><button class="btn waves-effect waves-light" type="submit" name="action" data-target="modal1">add
     				<i class="material-icons right">send</i>
   					</button></center>
 			      </div>
@@ -146,12 +164,12 @@
 
       <div class="col s8 " id= "content">
       <div class="row"><center><h4><span id="table">Table contents</span></h4></center></div>
-      <table class ="responsive-table highlight red lighten-2 z-depth-2 bordered">
+      <table class ="responsive-table highlight grey lighten-1 z-depth-2 bordered">
         <thead>
           <tr>
-              <th data-field="id"><span class = "white-text text-darken-2">Name</span></th>
-              <th data-field="name"><span class = "white-text text-darken-2">Rating</span></th>
-              <th data-field="price"><span class = "white-text text-darken-2">Fuzzy Value</span></th>
+              <th data-field="id"><span class = "black-text text-darken-2">Name</span></th>
+              <th data-field="name"><span class = "black-text text-darken-2">Rating</span></th>
+              <th data-field="price"><span class = "black-text text-darken-2">Fuzzy Value</span></th>
           </tr>
         </thead>
 
@@ -249,6 +267,7 @@
   </div>
 
   </div>
+  
    
 
     
@@ -263,7 +282,12 @@
 	function How(){
 		bootbox.alert("This method works");
 	}
-	
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal1').modal();
+  });
 </script>
 
 </html>
