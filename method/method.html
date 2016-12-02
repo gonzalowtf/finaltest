@@ -135,23 +135,23 @@
             <div class="row">
             <center><label> <span class = "teal-text text-darken-2">Decisors</span></label></center>
                <p class="range-field">
-                <input type="range" id="decisorsQ" min="0" max="30" value="4" />
+                <input type="range" id="decisorsQ" min="1" max="30" value="4" />
               </p>
             </div>
             <div class="row">
             <center><label><span class = "teal-text text-darken-2">Criterias</span></label></center>
                <p class="range-field">
-                <input type="range" id="criteriasQ" min="0" max="30"  value="4" />
+                <input type="range" id="criteriasQ" min="1" max="30"  value="4" />
               </p>
             </div>
             <div class="row">
             <center><label><span class = "teal-text text-darken-2">Alternatives</span></label></center>
                <p class="range-field">
-                <input type="range" id="alternativesQ" min="0" max="100" value="8" />
+                <input type="range" id="alternativesQ" min="1" max="100" value="8" />
               </p>
             </div>  
       		      <div class="row">
-			      	<center><button class="btn waves-effect waves-light" type="submit" name="action" data-target="modal1">add
+			      	<center><button class="btn waves-effect waves-light modal-trigger" type="submit" name="action" href="#modal1" data-target = "modal1" >add
     				<i class="material-icons right">send</i>
   					</button></center>
 			      </div>
@@ -267,6 +267,17 @@
   </div>
 
   </div>
+   <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>Enter a number of decisors</p>
+      <input type="text" name="">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
   
    
 
@@ -275,6 +286,8 @@
 <script type="text/javascript" src = "/js/angular.min.js"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
 <script type="text/javascript" src = "/js/method.js"></script>
+<script type="text/javascript" src = "/js/modals.js"></script>
+
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>
 <script src="/js/init.js"></script>
@@ -282,12 +295,6 @@
 	function How(){
 		bootbox.alert("This method works");
 	}
-</script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal1').modal();
-  });
 </script>
 
 </html>
