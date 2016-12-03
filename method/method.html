@@ -52,7 +52,7 @@
 	}
 </style>
 </head>
-<body>
+<body ng-controller = "ProblemsController as pc">
 <nav id = "navigation" class="black" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2">Fuzzy Multi-Criteria Method of Group Decision Making</span></a>
@@ -73,7 +73,7 @@
     </div>
   </nav>
 
-    <div class="row">
+   <div class="row">
       <div class="col s3">
       <div class="row"></div>
       <div class="container col s12 white">
@@ -83,38 +83,16 @@
       	<div class="row">
       		<ul class="collection collapsible collapsible-accordion">
         
-<li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 1</a>
+<li class="bold" ng-repeat = "problem in pc.problemss"><a class="collapsible-header  waves-effect waves-teal">{{problem.name}}</a>
               <div class="collapsible-body">
                 <ul>
-                  <center><li><a href = "#">Decisors</a></li></center>
-                  <center><li><a href = "#">Criterias</a></li></center>
-                  <center><li><a href = "#">Alternatives</a></li></center>
+                  <center><li><a href = "#">Decisors({{problem.nd}})</a></li></center>
+                  <center><li><a href = "#">Criterias({{problem.nc}})</a></li></center>
+                  <center><li><a href = "#">Alternatives({{problem.na}})</a></li></center>
                 </ul>
               </div>
-         <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 2</a>
-              <div class="collapsible-body">
-                <ul>
-                  <center><li><a href = "#">Decisors</a></li></center>
-                  <center><li><a href = "#">Criterias</a></li></center>
-                  <center><li><a href = "#">Alternatives</a></li></center>
-                </ul>
-              </div>
-               <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 3</a>
-              <div class="collapsible-body">
-                <ul>
-                  <center><li><a href = "#">Decisors</a></li></center>
-                  <center><li><a href = "#">Criterias</a></li></center>
-                  <center><li><a href = "#">Alternatives</a></li></center>
-                </ul>
-              </div>
-               <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Problem 4</a>
-              <div class="collapsible-body">
-                <ul>
-                  <center><li><a href = "#">Decisors</a></li></center>
-                  <center><li><a href = "#">Criterias</a></li></center>
-                  <center><li><a href = "#">Alternatives</a></li></center>
-                </ul>
-              </div>
+              </li>
+         
       </ul>
       	</div>
       	</div>
@@ -137,80 +115,10 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
+          <tr ng-repeat = " decisor in problem.decisors">
+            <td>{{decisor.name +" "+decisor.surname}}</td>
+            <td>{{decisor.fuzzyRating}}</td>
+            <td>({{decisor.fuzzyValue1,decisor.fuzzyValue2,decisor.fuzzyValue3}})</td>
           </tr>
         </tbody>
       </table></div>
@@ -231,7 +139,7 @@
 
   </div>
    <!-- Modal Structure -->
-  <div ng-controller = "NewPForm" id="modal1" class="modal">
+  <div id="modal1" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
       <form class="col s12">
@@ -245,9 +153,7 @@
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Decisors</span></label>
                <div class="chip light-blue lighten-4" id= "showD">
-                  Tag
                </div></center>
-               
                <p class="range-field">
                 <input type="range" id="decisorsQ" min="1" max="30" value="4"/>
               </p>
@@ -256,8 +162,7 @@
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Criterias</span></label>
-               <div class="chip light-blue lighten-4" id= "showC">
-                  Tag
+               <div class="chip light-blue lighten-4" id= "showC">a
                </div></center>
                <p class="range-field">
                 <input type="range" id="criteriasQ" min="1" max="30"  value="4" />
@@ -267,9 +172,7 @@
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Alternatives</span></label>
-               <div class="chip light-blue lighten-4" id= "showA">
-                  Tag
-               </div></center>
+               <div class="chip light-blue lighten-4" id= "showA"></div></center>
                <p class="range-field">
                 <input type="range" id="alternativesQ" min="1" max="100" value="8" />
               </p>
@@ -282,7 +185,7 @@
             </div>
            </form>
     </div>
- </div>
+</div>
   
    
 
