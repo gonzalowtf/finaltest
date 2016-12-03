@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Fuzzy Multi-Criteria Method of Group Decision Making</title>
   <!-- Latest compiled and minified CSS -->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -13,7 +14,6 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
@@ -47,9 +47,7 @@
   src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 	}
-	body{
-		background-image: url("/files/tree.jpg");
-	}
+	
 </style>
 </head>
 <body ng-controller = "ProblemsController as pc">
@@ -72,58 +70,47 @@
       
     </div>
   </nav>
-
-   <div class="row">
-      <div class="col s3">
+   <div class="container">
+    <div class="row">
+      <div class="col s12 m12 l12">
       <div class="row"></div>
       <div class="container col s12 white">
       	<div class="row">
+        <div class="col s3"></div>
+        <div class="col s6">
       	<div class="card-panel teal lighten-1 flow-text white-text z-depth-3"><center><span id="problems">Problems</span></center></div>
+          </div>
       	</div>
+
       	<div class="row">
-      		<ul class="collection collapsible collapsible-accordion">
+      		<ul class="collection collapsible collapsible-accordion popout" data-collapsible ="accordion">
         
-<li class="bold" ng-repeat = "problem in pc.problemss"><a class="collapsible-header  waves-effect waves-teal">{{problem.name}}</a>
+<li class="bold" ng-repeat = "problem in pc.problemss">
+
+   <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}}</a>
               <div class="collapsible-body">
                 <ul>
-                  <center><li><a href = "#">Decisors({{problem.nd}})</a></li></center>
-                  <center><li><a href = "#">Criterias({{problem.nc}})</a></li></center>
-                  <center><li><a href = "#">Alternatives({{problem.na}})</a></li></center>
+                  <li><center><a class="waves-effect waves-teal">
+                  <i class="material-icons">perm_identity</i>Decisors({{problem.nd}})</a></center>
+                  </li>
+                  <center><li><a class="waves-effect waves-teal">
+                  <i class="material-icons">library_books</i>Criterias({{problem.nc}})</a></li></center>
+                  <center><li><a class="waves-effect waves-teal">
+                  <i class="material-icons">spellcheck</i>Alternatives({{problem.na}})</a></li></center>
                 </ul>
               </div>
               </li>
          
-      </ul>
+            </ul>
+
+            </div>  
+          
+      	</div>        
       	</div>
-      	</div>
-      	<div class="row"></div>
+      	
       	
 	
-      	
-      </div>
-       <div class="divider"></div>
-
-      <div class="col s8 " id= "content">
-      <div class="row"><center><h4><span id="table">Table contents</span></h4></center></div>
-      <table class ="responsive-table highlight grey lighten-1 z-depth-2 bordered">
-        <thead>
-          <tr>
-              <th data-field="id"><span class = "black-text text-darken-2">Name</span></th>
-              <th data-field="name"><span class = "black-text text-darken-2">Rating</span></th>
-              <th data-field="price"><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr ng-repeat = " decisor in problem.decisors">
-            <td>{{decisor.name +" "+decisor.surname}}</td>
-            <td>{{decisor.fuzzyRating}}</td>
-            <td>({{decisor.fuzzyValue1,decisor.fuzzyValue2,decisor.fuzzyValue3}})</td>
-          </tr>
-        </tbody>
-      </table></div>
-    </div>
-    <div class="row">
+      	<div class="row">
   <div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">add</i>
@@ -136,8 +123,11 @@
       <li><a class="btn-floating teal btn tooltipped modal-trigger" data-target = "modal1" data-position="top" data-delay="50" data-tooltip="Add"><i class="material-icons">add</i></a></li>
     </ul>
   </div>
-
-  </div>
+      </div>
+      
+</div>
+</div>
+  
    <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -193,8 +183,11 @@
 </body>
 <script type="text/javascript" src = "/js/angular.min.js"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
+<script type="text/javascript" src ="/js/jquery.min.js"></script>
 <script type="text/javascript" src = "/js/method.js"></script>
 <script type="text/javascript" src = "/js/modals.js"></script>
+
+
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>

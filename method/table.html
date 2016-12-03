@@ -1,0 +1,24 @@
+ <div class="divider"></div>
+
+      <div class="col s8 " id= "content">
+      <div class="row"><center><h4><span id="table">Table contents</span></h4></center></div>
+      <table class ="responsive-table highlight grey lighten-1 z-depth-2 bordered">
+        <thead>
+          <tr>
+              <th data-field="id"><span class = "black-text text-darken-2">Name</span></th>
+              <th data-field="name"><span class = "black-text text-darken-2">Rating</span></th>
+              <th data-field="price"><span class = "black-text text-darken-2">Fuzzy Value</span></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat = " decisor in problem.decisors">
+            <td>{{decisor.name +" "+decisor.surname}}</td>
+            <td>{{decisor.fuzzyRating}}</td>
+            <td>({{decisor.fuzzyValue1,decisor.fuzzyValue2,decisor.fuzzyValue3}})</td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+    
+</div>

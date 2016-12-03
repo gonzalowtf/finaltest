@@ -28,6 +28,14 @@
 					fuzzyValue1 : 2,
 					fuzzyValue2 : 5,
 					fuzzyValue3: 8 
+				},
+				{
+					name: "Mark",
+					surname: "Twin",
+					fuzzyRating: "Very Important",
+					fuzzyValue1 : 5,
+					fuzzyValue2 : 8,
+					fuzzyValue3: 10 
 				}
 			],
 		},
