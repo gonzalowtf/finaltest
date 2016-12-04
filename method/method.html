@@ -132,44 +132,44 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
-      <form class="col s12">
+      <form class="col s12" name = "NPform" ng-controller = "NewProblem as np" ng-submit = "np.newP(rev)">
            <div class="row">
               <div class="input-field col s12">
-                <input id="first_name" type="text" class="validate">
-                <label for="first_name" data-error="wrong" data-success="right" class = "teal-text text-darken-2">Problem Name</label>
+                <input id="first_name" type="text" class="validate" ng-model = "np.review.name" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Problem Name</label>
               </div>
+
+              <center><span class = "grey-text text-lighten-1">problem name must have no spaces</span></center>
             </div>
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Decisors</span></label>
-               <div class="chip light-blue lighten-4" id= "showD">
-               </div></center>
+               <div class="chip light-blue lighten-4" id= "showD" >{{np.review.qdecisors || 4}}</div></center>
                <p class="range-field">
-                <input type="range" id="decisorsQ" min="1" max="30" value="4"/>
+                <input type="range" id="decisorsQ" min="1" max="30" value="4" ng-model = "np.review.qdecisors"></input>
               </p>
             </div>
             </div>
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Criterias</span></label>
-               <div class="chip light-blue lighten-4" id= "showC">a
-               </div></center>
+               <div class="chip light-blue lighten-4" id= "showC" >{{np.review.qcriterias || 4}}</div></center>
                <p class="range-field">
-                <input type="range" id="criteriasQ" min="1" max="30"  value="4" />
+                <input type="range" id="criteriasQ" min="1" max="30"  value="4" ng-model = "np.review.qcriterias"></input>
               </p>
             </div>
             </div>
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Alternatives</span></label>
-               <div class="chip light-blue lighten-4" id= "showA"></div></center>
+               <div class="chip light-blue lighten-4" id= "showA" >{{np.review.qalternatives || 8}}</div></center>
                <p class="range-field">
-                <input type="range" id="alternativesQ" min="1" max="100" value="8" />
+                <input type="range" id="alternativesQ" min="1" max="100" value="8" ng-model = "np.review.qalternatives"></input>
               </p>
             </div> 
             </div> 
                 <div class="row">
-              <center><button class="btn waves-effect waves-light " type="submit" name="action">add
+              <center><button class="btn waves-effect waves-light " type="submit" value="Submit" name="action">add
             <i class="material-icons right">send</i>
             </button></center>
             </div>

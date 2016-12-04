@@ -9,6 +9,16 @@
 
 	});
 
+	app.controller("NewProblem",function(){
+		this.review = {};
+		
+		this.newP = function(rev){
+			
+		};
+
+
+	});
+
 
 
 
@@ -16,7 +26,7 @@
 
 	var problems = [
 		{
-			name: "problem 1",
+			name: "problem1",
 			nd: 5,
 			nc: 4,
 			na: 3,
@@ -40,13 +50,13 @@
 			],
 		},
 		{
-			name: "problem 2",
+			name: "problem2",
 			nd: 3,
 			nc: 5,
 			na: 9
 		},
 		{
-			name: "problem 3",
+			name: "problem3",
 			nd: 10,
 			nc: 6,
 			na: 2
