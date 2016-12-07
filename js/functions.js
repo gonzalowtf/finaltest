@@ -7,3 +7,9 @@ function toast1(){
 function toast2(){
 	Materialize.toast("Item Deleted!",3000);
 }
+function toast3(){
+	Materialize.toast("Item Edited!",3000);
+}
+function toast4(){
+	Materialize.toast("Item Added!",3000);
+}

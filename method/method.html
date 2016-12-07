@@ -119,7 +119,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons tooltipped" data-tooltip="Add New" data-position="right">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -127,7 +127,7 @@
                         <td>{{decisor.name +" "+decisor.surname}}</td>
                         <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons tooltipped"  data-tooltip ="Edit" data-position="right" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -141,7 +141,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons tooltipped" data-tooltip="Add New" data-position="right">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -149,10 +149,9 @@
                         <td>{{criteria.name +" "+criteria.surname}}</td>
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons tooltipped"  data-tooltip ="Edit" data-position="right" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -163,7 +162,8 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons tooltipped" data-tooltip="Add New" data-position="right">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
+                      
                       </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@
                         <td>{{alternative.name +" "+alternative.surname}}</td>
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
-                       <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons tooltipped"  data-tooltip ="Edit" data-position="right" >mode_edit</i></a>
+                       <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -207,14 +207,8 @@
     </ul>
   </div>
       </div>
-      
+  </div>
 </div>
-</div>
-
-
-
-
-  
    <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -265,6 +259,99 @@
 </div>
 <!-- Modal Trigger -->
 <!-- Modal Structure -->
+<div id="modal4" class="modal">
+    <div class="modal-content">
+      <center><h4>Add Item</h4></center>
+      <form class="col s12" name = "NewItemForm">
+           <div class="row">
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Item Name</label>
+              </div>
+              <div class="col s6">
+              <div class="row"></div>
+              <div class="row"></div>
+              <span class = "grey-text text-lighten-1">Item name must have no spaces</span></div>
+            </div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="(0,0,4)">Normal</option>
+                  <option value="(2,5,8)">Important</option>
+                  <option value="(5,8,10)">Very Important</option>
+                  <option value="(8,10,10)">Most Important</option>
+                </select>
+                <div class="row">
+                <center><label>value</label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button onClick = "toast4()" class="btn waves-effect waves-light teal darken-1  modal-action modal-close" type="submit" value="Submit" name="action">Add
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="modal3" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Item</h4></center>
+      <form class="col s12" name = "EditForm">
+           <div class="row">
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Item Name</label>
+              </div>
+              <div class="col s6">
+              <div class="row"></div>
+              <div class="row"></div>
+              <span class = "grey-text text-lighten-1">Item name must have no spaces</span></div>
+            </div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="(0,0,4)">Normal</option>
+                  <option value="(2,5,8)">Important</option>
+                  <option value="(5,8,10)">Very Important</option>
+                  <option value="(8,10,10)">Most Important</option>
+                </select>
+                <div class="row">
+                <center><label>value</label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button onClick = "toast3()" class="btn waves-effect waves-light red  modal-action modal-close" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+
   <div id="modal2" class="modal">
     <div class="modal-content">
       <h4><center>Delete Element ?</center></h4>
@@ -288,6 +375,7 @@
   </button></center>
     </div>
   </div>
+  
   
   
 </body>
