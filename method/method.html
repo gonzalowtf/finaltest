@@ -24,7 +24,7 @@
   <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Abel|Exo+2|Inconsolata|Indie+Flower|Josefin+Sans|Yanone+Kaffeesatz" rel="stylesheet">
-  
+  <link rel="stylesheet" type="text/css" href="/css/animate.css">
 <style type="text/css">
 	#table{
 		font-family: 'Inconsolata';
@@ -81,7 +81,7 @@
       	<div class="row">
         <div class="col s3"></div>
         <div class="col s6">
-      	<div class="card-panel teal lighten-1 flow-text white-text z-depth-3"><center><span id="problems">Problems</span></center></div>
+      	<div class="card-panel teal lighten-1 flow-text white-text z-depth-3 animated bounce"><center><span id="problems">Problems</span></center></div>
           </div>
       	</div>
 
@@ -108,7 +108,7 @@
                   Alternatives({{problem.na}})</a></li></center>
                 </ul>
                 <div class="panel" ng-show = "table == 1">
-                  <table class ="responsive-table highlight green lighten-1 z-depth-2 bordered">
+                  <table class ="responsive-table highlight green lighten-1 z-depth-2 bordered animated fadeIn">
                     <thead>
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
@@ -131,7 +131,7 @@
                   </table>
                 </div>
                 <div class="panel" ng-show = "table == 2">
-                  <table class ="responsive-table highlight blue lighten-1 z-depth-2 bordered">
+                  <table class ="responsive-table highlight blue lighten-1 z-depth-2 bordered animated fadeIn">
                     <thead>
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
@@ -146,14 +146,14 @@
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons">mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons">delete</i>
+                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger" data-target="modal2">delete</i>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <div class="panel" ng-show = "table == 3">
-                  <table class ="responsive-table highlight yellow lighten-1 z-depth-2 bordered">
+                  <table class ="responsive-table highlight yellow lighten-1 z-depth-2 bordered animated fadeIn">
                     <thead>
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
@@ -168,7 +168,7 @@
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons">mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons">delete</i>
+                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger" data-target="modal2" >delete</i>
                         </td>
                       </tr>
                     </tbody>
@@ -204,30 +204,8 @@
 </div>
 </div>
 
-<!-- Modal Structure -->
-  <div id="modal2" class="modal">
-    <div class="modal-content">
-      <h4><center>Delete Element ?</center></h4>
-      <div class="row">
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row">
-      <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row">
-      <center><button onClick = "toast2()" class="btn btn-large waves-effect red waves-light modal-action modal-close" type="submit" name="action">
-    <i class="material-icons">delete</i></div>
-  </button></center>
-    </div>
-  </div>
+
+
 
   
    <!-- Modal Structure -->
@@ -279,6 +257,30 @@
     </div>
 </div>
 <!-- Modal Trigger -->
+<!-- Modal Structure -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4><center>Delete Element ?</center></h4>
+      <div class="row">
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row">
+      <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row">
+      <center><button onClick = "toast2()" class="btn btn-large waves-effect red waves-light modal-action modal-close" type="submit" name="action">
+    <i class="material-icons">delete</i></div>
+  </button></center>
+    </div>
+  </div>
   
   
 </body>
