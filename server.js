@@ -2,6 +2,8 @@ var express = require("express"),
 	app = express(),
 	http = require("http"),
 	server = http.createServer(app),
+	mongoclient = require('mongodb').MongoClient,
+	assert = require('assert')
 	port = process.env.PORT || 3000;
 
 
@@ -28,4 +30,17 @@ server.listen(port,function(err){
 	else{
 		console.log("server running at localhost:3000 or online port");
 	}
-});	
+});
+
+
+var url = 'mongodb://localhost:27017/datafuzzy';	
+
+
+
+
+mongoclient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+
+  db.close();
+});
