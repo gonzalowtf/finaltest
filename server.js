@@ -5,8 +5,11 @@ var express = require("express"),
 	mongoclient = require('mongodb').MongoClient,
 	mongoose = require('mongoose'),
 	assert = require('assert'),
+	bodyparser = require('body-parser'),
 	port = process.env.PORT || 3000;
 
+
+app.use(bodyparser());
 
 app.get('/', function(req, res) {
           //console.log(req.url);  actual direction

@@ -213,7 +213,7 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
-      <form class="col s12" name = "NPform" ng-controller = "NewProblem as np" ng-submit = "np.newP(rev)">
+      <form class="col s12" name = "NPform" ng-controller ="NewProblem as np" ng-submit = "np.newP()">
            <div class="row">
               <div class="input-field col s12">
                 <input id="first_name" type="text" class="validate" ng-model = "np.review.name" pattern="[a-zA-Z0-9]+" required>
@@ -225,32 +225,32 @@
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Decisors</span></label>
-               <div class="chip light-blue lighten-4" id= "showD" >{{np.review.nd || 4}}</div></center>
+               <div class="chip light-blue lighten-4" id= "showD" >{{np.review.nd}}</div></center>
                <p class="range-field">
-                <input type="range" id="decisorsQ" min="1" max="30" value="4" ng-model = "np.review.nd"></input>
+                <input type="range" id="decisorsQ" min="1" max="30" ng-model = "np.review.nd" required></input>
               </p>
             </div>
             </div>
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Criterias</span></label>
-               <div class="chip light-blue lighten-4" id= "showC" >{{np.review.nc || 4}}</div></center>
+               <div class="chip light-blue lighten-4" id= "showC" >{{np.review.nc}}</div></center>
                <p class="range-field">
-                <input type="range" id="criteriasQ" min="1" max="30"  value="4" ng-model = "np.review.nc"></input>
+                <input type="range" id="criteriasQ" min="1" max="30"  ng-model = "np.review.nc" required></input>
               </p>
             </div>
             </div>
             <div class="row">
             <div class="col s12">
             <center><label> <span class = "teal-text text-darken-2">Alternatives</span></label>
-               <div class="chip light-blue lighten-4" id= "showA" >{{np.review.na || 8}}</div></center>
+               <div class="chip light-blue lighten-4" id= "showA" >{{np.review.na}}</div></center>
                <p class="range-field">
-                <input type="range" id="alternativesQ" min="1" max="100" value="8" ng-model = "np.review.na"></input>
+                <input type="range" id="alternativesQ" min="1" max="100" ng-model = "np.review.na" required></input>
               </p>
             </div> 
             </div> 
                 <div class="row">
-              <center><button onClick = "toast1()" class="btn waves-effect waves-light  modal-action modal-close" type="submit" value="Submit" name="action">add
+              <center><button class="btn waves-effect waves-light" type="submit" value="Submit" name="action">add
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -379,12 +379,14 @@
   
   
 </body>
+
+<script type="text/javascript" src = "/js/functions.js"></script>
 <script type="text/javascript" src = "/js/angular.min.js"></script>
+<script type="text/javascript" src = "/js/angular-resources.min.js"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
 <script type="text/javascript" src ="/js/jquery.min.js"></script>
 <script type="text/javascript" src = "/js/method.js"></script>
 <script type="text/javascript" src = "/js/modals.js"></script>
-<script type="text/javascript" src = "/js/functions.js"></script>
 <script type="text/javascript" src = "/models/problem.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>

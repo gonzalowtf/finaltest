@@ -1,13 +1,13 @@
 (function(){
 
-	var app = angular.module('fuzzy',[]);
-	
-	app.controller("ProblemsController",function($http){
+	var app = angular.module('fuzzy',['ngResource']);
+	app.controller("ProblemsController",['$resource',function($scope,$http,$resource){
 
+		//var source = $resource('api/problems');
 		this.problemss = problems;
-		
 
-	});
+
+	}]);
 
 	app.controller("Tables",function(){
 
@@ -23,16 +23,30 @@
 
 	app.controller("NewProblem",function(){
 		this.review = {};
+		this.review.nd = 4;
+		this.review.nc = 4;
+		this.review.na = 8;
 		
-		this.newP = function(rev){
-			
+		this.newP = function(){
+			//console.log(this.review.nd);
+			problems.push(
+				{
+					name: this.review.name,
+					nd: this.review.nd,
+					nc: this.review.nc,
+					na: this.review.na,
+					
+				}
+				);
+			this.review.name = '';
+			toast1();
+						
 		};
 
 
 	});
 
-
-
+	
 
 
 

@@ -5,7 +5,8 @@
     "mongodb": "^2.2.12",
     "mongoose" : "x.x.x",
     "express" : "x.x.x",
-    "assert" : "x.x.x"
+    "assert" : "x.x.x",
+    "body-parser" : "x.x.x"
     
   }
 }
