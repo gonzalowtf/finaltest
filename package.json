@@ -1,18 +1,11 @@
 {
-  "name": "Fuzzy Multi Criteria of Group Decision Making",
+  "name": "finaltest",
   "version": "0.1.0",
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-shell": "~0.7.0",
-    "express": "x.x.x",
-    "bootbox": "x.x.x",
-    "bootstrap": "x.x.x",
-    "grunt-init": "x.x.x"
-  },
   "dependencies": {
-    "mongodb": "^2.2.12"
+    "mongodb": "^2.2.12",
+    "mongoose" : "x.x.x",
+    "express" : "x.x.x",
+    "assert" : "x.x.x"
+    
   }
 }

@@ -1,8 +1,8 @@
 (function(){
 
 	var app = angular.module('fuzzy',[]);
-
-	app.controller("ProblemsController",function(){
+	
+	app.controller("ProblemsController",function($http){
 
 		this.problemss = problems;
 		

@@ -3,7 +3,8 @@ var express = require("express"),
 	http = require("http"),
 	server = http.createServer(app),
 	mongoclient = require('mongodb').MongoClient,
-	assert = require('assert')
+	mongoose = require('mongoose'),
+	assert = require('assert'),
 	port = process.env.PORT || 3000;
 
 
@@ -20,6 +21,7 @@ app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/method', express.static(__dirname + '/method'));
+app.use('/models', express.static(__dirname + '/models'));
 
 
 
@@ -44,3 +46,7 @@ mongoclient.connect(url, function(err, db) {
 
   db.close();
 });
+
+
+
+mongoose.connect(url);
