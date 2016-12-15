@@ -90,9 +90,11 @@
         
 <li class="bold" ng-repeat = "problem in pc.problemss">
 
-   <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}}</a>
-              <div class="collapsible-body">
+   <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}} </a>
+             <div class="collapsible-body">
                 <ul>
+                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                        <a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Problem" data-position = "right" data-target="modal2" >delete</i></a></center></li>
                   <li><center>
                   <a class="waves-effect waves-teal" ng-click= "table = 1">
                   <i class="material-icons">perm_identity</i>Decisors({{problem.nd}})</a></center>
@@ -127,7 +129,7 @@
                         <td>{{decisor.name +" "+decisor.surname}}</td>
                         <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -149,7 +151,7 @@
                         <td>{{criteria.name +" "+criteria.surname}}</td>
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                     </tbody>
@@ -171,7 +173,7 @@
                         <td>{{alternative.name +" "+alternative.surname}}</td>
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
-                       <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                       <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -182,6 +184,7 @@
                   <center><h2><span class = "flow-text orange-text text-lighten-2 animated fadeInRight">Here will be the results</span></h2></center>
                 </div>
               </div>
+              
               </li>
          
             </ul>
@@ -379,7 +382,8 @@
   
   
 </body>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-resource.js"></script>
 <script type="text/javascript" src = "/js/functions.js"></script>
 <script type="text/javascript" src = "/js/angular.min.js"></script>
 <script type="text/javascript" src = "/js/angular-resources.min.js"></script>

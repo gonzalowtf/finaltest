@@ -6,6 +6,7 @@ var express = require("express"),
 	mongoose = require('mongoose'),
 	assert = require('assert'),
 	bodyparser = require('body-parser'),
+	pController = require('./data-controllers/problemscontroller.js');
 	port = process.env.PORT || 3000;
 
 
@@ -25,9 +26,11 @@ app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/method', express.static(__dirname + '/method'));
 app.use('/models', express.static(__dirname + '/models'));
+app.use('/data-controllers', express.static(__dirname + '/data-controllers'));
 
 
 
+//------------------------Server listening at port 3000--------------------
 server.listen(port,function(err){
 	if(err){
 		console.log("could not start server");
@@ -37,19 +40,38 @@ server.listen(port,function(err){
 	}
 });
 
+//--------------------------------------------------------------------------
+//------------------------------Data Base Connection--------------------------
+
 
 var url = 'mongodb://localhost:27017/datafuzzy';	
 
 
 
-
+// connection with mongoclient
 mongoclient.connect(url, function(err, db) {
   assert.equal(null, err);
-  console.log("Connected successfully to server");
+  console.log("Connected successfully to server with mongoclient");
 
   db.close();
 });
 
 
 
-mongoose.connect(url);
+// connection with mongoose
+
+mongoose.connect(url,function(err){
+	assert.equal(null, err);
+  console.log("Connected successfully to server with mongoose");
+});
+
+
+
+//----------------------------------------------------------------------------------
+//---------------------getting , posting and deleting ---------------------
+
+
+app.get('/api/problems', pController.list);
+app.post('/api/problems', pController.create);
+
+//-------------------------------------------------------------------------

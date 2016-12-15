@@ -1,13 +1,15 @@
 (function(){
 
 	var app = angular.module('fuzzy',['ngResource']);
-	app.controller("ProblemsController",['$resource',function($scope,$http,$resource){
+	app.controller("ProblemsController",function($scope,$http,$resource){
 
-		//var source = $resource('api/problems');
-		this.problemss = problems;
+		var source = $resource('/api/problems');
+		source.query(function (results){
+			this.problemss = results;
 
+		});
 
-	}]);
+	});
 
 	app.controller("Tables",function(){
 
