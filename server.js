@@ -46,7 +46,7 @@ server.listen(port,function(err){
 
 var url = 'mongodb://localhost:27017/datafuzzy';	
 
-
+/*
 
 // connection with mongoclient
 mongoclient.connect(url, function(err, db) {
@@ -56,7 +56,7 @@ mongoclient.connect(url, function(err, db) {
   db.close();
 });
 
-
+*/
 
 // connection with mongoose
 

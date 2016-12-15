@@ -2,11 +2,11 @@
   "name": "finaltest",
   "version": "0.1.0",
   "dependencies": {
+    "angular-resource": "^1.6.0",
+    "assert": "x.x.x",
+    "body-parser": "x.x.x",
+    "express": "x.x.x",
     "mongodb": "^2.2.12",
-    "mongoose" : "x.x.x",
-    "express" : "x.x.x",
-    "assert" : "x.x.x",
-    "body-parser" : "x.x.x"
-    
+    "mongoose": "x.x.x"
   }
 }

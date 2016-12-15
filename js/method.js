@@ -1,15 +1,17 @@
 (function(){
 
-	var app = angular.module('fuzzy',['ngResource']);
-	app.controller("ProblemsController",function($scope,$http,$resource){
-
-		var source = $resource('/api/problems');
-		source.query(function (results){
-			this.problemss = results;
+	var app = angular.module('fuzzy',[]);
+	app.controller("ProblemsController",['$scope','$http',function($scope,$http){
+		//$scope.problemss = problems;
+		var Problem = $http.get('/api/problems');
+		Problem.then(function (results){
+			
+			$scope.problemss = results.data;
 
 		});
-
-	});
+		
+		$scope.problemss = []
+	}]);
 
 	app.controller("Tables",function(){
 
@@ -23,7 +25,7 @@
 		
 	});
 
-	app.controller("NewProblem",function(){
+	app.controller("NewProblem",['$scope','$http' ,function($scope,$http){
 		this.review = {};
 		this.review.nd = 4;
 		this.review.nc = 4;
@@ -31,12 +33,27 @@
 		
 		this.newP = function(){
 			//console.log(this.review.nd);
-			problems.push(
+			$http.post('/api/problems',{
+					name: this.review.name,
+					nd: this.review.nd,
+					nc: this.review.nc,
+					na: this.review.na,
+					decisors : generateD(this.review.nd),
+					criterias : generateC(this.review.nc),
+					alternatives: generateA(this.review.na)
+					
+				}
+				);
+
+			$scope.problemss.push(
 				{
 					name: this.review.name,
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,
+					decisors : generateD(this.review.nd),
+					criterias : generateC(this.review.nc),
+					alternatives: generateA(this.review.na)
 					
 				}
 				);
@@ -46,176 +63,61 @@
 		};
 
 
-	});
-
-	
+	}]);
 
 
-
-	var problems = [
-		{
-			name: "problem1",
-			nd: 5,
-			nc: 4,
-			na: 3,
-			decisors: [
-				{
-					name: "Charly",
-					surname: "Brown",
-					fuzzyRating: "Important",
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 5,
-					fuzzyValue3: 8 
-				},
-				{
-					name: "Mark",
-					surname: "Twin",
-					fuzzyRating: "Very Important",
-					fuzzyValue1 : 5,
-					fuzzyValue2 : 8,
-					fuzzyValue3: 10 
-				}
-			],
-			criterias: [
-				{
-					name: "C1",
-					fuzzyRating: 'Same Importance',
-					fuzzyValue1 : 0,
-					fuzzyValue2 : 1,
-					fuzzyValue3: 2
-
-				},
-				{
-					name: "C2",
-					fuzzyRating: 'Light Importance',
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 3,
-					fuzzyValue3: 4
-
-				},
-				{
-					name: "C3",
-					fuzzyRating: 'Weak Importance',
-					fuzzyValue1 : 1,
-					fuzzyValue2 : 2,
-					fuzzyValue3: 3
-
-				}
-			],
-			alternatives: [
-				{
-					name: "A1",
-					fuzzyRating: 'Same Importance',
-					fuzzyValue1 : 0,
-					fuzzyValue2 : 1,
-					fuzzyValue3: 2
-
-				},
-				{
-					name: "A2",
-					fuzzyRating: 'Light Importance',
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 3,
-					fuzzyValue3: 4
-
-				},
-				{
-					name: "A3",
-					fuzzyRating: 'Weak Importance',
-					fuzzyValue1 : 1,
-					fuzzyValue2 : 2,
-					fuzzyValue3: 3
-
-				}
-
-
-			]
-		},
-		{
-			name: "problem2",
-			nd: 3,
-			nc: 5,
-			na: 9,
-			decisors: [
-				{
-					name: "Charly",
-					surname: "Brown",
-					fuzzyRating: "Important",
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 5,
-					fuzzyValue3: 8 
-				},
-				{
-					name: "Mark",
-					surname: "Twin",
-					fuzzyRating: "Very Important",
-					fuzzyValue1 : 5,
-					fuzzyValue2 : 8,
-					fuzzyValue3: 10 
-				}
-			],
-			criterias: [
-				{
-					name: "C1",
-					fuzzyRating: 'Same Importance',
-					fuzzyValue1 : 0,
-					fuzzyValue2 : 1,
-					fuzzyValue3: 2
-
-				},
-				{
-					name: "C2",
-					fuzzyRating: 'Light Importance',
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 3,
-					fuzzyValue3: 4
-
-				},
-				{
-					name: "C3",
-					fuzzyRating: 'Weak Importance',
-					fuzzyValue1 : 1,
-					fuzzyValue2 : 2,
-					fuzzyValue3: 3
-
-				}
-			],
-			alternatives: [
-				{
-					name: "A1",
-					fuzzyRating: 'Same Importance',
-					fuzzyValue1 : 0,
-					fuzzyValue2 : 1,
-					fuzzyValue3: 2
-
-				},
-				{
-					name: "A2",
-					fuzzyRating: 'Light Importance',
-					fuzzyValue1 : 2,
-					fuzzyValue2 : 3,
-					fuzzyValue3: 4
-
-				},
-				{
-					name: "A3",
-					fuzzyRating: 'Weak Importance',
-					fuzzyValue1 : 1,
-					fuzzyValue2 : 2,
-					fuzzyValue3: 3
-
-				}
-
-
-			]
-		},
-		{
-			name: "problem3",
-			nd: 10,
-			nc: 6,
-			na: 2
-		}
-	];
+	function generateD(nd){
+		var data = [];
+		var des =0;
+		while(des < nd){
+			data.push({
+				name: "d"+(des+1),
+				surname: "",
+				fuzzyRating: "Important",
+				fuzzyValue1 : 2,
+				fuzzyValue2 : 5,
+				fuzzyValue3: 8 
+			});
+			des=des+1;
+		} 
+		
+		
+		return data;
+	}
+	function generateC(nc){
+		var data = [];
+		var cri =0;
+		while(cri < nc){
+			data.push({
+				name: "c"+(cri+1),
+				fuzzyRating: "Same Importance",
+				fuzzyValue1 : 0,
+				fuzzyValue2 : 1,
+				fuzzyValue3: 2 
+			});
+			cri=cri+1;
+		} 
+		
+		
+		return data;
+	}
+	function generateA(na){
+		var data = [];
+		var alt =0;
+		while(alt < na){
+			data.push({
+				name: "a"+(alt+1),
+				fuzzyRating: "Medium",
+				fuzzyValue1 : 3,
+				fuzzyValue2 : 5,
+				fuzzyValue3: 7
+			});
+			alt=alt+1;
+		} 
+		
+		
+		return data;
+	}
 
 
 })();
