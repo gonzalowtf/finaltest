@@ -60,7 +60,9 @@ mongoclient.connect(url, function(err, db) {
 
 // connection with mongoose
 
-mongoose.connect(url,function(err){
+var url2 = "mongodb://hutter:cancer29@ds133438.mlab.com:33438/datafuzzy"; 
+
+mongoose.connect(url2,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });
