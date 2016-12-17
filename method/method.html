@@ -93,7 +93,7 @@
    <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}} </a>
              <div class="collapsible-body">
                 <ul>
-                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "">mode_edit</i></a>
+                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "editProblemModal" ng-submit = "selectedProblem()" onclick="editProblemOpen()">mode_edit</i></a>
                         <a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Problem" data-position = "right">delete</i></a></center></li>
                   <li><center>
                   <a class="waves-effect waves-teal" ng-click= "table = 1">
@@ -126,11 +126,11 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat = "decisor in problem.decisors">
-                        <td>{{decisor.name +" "+decisor.surname}}</td>
+                       <td>{{decisor.name +" "+decisor.surname}}</td>
                         <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseDecisorModal" >delete</i>
+                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseDecisorModal" onclick="eraseDecisorOpen()">delete</i>
                         </td>
                       </tr>
                     </tbody>
@@ -148,7 +148,7 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat = "criteria in problem.criterias">
-                        <td>{{criteria.name +" "+criteria.surname}}</td>
+                        <td>{{criteria.name}}</td>
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
@@ -170,7 +170,7 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat = "alternative in problem.alternatives">
-                        <td>{{alternative.name +" "+alternative.surname}}</td>
+                        <td>{{alternative.name}}</td>
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
@@ -310,6 +310,34 @@
            
     </div>
 </div>
+<div id="editProblemModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Problem Name</h4></center>
+      <form class="col s12" name = "EditProblemForm">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Problem Name</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
 <div id="editDecisorModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Decisor</h4></center>
@@ -358,29 +386,31 @@
     </div>
 </div>
 
-  <div id="eraseDecisorModal" class="modal">
-    <div class="modal-content">
-      <h4><center>Delete Decisor ?</center></h4>
-      <div class="row">
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row">
-      <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row"></div>
-      <div class="row">
-      <center><button onClick = "toast2()" class="btn btn-large waves-effect red waves-light modal-action modal-close" type="submit" name="action">
-    <i class="material-icons">delete</i></div>
-  </button></center>
-    </div>
-  </div>
+<div id="eraseDecisorModal" class="modal">
+                          <div class="modal-content">
+                            <h4><center>Delete Decisor {{decisor.name +" "+decisor.surname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                          </div>
+                        </div>
+
+  
   
   
   

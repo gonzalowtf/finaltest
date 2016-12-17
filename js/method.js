@@ -1,7 +1,14 @@
 (function(){
 
 	var app = angular.module('fuzzy',[]);
-	app.controller("ProblemsController",['$scope','$http',function($scope,$http){
+	app.factory("problemName",function(){
+		return{
+			problemName : ""
+		};
+
+	});
+
+	app.controller("ProblemsController",['$scope','$http','problemName',function($scope,$http){
 		//$scope.problemss = problems;
 		var Problem = $http.get('/api/problems');
 		Problem.then(function (results){
@@ -10,7 +17,12 @@
 
 		});
 		
-		$scope.problemss = []
+		$scope.problemss = [];
+		$scope.selectedProblem = function(){
+			console.log(problemName);
+
+		}
+		
 	}]);
 
 	app.controller("Tables",function(){
@@ -65,11 +77,12 @@
 
 	}]);
 
-	app.controller("EditDecisor",['$scope','$http' ,function($scope,$http){
+	app.controller("EditDecisor",['$scope','$http' ,'problemName' ,function($scope,$http){
 
+			
 			this.review = {};
 			this.editD = function(){
-				
+				 console.log(problemName);
 
 				$http.put('/api/problems',{
 					name: this.review.name,
@@ -92,6 +105,8 @@
 
 
 	}]);
+
+	
 
 
 	function generateD(nd){

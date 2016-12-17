@@ -39,7 +39,11 @@ function editDecisorOpen(){
 }
 function eraseDecisorOpen(){
 	$('#eraseDecisorModal').openModal();
+
 }
 function addDecisorOpen(){
 	$('#addDecisorModal').openModal();
+}
+function editProblemOpen(){
+	$('#editProblemModal').openModal();
 }

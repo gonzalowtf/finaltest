@@ -10,7 +10,7 @@ var express = require("express"),
 	port = process.env.PORT || 3000;
 
 
-app.use(bodyparser());
+
 
 app.get('/', function(req, res) {
           //console.log(req.url);  actual direction
@@ -27,6 +27,10 @@ app.use('/js', express.static(__dirname + '/js'));
 app.use('/method', express.static(__dirname + '/method'));
 app.use('/models', express.static(__dirname + '/models'));
 app.use('/data-controllers', express.static(__dirname + '/data-controllers'));
+app.use(bodyparser());
+//app.use(bodyparser.json());
+
+
 
 
 
