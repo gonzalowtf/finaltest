@@ -2,9 +2,9 @@ function how(){
 	bootbox.alert("This is a fine method to get the best solution for your problem");
 }
 function createProblemClose(){
-	$('#modal1').closeModal();
+	$('#newProblemModal').closeModal();
 
-	//var modal = document.getElementById('modal1');
+	//var modal = document.getElementById('newProblemModal');
 	//modal.style.display = "none";
 	//Materialize.toast("tap the screen to continue",4000);
 }
@@ -12,11 +12,18 @@ function toast1(){
 	Materialize.toast("Problem created!",3000);
 	createProblemClose();
 }
+function addDecisorClose(){
+	$('#addDecisorModal').closeModal();
+}
+function eraseDecisorClose(){
+	$('#eraseDecisorModal').closeModal();
+}
 function editDecisorClose(){
-	$('#modal3').closeModal();
+	$('#editDecisorModal').closeModal();
 }
 function toast2(){
-	Materialize.toast("Item Deleted!",3000);
+	Materialize.toast("Decisor Deleted!",3000);
+	eraseDecisorClose();
 }
 function toast3(){
 	Materialize.toast("Decisor Edited!",3000);
@@ -24,8 +31,15 @@ function toast3(){
 
 }
 function toast4(){
-	Materialize.toast("Item Added!",3000);
+	Materialize.toast("Decisor Added!",3000);
+	addDecisorClose();
 }
 function editDecisorOpen(){
-	$('#modal3').openModal();
+	$('#editDecisorModal').openModal();
+}
+function eraseDecisorOpen(){
+	$('#eraseDecisorModal').openModal();
+}
+function addDecisorOpen(){
+	$('#addDecisorModal').openModal();
 }

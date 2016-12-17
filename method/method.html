@@ -93,8 +93,8 @@
    <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}} </a>
              <div class="collapsible-body">
                 <ul>
-                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "modal3" >mode_edit</i></a>
-                        <a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Problem" data-position = "right" data-target="modal2" >delete</i></a></center></li>
+                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "">mode_edit</i></a>
+                        <a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Problem" data-position = "right">delete</i></a></center></li>
                   <li><center>
                   <a class="waves-effect waves-teal" ng-click= "table = 1">
                   <i class="material-icons">perm_identity</i>Decisors({{problem.nd}})</a></center>
@@ -121,7 +121,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "addDecisorModal">add</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -129,8 +129,8 @@
                         <td>{{decisor.name +" "+decisor.surname}}</td>
                         <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" onclick="editDecisorOpen()">mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
+                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseDecisorModal" >delete</i>
                         </td>
                       </tr>
                     </tbody>
@@ -206,14 +206,14 @@
       <li><a class="btn-floating yellow darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Alternatives"><i class="material-icons">spellcheck</i></a></li>
       <li><a class="btn-floating blue darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Criterias"><i class="material-icons">library_books</i></a></li>
       <li><a class="btn-floating green btn tooltipped" data-position="top" data-delay="50" data-tooltip="Decisors"><i class="material-icons">perm_identity</i></a></li>
-      <li><a class="btn-floating teal btn tooltipped modal-trigger" data-target = "modal1" data-position="top" data-delay="50" data-tooltip="Add New Problem"><i class="material-icons">add</i></a></li>
+      <li><a class="btn-floating teal btn tooltipped modal-trigger" data-target = "newProblemModal" data-position="top" data-delay="50" data-tooltip="Add New Problem"><i class="material-icons">add</i></a></li>
     </ul>
   </div>
       </div>
   </div>
 </div>
    <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+  <div id="newProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
       <form class="col s12" name = "NPform" ng-controller ="NewProblem as np" ng-submit = "np.newP()">
@@ -262,19 +262,21 @@
 </div>
 <!-- Modal Trigger -->
 <!-- Modal Structure -->
-<div id="modal4" class="modal">
+<div id="addDecisorModal" class="modal">
     <div class="modal-content">
-      <center><h4>Add Item</h4></center>
+      <center><h4>Add Decisor</h4></center>
       <form class="col s12" name = "NewItemForm">
            <div class="row">
               <div class="input-field col s6">
                 <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
-                <label for="first_name" data-error="wrong" data-success="right">Item Name</label>
+                <label for="first_name" data-error="wrong" data-success="right">Decisor Name</label>
               </div>
-              <div class="col s6">
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Decisor Surname</label>
+              </div>
               <div class="row"></div>
-              <div class="row"></div>
-              <span class = "grey-text text-lighten-1">Item name must have no spaces</span></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
             </div>
             <div class="row">
             <div class="col s6">
@@ -282,7 +284,7 @@
               </div>
             
               <div class="col s6">
-                 <select class="browser-default">
+                 <select class="browser-default" required="">
                   <option value="" disabled selected>Choose your option</option>
                   <option value="(0,0,4)">Normal</option>
                   <option value="(2,5,8)">Important</option>
@@ -308,7 +310,7 @@
            
     </div>
 </div>
-<div id="modal3" class="modal">
+<div id="editDecisorModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Decisor</h4></center>
       <form class="col s12" name = "EditDecisorForm" ng-controller = "EditDecisor as ed" ng-submit ="ed.editD()">
@@ -356,9 +358,9 @@
     </div>
 </div>
 
-  <div id="modal2" class="modal">
+  <div id="eraseDecisorModal" class="modal">
     <div class="modal-content">
-      <h4><center>Delete Element ?</center></h4>
+      <h4><center>Delete Decisor ?</center></h4>
       <div class="row">
       <div class="row"></div>
       <div class="row"></div>
