@@ -65,6 +65,34 @@
 
 	}]);
 
+	app.controller("EditDecisor",['$scope','$http' ,function($scope,$http){
+
+			this.review = {};
+			this.editD = function(){
+				
+
+				$http.put('/api/problems',{
+					name: this.review.name,
+					surname: this.review.name,
+					fuzzyRating : this.review.rating,
+					fuzzyValue1 : this.review.v1,
+					fuzzyValue2 : this.review.v2,
+					fuzzyValue3 : this.review.v3
+				}
+
+				);
+
+				$scope.problemss.put()
+
+				//toast3() !
+
+			}
+
+
+
+
+	}]);
+
 
 	function generateD(nd){
 		var data = [];
@@ -119,5 +147,6 @@
 		return data;
 	}
 
+	
 
 })();

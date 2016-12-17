@@ -45,6 +45,7 @@ server.listen(port,function(err){
 
 
 var url = 'mongodb://localhost:27017/datafuzzy';	
+var url2 = "mongodb://hutter:cancer29@ds133438.mlab.com:33438/datafuzzy"; 
 
 /*
 
@@ -60,9 +61,9 @@ mongoclient.connect(url, function(err, db) {
 
 // connection with mongoose
 
-var url2 = "mongodb://hutter:cancer29@ds133438.mlab.com:33438/datafuzzy"; 
 
-mongoose.connect(url2,function(err){
+
+mongoose.connect(url,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });

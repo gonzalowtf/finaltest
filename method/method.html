@@ -129,7 +129,7 @@
                         <td>{{decisor.name +" "+decisor.surname}}</td>
                         <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" onclick="editDecisorOpen()">mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -253,7 +253,7 @@
             </div> 
             </div> 
                 <div class="row">
-              <center><button class="btn waves-effect waves-light" type="submit" value="Submit" name="action">add
+              <center><button class="btn waves-effect waves-light " type="submit" value="Submit" name="action" >add
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -310,25 +310,26 @@
 </div>
 <div id="modal3" class="modal">
     <div class="modal-content">
-      <center><h4>Edit Item</h4></center>
-      <form class="col s12" name = "EditForm">
+      <center><h4>Edit Decisor</h4></center>
+      <form class="col s12" name = "EditDecisorForm" ng-controller = "EditDecisor as ed" ng-submit ="ed.editD()">
            <div class="row">
               <div class="input-field col s6">
-                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
-                <label for="first_name" data-error="wrong" data-success="right">Change Item Name</label>
+                <input id="item_name" type="text" class="validate" ng-model = "ed.review.name" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Decisor Name</label>
               </div>
-              <div class="col s6">
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" ng-model = "ed.review.surname" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Decisor Surname</label>
+              </div>
               <div class="row"></div>
-              <div class="row"></div>
-              <span class = "grey-text text-lighten-1">Item name must have no spaces</span></div>
-            </div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
             <div class="row">
             <div class="col s6">
               <h6><span>Rate Item</span></h6>
               </div>
             
               <div class="col s6">
-                 <select class="browser-default">
+                 <select class="browser-default" ng-model="ed.review.rating" required="">
                   <option value="" disabled selected>Choose your option</option>
                   <option value="(0,0,4)">Normal</option>
                   <option value="(2,5,8)">Important</option>
@@ -336,14 +337,14 @@
                   <option value="(8,10,10)">Most Important</option>
                 </select>
                 <div class="row">
-                <center><label>value</label></center>
+                <center><label>Value {{ed.review.rating}} </label></center>
                 </div>
               </div></div>          
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button onClick = "toast3()" class="btn waves-effect waves-light red  modal-action modal-close" type="submit" value="Submit" name="action">Change
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
             <i class="material-icons right">send</i>
             </button></center>
             </div>
