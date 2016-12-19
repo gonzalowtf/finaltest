@@ -12,3 +12,11 @@ module.exports.list = function (req, res) {
     res.json(results);
   });
 }
+module.exports.delete = function (req, res) {
+  var pid = req.params.id;
+  console.log(pid + " problem id recived on server");
+  Problem.remove({_id:pid}, function (err, results) {
+    console.log(results);
+    
+  });
+}

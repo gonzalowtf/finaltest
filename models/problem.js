@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 
 module.exports = mongoose.model('Problem',{
+	id: {type: String ,require: true},	
 	name: {type : String , require : true},
 	nd: {type : Number , require : true},
 	nc: {type : Number , require : true},

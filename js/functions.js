@@ -18,6 +18,9 @@ function addDecisorClose(){
 function eraseDecisorClose(){
 	$('#eraseDecisorModal').closeModal();
 }
+function eraseProblemClose(){
+	$('#eraseProblemModal').closeModal();
+}
 function editDecisorClose(){
 	$('#editDecisorModal').closeModal();
 }
@@ -34,6 +37,10 @@ function toast4(){
 	Materialize.toast("Decisor Added!",3000);
 	addDecisorClose();
 }
+function toast5(){
+	Materialize.toast("Problem erased!",3000);
+	eraseProblemClose();
+}
 function editDecisorOpen(){
 	$('#editDecisorModal').openModal();
 }
@@ -46,4 +53,8 @@ function addDecisorOpen(){
 }
 function editProblemOpen(){
 	$('#editProblemModal').openModal();
+}
+function eraseProblemOpen(){
+	$('#eraseProblemModal').openModal();
+
 }

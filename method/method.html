@@ -90,11 +90,16 @@
         
 <li class="bold" ng-repeat = "problem in problemss">
 
-   <a class="collapsible-header  waves-effect waves-teal"><i class="small material-icons">label</i>{{problem.name}} </a>
+   <a class="collapsible-header  waves-effect waves-teal" ng-click = "problemName(problem.name,problem._id)"><i class="small material-icons">label</i>{{problem.name}}</a>
              <div class="collapsible-body">
                 <ul>
-                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "editProblemModal" ng-submit = "selectedProblem()" onclick="editProblemOpen()">mode_edit</i></a>
-                        <a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Problem" data-position = "right">delete</i></a></center></li>
+                <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "editProblemModal" onclick="editProblemOpen()">mode_edit</i></a>
+                        <a class="btn-floating btn-small black waves-effect waves-light"  >
+                        <i class="large material-icons modal-trigger tooltipped"  data-tooltip="Delete Problem" data-position = "right" data-target = "eraseProblemModal" onclick="eraseProblemOpen()">delete</i>
+                        </a>
+                      </center>
+                 </li>
+                  
                   <li><center>
                   <a class="waves-effect waves-teal" ng-click= "table = 1">
                   <i class="material-icons">perm_identity</i>Decisors({{problem.nd}})</a></center>
@@ -310,6 +315,34 @@
            
     </div>
 </div>
+<div id="eraseProblemModal" class="modal">
+    <div class="modal-content">
+    <form ng-controller ="EraseProblem" ng-submit = "eraseP()">
+      <center><h4>Erase Problem {{pName.name}}?</h4></center>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>All data will be erased</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" name="action" value = "Submit">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>                    
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
 <div id="editProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Problem Name</h4></center>
@@ -338,6 +371,7 @@
            
     </div>
 </div>
+
 <div id="editDecisorModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Decisor</h4></center>
@@ -385,7 +419,6 @@
            
     </div>
 </div>
-
 <div id="eraseDecisorModal" class="modal">
                           <div class="modal-content">
                             <h4><center>Delete Decisor {{decisor.name +" "+decisor.surname}} ?</center></h4>
@@ -410,10 +443,6 @@
                           </div>
                         </div>
 
-  
-  
-  
-  
 </body>
 <script type="text/javascript" src = "/js/functions.js"></script>
 <script type="text/javascript" src = "/js/angular.min.js"></script>

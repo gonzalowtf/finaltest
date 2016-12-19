@@ -80,5 +80,6 @@ mongoose.connect(url,function(err){
 
 app.get('/api/problems', pController.list);
 app.post('/api/problems', pController.create);
+app.delete('/api/problems/:id',pController.delete);
 
 //-------------------------------------------------------------------------

@@ -1,28 +1,39 @@
 (function(){
 
 	var app = angular.module('fuzzy',[]);
-	app.factory("problemName",function(){
-		return{
-			problemName : ""
-		};
-
-	});
-
-	app.controller("ProblemsController",['$scope','$http','problemName',function($scope,$http){
+	app.service('serveProblemName', [function () 
+		{
+			return {
+				name: "",
+				id: ""
+			};
+		}]);
+	app.controller("ProblemsController",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 		//$scope.problemss = problems;
 		var Problem = $http.get('/api/problems');
 		Problem.then(function (results){
 			
 			$scope.problemss = results.data;
-
+			
 		});
 		
 		$scope.problemss = [];
-		$scope.selectedProblem = function(){
-			console.log(problemName);
-
-		}
+		$scope.problemName = function(pname,idp){
+			$scope.pName =pname;
+			serveProblemName.name = $scope.pName;
+			serveProblemName.id = idp;
+		};
+		var refresh = function(){
+			var Problem = $http.get('/api/problems');
+		Problem.then(function (results){
+			
+			$scope.problemss = results.data;
+			
+		});
 		
+		$scope.problemss = [];
+		};
+		refresh();
 	}]);
 
 	app.controller("Tables",function(){
@@ -77,12 +88,12 @@
 
 	}]);
 
-	app.controller("EditDecisor",['$scope','$http' ,'problemName' ,function($scope,$http){
+	app.controller("EditDecisor",['$scope','$http',function($scope,$http){
 
 			
 			this.review = {};
 			this.editD = function(){
-				 console.log(problemName);
+				 
 
 				$http.put('/api/problems',{
 					name: this.review.name,
@@ -104,6 +115,19 @@
 
 
 
+	}]);
+	app.controller("EraseProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			
+			$scope.pName = serveProblemName;
+			$scope.eraseP = function(){
+					var id = $scope.pName.id;
+					console.log(id);
+					$http.delete('/api/problems/'+id);
+					toast5();
+						
+			}
 	}]);
 
 	
