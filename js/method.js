@@ -10,12 +10,16 @@
 		}]);
 	app.controller("ProblemsController",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 		//$scope.problemss = problems;
-		var Problem = $http.get('/api/problems');
+		$scope.refresh = function(){
+			var Problem = $http.get('/api/problems');
 		Problem.then(function (results){
 			
 			$scope.problemss = results.data;
 			
 		});
+		};
+		$scope.refresh();
+		
 		
 		$scope.problemss = [];
 		$scope.problemName = function(pname,idp){
@@ -23,17 +27,10 @@
 			serveProblemName.name = $scope.pName;
 			serveProblemName.id = idp;
 		};
-		var refresh = function(){
-			var Problem = $http.get('/api/problems');
-		Problem.then(function (results){
-			
-			$scope.problemss = results.data;
-			
-		});
+		
 		
 		$scope.problemss = [];
-		};
-		refresh();
+		
 	}]);
 
 	app.controller("Tables",function(){
@@ -80,6 +77,8 @@
 					
 				}
 				);
+				
+			$scope.refresh();
 			this.review.name = '';
 			toast1();
 						
@@ -126,7 +125,20 @@
 					console.log(id);
 					$http.delete('/api/problems/'+id);
 					toast5();
-						
+					$scope.refresh();
+			}
+	}]);
+	app.controller("EditProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+				
+			$scope.pName = serveProblemName;
+			$scope.editP= function(){
+					var id = $scope.pName.id;
+					var req ={name:$scope.pName.name};
+					$http.put('/api/problems/'+id,req);
+					toast6();
+					$scope.refresh();					
+					$scope.pName.name = "";
 			}
 	}]);
 

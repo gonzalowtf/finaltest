@@ -24,6 +24,9 @@ function eraseProblemClose(){
 function editDecisorClose(){
 	$('#editDecisorModal').closeModal();
 }
+function editProblemClose(){
+	$('#editProblemModal').closeModal();
+}
 function toast2(){
 	Materialize.toast("Decisor Deleted!",3000);
 	eraseDecisorClose();
@@ -40,6 +43,10 @@ function toast4(){
 function toast5(){
 	Materialize.toast("Problem erased!",3000);
 	eraseProblemClose();
+}
+function toast6(){
+	Materialize.toast("Problem name updated!",3000);
+	editProblemClose();
 }
 function editDecisorOpen(){
 	$('#editDecisorModal').openModal();

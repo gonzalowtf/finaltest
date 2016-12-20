@@ -346,11 +346,11 @@
 <div id="editProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Problem Name</h4></center>
-      <form class="col s12" name = "EditProblemForm">
+      <form class="col s12" name = "EditProblemForm" ng-controller = "EditProblem" ng-submit ="editP()">
            <div class="row">
               <div class="input-field col s12">
-                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
-                <label for="first_name" data-error="wrong" data-success="right">Change Problem Name</label>
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required ng-model = "pName.name">
+                <label for="first_name" data-error="wrong" data-success="right">Change Problem Name "{{pName.name}}"</label>
               </div>
               <div class="row"></div>
               <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
