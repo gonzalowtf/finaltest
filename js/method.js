@@ -30,6 +30,10 @@
 		
 		
 		$scope.problemss = [];
+
+		$scope.decisorId = function(decisorid){
+			$scope.did = decisorid;
+		}
 		
 	}]);
 
@@ -87,28 +91,51 @@
 
 	}]);
 
-	app.controller("EditDecisor",['$scope','$http',function($scope,$http){
+	app.controller("EditDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
 			
 			this.review = {};
+			$scope.pName = serveProblemName;
 			this.editD = function(){
-				 
+				var v1 = parseInt(this.review.rating[1]);
+				var v2 = parseInt(this.review.rating[3]);
+				var v3 = parseInt(this.review.rating[5]);
+				var len = $scope.problemss.length;
+				 console.log($scope.did);
+				 for(i =0;i<len;i++){
+						var key = $scope.problemss[i].id;
+						console.log("vuelta :"+i +" "+$scope.pName.id);
+						if(key == $scope.pName.id ){
+							var len2 =$scope.problemss[i].decisors.length;
+							console.log(len2);
 
-				$http.put('/api/problems',{
-					name: this.review.name,
-					surname: this.review.name,
-					fuzzyRating : this.review.rating,
-					fuzzyValue1 : this.review.v1,
-					fuzzyValue2 : this.review.v2,
-					fuzzyValue3 : this.review.v3
-				}
-
-				);
-
-				$scope.problemss.put()
-
-				//toast3() !
-
+							
+							for(j=0;j<len2;j++){
+								var key2= $scope.problemss[i].decisors[j];
+								if(key2 ==$scope.did){
+									$http.put('/api/problems/' +$scope.pName.id +'/'+ $scope.did,{
+									name: this.review.name,
+									surname: this.review.name,
+									fuzzyRating : this.review.rating,
+									fuzzyValue1 : v1,
+									fuzzyValue2 : v2,
+									fuzzyValue3 : v3
+							});
+							$scope.problemss[i].decisors[j].push({
+									name: this.review.name,
+									surname: this.review.name,
+									fuzzyRating : this.review.rating,
+									fuzzyValue1 : v1,
+									fuzzyValue2 : v2,
+									fuzzyValue3 : v3
+							});
+								}
+								}
+							}
+							
+							}
+				
+					
 			}
 
 
@@ -126,6 +153,9 @@
 					$http.delete('/api/problems/'+id);
 					toast5();
 					$scope.refresh();
+					
+									
+
 			}
 	}]);
 	app.controller("EditProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
@@ -137,7 +167,15 @@
 					var req ={name:$scope.pName.name};
 					$http.put('/api/problems/'+id,req);
 					toast6();
-					$scope.refresh();					
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i].id;
+						if(key == $scope.pName.id ){
+							$scope.problemss[i].push({name: $scope.pName.name});
+						}
+					}
+					$scope.refresh();
 					$scope.pName.name = "";
 			}
 	}]);

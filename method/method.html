@@ -132,9 +132,9 @@
                     <tbody>
                       <tr ng-repeat = "decisor in problem.decisors">
                        <td>{{decisor.name +" "+decisor.surname}}</td>
-                        <td>{{decisor.fuzzyRating}}</td>
+                       <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"  ng-click="decisorId(decisor._id)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseDecisorModal" onclick="eraseDecisorOpen()">delete</i>
                         </td>
                       </tr>
@@ -421,7 +421,7 @@
 </div>
 <div id="eraseDecisorModal" class="modal">
                           <div class="modal-content">
-                            <h4><center>Delete Decisor {{decisor.name +" "+decisor.surname}} ?</center></h4>
+                            <h4><center>Delete Decisor ?</center></h4>
                             <div class="row">
                             <div class="row"></div>
                             <div class="row"></div>
