@@ -24,6 +24,12 @@ function eraseProblemClose(){
 function editDecisorClose(){
 	$('#editDecisorModal').closeModal();
 }
+function editCriteriaClose(){
+	$('#editCriteriaModal').closeModal();
+}
+function editAlternativeClose(){
+	$('#editAlternativeModal').closeModal();
+}
 function editProblemClose(){
 	$('#editProblemModal').closeModal();
 }
@@ -48,8 +54,22 @@ function toast6(){
 	Materialize.toast("Problem name updated!",3000);
 	editProblemClose();
 }
+function toast7(){
+	Materialize.toast("Criteria Edited !",3000);
+	editCriteriaClose();
+}
+function toast8(){
+	Materialize.toast("Alternative Edited !",3000);
+	editAlternativeClose();
+}
 function editDecisorOpen(){
 	$('#editDecisorModal').openModal();
+}
+function editCriteriaOpen(){
+	$('#editCriteriaModal').openModal();
+}
+function editAlternativeOpen(){
+	$('#editAlternativeModal').openModal();
 }
 function eraseDecisorOpen(){
 	$('#eraseDecisorModal').openModal();

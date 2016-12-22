@@ -23,7 +23,7 @@ module.exports = mongoose.model('Problem',{
 		{
 			name: {type : String , require : true},
 			fuzzyRating: {type : String,
-				enum: ['Same Importance','Waek Importance','Light Importance','Importance between light and accentuated'
+				enum: ['Same Importance','Weak Importance','Light Importance','Importance between light and accentuated'
 				,'Importance Accentuated','Strong Importance','Very Strong Importance'
 				,'Extremely Strong Importance','Absolute Importance'],
 				require : true} ,

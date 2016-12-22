@@ -34,6 +34,12 @@
 		$scope.decisorId = function(decisorid){
 			$scope.did = decisorid;
 		}
+		$scope.criteriaId = function(criteriaid){
+			$scope.cid = criteriaid;
+		}
+		$scope.alternativeId = function(alternativeid){
+			$scope.aid = alternativeid;
+		}
 		
 	}]);
 
@@ -97,43 +103,122 @@
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.editD = function(){
-				var v1 = parseInt(this.review.rating[1]);
-				var v2 = parseInt(this.review.rating[3]);
-				var v3 = parseInt(this.review.rating[5]);
+				var v1 = findV1Decisor(this.review.rating);
+				var v2 = findV2Decisor(this.review.rating);
+				var v3 = findV3Decisor(this.review.rating);
 				var len = $scope.problemss.length;
-				 console.log($scope.did);
+				$scope.refresh();
 				 for(i =0;i<len;i++){
-						var key = $scope.problemss[i].id;
-						console.log("vuelta :"+i +" "+$scope.pName.id);
+						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							var len2 =$scope.problemss[i].decisors.length;
-							console.log(len2);
+							var len2 = $scope.problemss[i].decisors.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.did == $scope.problemss[i].decisors[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "decisor",
+									_id:  $scope.did,
+									name: this.review.name,
+									surname: this.review.surname,
+									fuzzyRating : this.review.rating,
+									fuzzyValue1 : v1,
+									fuzzyValue2 : v2,
+									fuzzyValue3 : v3
+							});
+							 $scope.refresh();
+							toast3();
+							this.review = {};
+								}
+							}
+						}
+					}
+				
+					
+			}
 
-							
-							for(j=0;j<len2;j++){
-								var key2= $scope.problemss[i].decisors[j];
-								if(key2 ==$scope.did){
-									$http.put('/api/problems/' +$scope.pName.id +'/'+ $scope.did,{
+
+
+
+	}]);
+	app.controller("EditCriteria",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.editC = function(){
+				var v1 = findV1Criteria(this.review.rating);
+				var v2 = findV2Criteria(this.review.rating);
+				var v3 = findV3Criteria(this.review.rating);
+				var len = $scope.problemss.length;
+				$scope.refresh();
+				 for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							var len2 = $scope.problemss[i].criterias.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.cid == $scope.problemss[i].criterias[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "criteria",
+									_id:  $scope.cid,
 									name: this.review.name,
-									surname: this.review.name,
 									fuzzyRating : this.review.rating,
 									fuzzyValue1 : v1,
 									fuzzyValue2 : v2,
 									fuzzyValue3 : v3
 							});
-							$scope.problemss[i].decisors[j].push({
+							 $scope.refresh();
+							toast7();
+							this.review = {};
+								}
+							}
+						}
+					}
+				
+					
+			}
+
+
+
+
+	}]);
+	app.controller("EditAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.editA = function(){
+				var v1 = findV1Alternative(this.review.rating);
+				var v2 = findV2Alternative(this.review.rating);
+				var v3 = findV3Alternative(this.review.rating);
+				var len = $scope.problemss.length;
+				$scope.refresh();
+				 for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							var len2 = $scope.problemss[i].alternatives.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.aid == $scope.problemss[i].alternatives[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "alternative",
+									_id:  $scope.aid,
 									name: this.review.name,
-									surname: this.review.name,
 									fuzzyRating : this.review.rating,
 									fuzzyValue1 : v1,
 									fuzzyValue2 : v2,
 									fuzzyValue3 : v3
 							});
-								}
+							 $scope.refresh();
+							toast8();
+							this.review = {};
 								}
 							}
-							
-							}
+						}
+					}
 				
 					
 			}
@@ -236,6 +321,206 @@
 		return data;
 	}
 
+	function findV1Decisor(fuzzyRating){
+		if(fuzzyRating == "(0,0,4)"){
+			return 0;
+		}
+		if(fuzzyRating == "(2,5,8)"){
+          return 2;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 5;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 8;
+        }
+	}
+	function findV2Decisor(fuzzyRating){
+		if(fuzzyRating == "(0,0,4)"){
+			return 0;
+		}
+		if(fuzzyRating == "(2,5,8)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 8;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+	}
+	function findV3Decisor(fuzzyRating){
+		if(fuzzyRating == "(0,0,4)"){
+			return 4;
+		}
+		if(fuzzyRating == "(2,5,8)"){
+          return 8;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+	}
+ function findV1Criteria(fuzzyRating){
+ 	if(fuzzyRating == "(0,1,2)"){
+          return 0;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+			return 1;       
+		 }
+        if(fuzzyRating == "(2,3,4)"){
+          return 2;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 3;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 6;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 7;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 8;
+        }
+ }
+ function findV2Criteria(fuzzyRating){
+ 	if(fuzzyRating == "(0,1,2)"){
+          return 1;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+			return 2;       
+		 }
+        if(fuzzyRating == "(2,3,4)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 4;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 6;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 7;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 8;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 9;
+        }
+ }
+
+ function findV3Criteria(fuzzyRating){
+ 	if(fuzzyRating == "(0,1,2)"){
+          return 2;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+			return 3;       
+		 }
+        if(fuzzyRating == "(2,3,4)"){
+          return 4;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 5;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 8;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 9;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 10;
+        }
+ }
+ function findV1Alternative(fuzzyRating){
+ 	if(fuzzyRating == "(0,0,1)"){
+          return 0;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 0;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 1;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 3;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 5;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 7;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 9;
+        }
+ }
+  function findV2Alternative(fuzzyRating){
+ 	if(fuzzyRating == "(0,0,1)"){
+          return 0;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 1;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 7;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 9;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 10;
+        }
+ }
+ function findV3Alternative(fuzzyRating){
+ 	if(fuzzyRating == "(0,0,1)"){
+          return 1;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 3;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 5;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 9;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 10;
+        }
+ }
+	
 	
 
 })();

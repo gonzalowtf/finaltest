@@ -82,5 +82,5 @@ app.get('/api/problems', pController.list);
 app.post('/api/problems', pController.create);
 app.delete('/api/problems/:id',pController.delete);
 app.put('/api/problems/:id',pController.update);
-
+//app.put('/api/problems/:id/decisors/:id',pController.updateDecisor);
 //-------------------------------------------------------------------------

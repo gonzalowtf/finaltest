@@ -156,7 +156,7 @@
                         <td>{{criteria.name}}</td>
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()" ng-click="criteriaId(criteria._id)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                     </tbody>
@@ -178,7 +178,7 @@
                         <td>{{alternative.name}}</td>
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
-                       <td><a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "modal3" >mode_edit</i></a>
+                       <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id)" onclick="editAlternativeOpen()"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editAlternativeModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
                         </td>
                       </tr>
@@ -402,6 +402,100 @@
                 </select>
                 <div class="row">
                 <center><label>Value {{ed.review.rating}} </label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="editCriteriaModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Criteria</h4></center>
+      <form class="col s12" name = "EditCriteriaForm" ng-controller = "EditCriteria as ec" ng-submit ="ec.editC()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" ng-model = "ec.review.name" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Criteria Name</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default" ng-model="ec.review.rating" required="">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="(0,1,2)">Same Importance</option>
+                  <option value="(1,2,3)">Weak Importance</option>
+                  <option value="(2,3,4)">Light Importance</option>
+                  <option value="(3,4,5)">Importance between light and accentuated</option>
+                  <option value="(3,5,7)">Importance Accentuated</option>
+                  <option value="(5,6,7)">Strong Importance</option>
+                  <option value="(6,7,8)">Very Strong Importance</option>
+                  <option value="(7,8,9)">Extremely Strong Importance</option>
+                  <option value="(8,9,10)">Absolute Importance</option>
+                </select>
+                <div class="row">
+                <center><label>Value {{ec.review.rating}} </label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="editAlternativeModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Alternative</h4></center>
+      <form class="col s12" name = "EditAlternativeForm" ng-controller = "EditAlternative as ea" ng-submit ="ea.editA()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" ng-model = "ea.review.name" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Change Alternative Name</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default" ng-model="ea.review.rating" required="">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="(0,0,1)">Extremely Low</option>
+                  <option value="(0,1,3)">Very Low</option>
+                  <option value="(1,3,5)">Low</option>
+                  <option value="(3,5,7)">Medium</option>
+                  <option value="(5,7,9)">High</option>
+                  <option value="(7,9,10)">Very High</option>
+                  <option value="(9,10,10)">Extremely High</option>
+                 </select>
+                <div class="row">
+                <center><label>Value {{ea.review.rating}} </label></center>
                 </div>
               </div></div>          
             <div class="row"></div>
