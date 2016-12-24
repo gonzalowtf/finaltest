@@ -9,6 +9,7 @@ module.exports = mongoose.model('Problem',{
 	na: {type : Number , require : true},
 	decisors:[
 		{
+			
 			name: {type : String , require : true},
 			surname: {type : String , require : true},
 			fuzzyRating:{type : String,
@@ -21,6 +22,7 @@ module.exports = mongoose.model('Problem',{
 	],
 	criterias:[
 		{
+			
 			name: {type : String , require : true},
 			fuzzyRating: {type : String,
 				enum: ['Same Importance','Weak Importance','Light Importance','Importance between light and accentuated'
@@ -37,6 +39,7 @@ module.exports = mongoose.model('Problem',{
 	],
 	alternatives:[
 		{
+
 			name: {type : String , require : true},
 			fuzzyRating: {type : String,
 				enum: ['Extremely Low','Very Low','Low','Medium'

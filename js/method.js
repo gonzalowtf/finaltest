@@ -31,14 +31,21 @@
 		
 		$scope.problemss = [];
 
-		$scope.decisorId = function(decisorid){
+		$scope.decisorId = function(decisorid,decisorname,decisorsurname,decisorfuzzyrating){
 			$scope.did = decisorid;
+			$scope.dname = decisorname;
+			$scope.dsurname = decisorsurname;
+			$scope.dfuzzyrating = decisorfuzzyrating;
 		}
-		$scope.criteriaId = function(criteriaid){
+		$scope.criteriaId = function(criteriaid,criterianame,criteriafuzzyrating){
 			$scope.cid = criteriaid;
+			$scope.cname = criterianame;
+			$scope.cfuzzyrating = criteriafuzzyrating;
 		}
-		$scope.alternativeId = function(alternativeid){
+		$scope.alternativeId = function(alternativeid,alternativename,alternativefuzzyrating){
 			$scope.aid = alternativeid;
+			$scope.aname = alternativename;
+			$scope.afuzzyrating = alternativefuzzyrating;
 		}
 		
 	}]);
@@ -111,6 +118,12 @@
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
+							if(this.review.name == null){
+							this.review.name = $scope.dname;
+								}
+						if(this.review.surname == null){
+							this.review.surname = $scope.dsurname;
+							}
 							var len2 = $scope.problemss[i].decisors.length;
 							//$scope.did
 							$scope.refresh();
@@ -118,6 +131,7 @@
 								if($scope.did == $scope.problemss[i].decisors[j]._id){
 									$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "decisor",
+									action: "edit",
 									_id:  $scope.did,
 									name: this.review.name,
 									surname: this.review.surname,
@@ -129,7 +143,7 @@
 							 $scope.refresh();
 							toast3();
 							this.review = {};
-								}
+							}
 							}
 						}
 					}
@@ -155,6 +169,9 @@
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
+							if(this.review.name == null){
+							this.review.name =$scope.cname;
+								}
 							var len2 = $scope.problemss[i].criterias.length;
 							//$scope.did
 							$scope.refresh();
@@ -172,6 +189,7 @@
 							 $scope.refresh();
 							toast7();
 							this.review = {};
+							
 								}
 							}
 						}
@@ -198,6 +216,9 @@
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
+							if(this.review.name == null){
+							this.review.name = $scope.aname;
+								}
 							var len2 = $scope.problemss[i].alternatives.length;
 							//$scope.did
 							$scope.refresh();
@@ -233,9 +254,10 @@
 			
 			$scope.pName = serveProblemName;
 			$scope.eraseP = function(){
+					
 					var id = $scope.pName.id;
-					console.log(id);
 					$http.delete('/api/problems/'+id);
+					$scope.refresh();
 					toast5();
 					$scope.refresh();
 					
@@ -262,6 +284,42 @@
 					}
 					$scope.refresh();
 					$scope.pName.name = "";
+			}
+	}]);
+
+
+	app.controller("EraseDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			
+			$scope.pName = serveProblemName;
+			this.eraseD = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							var len2 = $scope.problemss[i].decisors.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.did == $scope.problemss[i].decisors[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "decisor",
+									action : "erase",
+									_id:  $scope.did
+									
+							});
+							 	$scope.refresh();
+								toast2();
+							
+								}
+							}
+						}
+					}
+									
+									
+
 			}
 	}]);
 

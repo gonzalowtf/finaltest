@@ -14,11 +14,13 @@ module.exports.list = function (req, res) {
 }
 module.exports.delete = function (req, res) {
   var pid = req.params.id;
-  //console.log(pid + " problem id recived on server");
-  Problem.remove({_id:pid}, function (err, results) {
-    //console.log("data successfully erased");    
-  });
-}
+  Problem.remove({_id:pid},function(err,results){
+          if(err){
+              console.log("err on delete");
+            }
+
+        });
+  }
 module.exports.update = function (req, res) {
   var pid = req.params.id;
   //console.log(pid + " problem id recived on server");
@@ -28,6 +30,7 @@ module.exports.update = function (req, res) {
       } 
       //console.log(req.body);
       if(req.body.type == "decisor"){
+            if(req.body.action == "edit"){
             //console.log("decisor info update request");
             var len = results.decisors.length;
             //console.log("decisor q:"+len);
@@ -47,8 +50,23 @@ module.exports.update = function (req, res) {
                       //console.log("decisor successfully updated"); 
                    });
                 }
-
+              }
                        }
+           if(req.body.action == "erase"){
+             var len = results.decisors.length;
+            //console.log("decisor q:"+len);
+            for(i=0;i<len;i++){
+              if(results.decisors[i]._id ==req.body._id ){
+                console.log("match");
+
+                // aca falta la eliminacion
+                 results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("decisor successfully updated"); 
+                   });
+              }
+            }
+           }            
            
       }
       else
