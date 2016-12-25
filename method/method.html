@@ -49,6 +49,7 @@
 	}
 	
 </style>
+<link rel="stylesheet" type="text/css" href="/method/modals.html">
 </head>
 <body ng-controller = "ProblemsController as pc">
 <nav id = "navigation" class="black" role="navigation">
@@ -157,7 +158,7 @@
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
+                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
                         </td>
                     </tbody>
                   </table>
@@ -179,7 +180,7 @@
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
                        <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)" onclick="editAlternativeOpen()"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editAlternativeModal" >mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="modal2" >delete</i>
+                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseAlternativeModal" onclick="eraseAlternativeOpen()" >delete</i>
                         </td>
                       </tr>
                     </tbody>
@@ -218,7 +219,7 @@
   </div>
 </div>
    <!-- Modal Structure -->
-  <div id="newProblemModal" class="modal">
+<div id="newProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
       <form class="col s12" name = "NPform" ng-controller ="NewProblem as np" ng-submit = "np.newP()">
@@ -420,6 +421,31 @@
            
     </div>
 </div>
+<div id="eraseCriteriaModal" class="modal">
+                        <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+                          <div class="modal-content">
+                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
 <div id="editCriteriaModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Criteria</h4></center>
@@ -469,6 +495,31 @@
            
     </div>
 </div>
+<div id="eraseAlternativeModal" class="modal">
+                        <form ng-controller = "EraseAlternative as ea" ng-submit ="ea.eraseA()">
+                          <div class="modal-content">
+                            <h4><center>Delete Alternative {{aname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
 <div id="editAlternativeModal" class="modal">
     <div class="modal-content">
       <center><h4>Edit Alternative</h4></center>
@@ -516,6 +567,8 @@
            
     </div>
 </div>
+
+              
 <div id="eraseDecisorModal" class="modal">
                         <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
                           <div class="modal-content">
@@ -541,6 +594,10 @@
                         </form>
                           </div>
                         </div>
+
+
+
+
 
 </body>
 <script type="text/javascript" src = "/js/functions.js"></script>

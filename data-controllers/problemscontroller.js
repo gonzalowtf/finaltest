@@ -56,14 +56,16 @@ module.exports.update = function (req, res) {
              var len = results.decisors.length;
             //console.log("decisor q:"+len);
             for(i=0;i<len;i++){
-              if(results.decisors[i]._id ==req.body._id ){
-                console.log("match");
-
-                // aca falta la eliminacion
-                 results.save(function (err, result) {
+              if(results.decisors[i]._id ==req.body._id){
+                
+                results.decisors.splice(i,1);
+                results.nd = results.nd -1;
+                results.save(function (err, result) {
                      res.json(result);
                       //console.log("decisor successfully updated"); 
                    });
+
+                 break;
               }
             }
            }            
@@ -72,6 +74,7 @@ module.exports.update = function (req, res) {
       else
         if(req.body.type == "criteria"){
           //console.log("decisor info update request");
+          if(req.body.action == "edit"){
             var len = results.criterias.length;
             //console.log("decisor q:"+len);
             for(i =0; i < len;i++ ){
@@ -91,10 +94,30 @@ module.exports.update = function (req, res) {
                 }
 
                        }
+                     }
+          if(req.body.action == "erase"){
+             var len = results.criterias.length;
+            //console.log("decisor q:"+len);
+            for(i=0;i<len;i++){
+              if(results.criterias[i]._id ==req.body._id){
+                
+                results.criterias.splice(i,1);
+                results.nc = results.nc -1;
+                results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("decisor successfully updated"); 
+                   });
+
+                 break;
+              }
+            }
+
+          }
         }
         else
           if(req.body.type =="alternative"){
              //console.log("decisor info update request");
+             if(req.body.action == "edit"){
             var len = results.alternatives.length;
             //console.log("decisor q:"+len);
             for(i =0; i < len;i++ ){
@@ -114,6 +137,25 @@ module.exports.update = function (req, res) {
                 }
 
                        }
+                     }
+
+            if(req.body.action == "erase"){
+                 var len = results.alternatives.length;
+            //console.log("decisor q:"+len);
+            for(i=0;i<len;i++){
+              if(results.alternatives[i]._id ==req.body._id){
+                
+                results.alternatives.splice(i,1);
+                results.na = results.na -1;
+                results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("decisor successfully updated"); 
+                   });
+
+                 break;
+              }
+            }
+            }
           }
       else{
       results.name= req.body.name;

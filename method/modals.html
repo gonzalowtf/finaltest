@@ -1,0 +1,376 @@
+<div id="newProblemModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Enter a New Problem</h4></center>
+      <form class="col s12" name = "NPform" ng-controller ="NewProblem as np" ng-submit = "np.newP()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="first_name" type="text" class="validate" ng-model = "np.review.name" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Problem Name</label>
+              </div>
+
+              <center><span class = "grey-text text-lighten-1">problem name must have no spaces</span></center>
+            </div>
+            <div class="row">
+            <div class="col s12">
+            <center><label> <span class = "teal-text text-darken-2">Decisors</span></label>
+               <div class="chip light-blue lighten-4" id= "showD" >{{np.review.nd}}</div></center>
+               <p class="range-field">
+                <input type="range" id="decisorsQ" min="1" max="30" ng-model = "np.review.nd" required></input>
+              </p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col s12">
+            <center><label> <span class = "teal-text text-darken-2">Criterias</span></label>
+               <div class="chip light-blue lighten-4" id= "showC" >{{np.review.nc}}</div></center>
+               <p class="range-field">
+                <input type="range" id="criteriasQ" min="1" max="30"  ng-model = "np.review.nc" required></input>
+              </p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col s12">
+            <center><label> <span class = "teal-text text-darken-2">Alternatives</span></label>
+               <div class="chip light-blue lighten-4" id= "showA" >{{np.review.na}}</div></center>
+               <p class="range-field">
+                <input type="range" id="alternativesQ" min="1" max="100" ng-model = "np.review.na" required></input>
+              </p>
+            </div> 
+            </div> 
+                <div class="row">
+              <center><button class="btn waves-effect waves-light " type="submit" value="Submit" name="action" >add
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+    </div>
+</div>
+<!-- Modal Trigger -->
+<!-- Modal Structure -->
+<div id="addDecisorModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Add Decisor</h4></center>
+      <form class="col s12" name = "NewItemForm">
+           <div class="row">
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Decisor Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <label for="first_name" data-error="wrong" data-success="right">Decisor Surname</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+            </div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default" required="">
+                  <option value="" disabled selected>Weight</option>
+                  <option value="(0,0,4)">Normal</option>
+                  <option value="(2,5,8)">Important</option>
+                  <option value="(5,8,10)">Very Important</option>
+                  <option value="(8,10,10)">Most Important</option>
+                </select>
+                <div class="row">
+                <center><label>value</label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button onClick = "toast4()" class="btn waves-effect waves-light teal darken-1  modal-action modal-close" type="submit" value="Submit" name="action">Add
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="eraseProblemModal" class="modal">
+    <div class="modal-content">
+    <form ng-controller ="EraseProblem" ng-submit = "eraseP()">
+      <center><h4>Erase Problem {{pName.name}}?</h4></center>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>All data will be erased</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" name="action" value = "Submit">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>                    
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="editProblemModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Problem Name</h4></center>
+      <form class="col s12" name = "EditProblemForm" ng-controller = "EditProblem" ng-submit ="editP()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required ng-model = "pName.name">
+                <label for="first_name" data-error="wrong" data-success="right">Change Problem Name "{{pName.name}}"</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+
+<div id="editDecisorModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Decisor</h4></center>
+      <form class="col s12" name = "EditDecisorForm" ng-controller = "EditDecisor as ed" ng-submit ="ed.editD()">
+           <div class="row">
+              <div class="input-field col s6">
+                <input id="item_name" type="text"  ng-model = "ed.review.name" class="validate" pattern="[a-zA-Z0-9]+">
+                <label for="first_name" data-error="wrong" data-success="right">Change Decisor Name "{{dname}}"</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="item_name" type="text" class="validate" ng-model = "ed.review.surname" pattern="[a-zA-Z0-9]+">
+                <label for="first_name" data-error="wrong" data-success="right">Change Decisor Surname "{{dsurname}}"</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+              <center>Actual weight: {{dfuzzyrating}}</center>
+                 <select class="browser-default" ng-model="ed.review.rating" required="">
+                  <option value="" selected>Choose Weight</option>
+                  <option value="(0,0,4)">Normal</option>
+                  <option value="(2,5,8)">Important</option>
+                  <option value="(5,8,10)">Very Important</option>
+                  <option value="(8,10,10)">Most Important</option>
+                </select>
+                <div class="row">
+                <center><label>Value {{ed.review.rating}} </label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="eraseCriteriaModal" class="modal">
+                        <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+                          <div class="modal-content">
+                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
+<div id="editCriteriaModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Criteria</h4></center>
+      <form class="col s12" name = "EditCriteriaForm" ng-controller = "EditCriteria as ec" ng-submit ="ec.editC()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" ng-model = "ec.review.name" pattern="[a-zA-Z0-9]+">
+                <label for="first_name" data-error="wrong" data-success="right">Change Criteria Name "{{cname}}"</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                <center>Actual weight: {{cfuzzyrating}}</center>
+                 <select class="browser-default" ng-model="ec.review.rating" required="">
+                  <option value="" disabled selected>Choose Weight</option>
+                  <option value="(0,1,2)">Same Importance</option>
+                  <option value="(1,2,3)">Weak Importance</option>
+                  <option value="(2,3,4)">Light Importance</option>
+                  <option value="(3,4,5)">Importance between light and accentuated</option>
+                  <option value="(3,5,7)">Importance Accentuated</option>
+                  <option value="(5,6,7)">Strong Importance</option>
+                  <option value="(6,7,8)">Very Strong Importance</option>
+                  <option value="(7,8,9)">Extremely Strong Importance</option>
+                  <option value="(8,9,10)">Absolute Importance</option>
+                </select>
+                <div class="row">
+                <center><label>Value {{ec.review.rating}} </label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="eraseAlternativeModal" class="modal">
+                        <form ng-controller = "EraseAlternative as ea" ng-submit ="ea.eraseA()">
+                          <div class="modal-content">
+                            <h4><center>Delete Alternative {{aname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
+<div id="editAlternativeModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Edit Alternative</h4></center>
+      <form class="col s12" name = "EditAlternativeForm" ng-controller = "EditAlternative as ea" ng-submit ="ea.editA()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" ng-model = "ea.review.name" pattern="[a-zA-Z0-9]+" >
+                <label for="first_name" data-error="wrong" data-success="right">Change Alternative Name "{{aname}}"</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+              <center>Actual weight: {{afuzzyrating}}</center>
+                 <select class="browser-default" ng-model="ea.review.rating" required="">
+                  <option value="" selected>Choose Weight</option>
+                  <option value="(0,0,1)">Extremely Low</option>
+                  <option value="(0,1,3)">Very Low</option>
+                  <option value="(1,3,5)">Low</option>
+                  <option value="(3,5,7)">Medium</option>
+                  <option value="(5,7,9)">High</option>
+                  <option value="(7,9,10)">Very High</option>
+                  <option value="(9,10,10)">Extremely High</option>
+                 </select>
+                <div class="row">
+                <center><label>Value {{ea.review.rating}} </label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+
+              
+<div id="eraseDecisorModal" class="modal">
+                        <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
+                          <div class="modal-content">
+                            <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
+

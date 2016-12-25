@@ -179,6 +179,7 @@
 								if($scope.cid == $scope.problemss[i].criterias[j]._id){
 									$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "criteria",
+									action: "edit",
 									_id:  $scope.cid,
 									name: this.review.name,
 									fuzzyRating : this.review.rating,
@@ -226,6 +227,7 @@
 								if($scope.aid == $scope.problemss[i].alternatives[j]._id){
 									$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "alternative",
+									action : "edit",
 									_id:  $scope.aid,
 									name: this.review.name,
 									fuzzyRating : this.review.rating,
@@ -307,11 +309,13 @@
 									$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "decisor",
 									action : "erase",
-									_id:  $scope.did
+									_id:  $scope.did,
 									
 							});
 							 	$scope.refresh();
 								toast2();
+								break;
+
 							
 								}
 							}
@@ -323,7 +327,72 @@
 			}
 	}]);
 
-	
+app.controller("EraseCriteria",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+			$scope.pName = serveProblemName;
+			this.eraseC = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							var len2 = $scope.problemss[i].criterias.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.cid == $scope.problemss[i].criterias[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "criteria",
+									action : "erase",
+									_id:  $scope.cid,
+									
+							});
+							 	$scope.refresh();
+								toast9();
+								break;
+
+							
+								}
+							}
+						}
+					}
+									
+									
+
+			}
+	}]);	
+app.controller("EraseAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+			$scope.pName = serveProblemName;
+			this.eraseA = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							var len2 = $scope.problemss[i].alternatives.length;
+							//$scope.did
+							$scope.refresh();
+							for(j= 0;j<len2;j++){
+								if($scope.aid == $scope.problemss[i].alternatives[j]._id){
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "alternative",
+									action : "erase",
+									_id:  $scope.aid,
+									
+							});
+							 	$scope.refresh();
+								toast10();
+								break;
+
+							
+								}
+							}
+						}
+					}
+									
+									
+
+			}
+	}]);
 
 
 	function generateD(nd){

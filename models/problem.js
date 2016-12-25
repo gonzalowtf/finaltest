@@ -9,7 +9,7 @@ module.exports = mongoose.model('Problem',{
 	na: {type : Number , require : true},
 	decisors:[
 		{
-			
+			_id: {type : String , require : true},
 			name: {type : String , require : true},
 			surname: {type : String , require : true},
 			fuzzyRating:{type : String,

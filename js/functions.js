@@ -18,6 +18,12 @@ function addDecisorClose(){
 function eraseDecisorClose(){
 	$('#eraseDecisorModal').closeModal();
 }
+function eraseCriteriaClose(){
+	$('#eraseCriteriaModal').closeModal();
+}
+function eraseAlternativeClose(){
+	$('#eraseAlternativeModal').closeModal();
+}
 function eraseProblemClose(){
 	$('#eraseProblemModal').closeModal();
 }
@@ -34,7 +40,7 @@ function editProblemClose(){
 	$('#editProblemModal').closeModal();
 }
 function toast2(){
-	Materialize.toast("Decisor Deleted!",3000);
+	Materialize.toast("Decisor Erased!",3000);
 	eraseDecisorClose();
 }
 function toast3(){
@@ -47,7 +53,7 @@ function toast4(){
 	addDecisorClose();
 }
 function toast5(){
-	Materialize.toast("Problem erased!",3000);
+	Materialize.toast("Problem Erased!",3000);
 	eraseProblemClose();
 }
 function toast6(){
@@ -62,6 +68,14 @@ function toast8(){
 	Materialize.toast("Alternative Edited !",3000);
 	editAlternativeClose();
 }
+function toast9(){
+	Materialize.toast("Criteria Erased !",3000);
+	eraseCriteriaClose();
+}
+function toast10(){
+	Materialize.toast("Alternative Erased !",3000);
+	eraseAlternativeClose();
+}
 function editDecisorOpen(){
 	$('#editDecisorModal').openModal();
 }
@@ -75,6 +89,10 @@ function eraseDecisorOpen(){
 	$('#eraseDecisorModal').openModal();
 
 }
+function eraseCriteriaOpen(){
+	$('#eraseCriteriaModal').openModal();
+
+}
 function addDecisorOpen(){
 	$('#addDecisorModal').openModal();
 }
@@ -83,5 +101,9 @@ function editProblemOpen(){
 }
 function eraseProblemOpen(){
 	$('#eraseProblemModal').openModal();
+
+}
+function eraseAlternativeOpen(){
+	$('#eraseAlternativeModal').openModal();
 
 }
