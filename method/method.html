@@ -74,6 +74,7 @@
       
     </div>
   </nav>
+
    <div class="container">
     <div class="row">
       <div class="col s12 m12 l12">
@@ -127,7 +128,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "addDecisorModal">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Decisor" data-position="right" data-target= "addDecisorModal" onclick="addDecisorOpen()">add</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -135,12 +136,14 @@
                        <td>{{decisor.name +" "+decisor.surname}}</td>
                        <td>{{decisor.fuzzyRating}}</td>
                         <td>({{decisor.fuzzyValue1}},{{decisor.fuzzyValue2}},{{decisor.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light"  ng-click="decisorId(decisor._id,decisor.name,decisor.surname,decisor.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click="decisorId(decisor._id,decisor.name,decisor.surname,decisor.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseDecisorModal" onclick="eraseDecisorOpen()">delete</i>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light"  ng-click="decisorId(decisor._id,decisor.name,decisor.surname,decisor.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Decisor" data-position="right" data-target = "editDecisorModal" onclick="editDecisorOpen()">mode_edit</i></a>
+                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click="decisorId(decisor._id,decisor.name,decisor.surname,decisor.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Decisor" data-position = "right" data-target="eraseDecisorModal" onclick="eraseDecisorOpen()">delete</i>
                         </td>
                       </tr>
                     </tbody>
                   </table>
+
+
                 </div>
                 <div class="panel" ng-show = "table == 2">
                   <table class ="responsive-table highlight blue lighten-1 z-depth-2 bordered animated fadeIn">
@@ -149,7 +152,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Criteria" data-position="right" data-target= "addCriteriaModal" onclick="addCriteriaOpen()">add</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -157,8 +160,8 @@
                         <td>{{criteria.name}}</td>
                         <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
-                        <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
+                        <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()"  ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Criteria" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
+                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Criteria" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
                         </td>
                     </tbody>
                   </table>
@@ -170,7 +173,7 @@
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New" data-position="right" data-target= "modal4">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Alternative" data-position="right" data-target= "addAlternativeModal" onclick="addAlternativeOpen()">add</i></th>
                       
                       </tr>
                     </thead>
@@ -179,8 +182,8 @@
                         <td>{{alternative.name}}</td>
                         <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
-                       <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)" onclick="editAlternativeOpen()"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Item" data-position="right" data-target = "editAlternativeModal" >mode_edit</i></a>
-                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Item" data-position = "right" data-target="eraseAlternativeModal" onclick="eraseAlternativeOpen()" >delete</i>
+                       <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)" ><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Alternative" data-position="right" data-target = "editAlternativeModal"  onclick="editAlternativeOpen()" >mode_edit</i></a>
+                        <a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Alternative" data-position = "right" data-target="eraseAlternativeModal" onclick="eraseAlternativeOpen()" >delete</i>
                         </td>
                       </tr>
                     </tbody>
@@ -217,8 +220,7 @@
   </div>
       </div>
   </div>
-</div>
-   <!-- Modal Structure -->
+     <!-- Modal Structure -->
 <div id="newProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
@@ -271,14 +273,14 @@
 <div id="addDecisorModal" class="modal">
     <div class="modal-content">
       <center><h4>Add Decisor</h4></center>
-      <form class="col s12" name = "NewItemForm">
+      <form class="col s12" name = "NewDForm" ng-controller ="AddDecisor as ad" ng-submit="ad.addD()">
            <div class="row">
               <div class="input-field col s6">
-                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" ng-model ="ad.review.name" required>
                 <label for="first_name" data-error="wrong" data-success="right">Decisor Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" required>
+                <input id="item_name" type="text" class="validate" ng-model ="ad.review.surname" pattern="[a-zA-Z0-9]+" required>
                 <label for="first_name" data-error="wrong" data-success="right">Decisor Surname</label>
               </div>
               <div class="row"></div>
@@ -290,7 +292,7 @@
               </div>
             
               <div class="col s6">
-                 <select class="browser-default" required="">
+                 <select class="browser-default" ng-model = "ad.review.fuzzyRating" required>
                   <option value="" disabled selected>Weight</option>
                   <option value="(0,0,4)">Normal</option>
                   <option value="(2,5,8)">Important</option>
@@ -298,14 +300,110 @@
                   <option value="(8,10,10)">Most Important</option>
                 </select>
                 <div class="row">
-                <center><label>value</label></center>
+                <center><label>value {{ad.review.fuzzyRating}}</label></center>
                 </div>
               </div></div>          
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button onClick = "toast4()" class="btn waves-effect waves-light teal darken-1  modal-action modal-close" type="submit" value="Submit" name="action">Add
+              <center><button class="btn waves-effect waves-light teal darken-1" type="submit" value="Submit" name="action">Add
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="addCriteriaModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Add Criteria</h4></center>
+      <form class="col s12" name = "NewCForm" ng-controller ="AddCriteria as ac" ng-submit="ac.addC()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" ng-model ="ac.review.name" required>
+                <label for="first_name" data-error="wrong" data-success="right">Criteria Name</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+            </div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default" ng-model = "ac.review.fuzzyRating" required>
+                  <option value="" disabled selected>Choose Weight</option>
+                  <option value="(0,1,2)">Same Importance</option>
+                  <option value="(1,2,3)">Weak Importance</option>
+                  <option value="(2,3,4)">Light Importance</option>
+                  <option value="(3,4,5)">Importance between light and accentuated</option>
+                  <option value="(3,5,7)">Importance Accentuated</option>
+                  <option value="(5,6,7)">Strong Importance</option>
+                  <option value="(6,7,8)">Very Strong Importance</option>
+                  <option value="(7,8,9)">Extremely Strong Importance</option>
+                  <option value="(8,9,10)">Absolute Importance</option>
+                </select>
+                <div class="row">
+                <center><label>value {{ac.review.fuzzyRating}}</label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light teal darken-1" type="submit" value="Submit" name="action">Add
+            <i class="material-icons right">send</i>
+            </button></center>
+            </div>
+           </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
+<div id="addAlternativeModal" class="modal">
+    <div class="modal-content">
+      <center><h4>Add Criteria</h4></center>
+      <form class="col s12" name = "NewAForm" ng-controller ="AddAlternative as aa" ng-submit="aa.addA()">
+           <div class="row">
+              <div class="input-field col s12">
+                <input id="item_name" type="text" class="validate" pattern="[a-zA-Z0-9]+" ng-model ="aa.review.name" required>
+                <label for="first_name" data-error="wrong" data-success="right">Alternative Name</label>
+              </div>
+              <div class="row"></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+            </div>
+            <div class="row">
+            <div class="col s6">
+              <h6><span>Rate Item</span></h6>
+              </div>
+            
+              <div class="col s6">
+                 <select class="browser-default" ng-model = "aa.review.fuzzyRating" required>
+                  <option value="" selected>Choose Weight</option>
+                  <option value="(0,0,1)">Extremely Low</option>
+                  <option value="(0,1,3)">Very Low</option>
+                  <option value="(1,3,5)">Low</option>
+                  <option value="(3,5,7)">Medium</option>
+                  <option value="(5,7,9)">High</option>
+                  <option value="(7,9,10)">Very High</option>
+                  <option value="(9,10,10)">Extremely High</option>
+                </select>
+                <div class="row">
+                <center><label>value {{aa.review.fuzzyRating}}</label></center>
+                </div>
+              </div></div>          
+            <div class="row"></div>
+            <div class="row"></div>
+           <div class="row"></div>
+            <div class="row">
+              <center><button class="btn waves-effect waves-light teal darken-1" type="submit" value="Submit" name="action">Add
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -421,11 +519,11 @@
            
     </div>
 </div>
-<div id="eraseCriteriaModal" class="modal">
-                        <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+<div id="eraseDecisorModal" class="modal">                        
                           <div class="modal-content">
-                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
-                            <div class="row">
+                          <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
+                            <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
+                            <div class="row"></div>
                             <div class="row"></div>
                             <div class="row"></div>
                             <div class="row"></div>
@@ -441,10 +539,10 @@
                             <div class="row"></div>
                             <div class="row">
                             <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
-                          <i class="material-icons">delete</i></div>
-                        </button></center>
-                        </form>
-                          </div>
+                          <i class="material-icons">delete</i>
+                        </button></center></div>
+                          </form>
+                           </div>
                         </div>
 <div id="editCriteriaModal" class="modal">
     <div class="modal-content">
@@ -495,11 +593,11 @@
            
     </div>
 </div>
-<div id="eraseAlternativeModal" class="modal">
-                        <form ng-controller = "EraseAlternative as ea" ng-submit ="ea.eraseA()">
-                          <div class="modal-content">
-                            <h4><center>Delete Alternative {{aname}} ?</center></h4>
-                            <div class="row">
+<div id="eraseCriteriaModal" class="modal">
+                        <div class="modal-content">
+                          <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
+                            <div class="row"></div>
                             <div class="row"></div>
                             <div class="row"></div>
                             <div class="row"></div>
@@ -515,8 +613,35 @@
                             <div class="row"></div>
                             <div class="row">
                             <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
-                          <i class="material-icons">delete</i></div>
-                        </button></center>
+                          <i class="material-icons">delete</i>
+                        </button></center></div>
+                        </form>
+                          </div>
+                        </div>
+
+
+<div id="eraseAlternativeModal" class="modal">
+                        <div class="modal-content">
+                          <form ng-controller = "EraseAlternative as ea" ng-submit ="ea.eraseA()">
+                            <h4><center>Delete Alternative {{aname}} ?</center></h4>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i>
+                        </button></center></div>
                         </form>
                           </div>
                         </div>
@@ -568,46 +693,28 @@
     </div>
 </div>
 
+
+
+
+</div>
+
+
+
               
-<div id="eraseDecisorModal" class="modal">
-                        <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
-                          <div class="modal-content">
-                            <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
-                            <div class="row">
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row">
-                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row">
-                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
-                          <i class="material-icons">delete</i></div>
-                        </button></center>
-                        </form>
-                          </div>
-                        </div>
-
-
-
 
 
 </body>
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src = "/js/functions.js"></script>
 <script type="text/javascript" src = "/js/angular.min.js"></script>
 <script type="text/javascript" src = "/js/angular-resource.js"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
 <script type="text/javascript" src ="/js/jquery.min.js"></script>
 <script type="text/javascript" src = "/js/method.js"></script>
-<script type="text/javascript" src = "/js/modals.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>
+<script type="text/javascript" src = "/js/modals.js"></script>
 <script src="/js/init.js"></script>
 </html>

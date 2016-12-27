@@ -68,9 +68,30 @@ module.exports.update = function (req, res) {
                  break;
               }
             }
-           }            
+           }
+            if(req.body.action == "add"){
+                  
+                  var newD = {
+                    name: req.body.name,
+                    surname :req.body.surname,
+                    fuzzyRating : findDecisorRating(req.body.fuzzyRating),
+                    fuzzyValue1 : req.body.fuzzyValue1,
+                    fuzzyValue2 : req.body.fuzzyValue2,
+                    fuzzyValue3 : req.body.fuzzyValue3
+
+                  };
+                  //console.log(newD);
+                  results.decisors.push(newD);
+                  results.nd = results.nd +1;
+                  results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("decisor successfully added"); 
+                   });
+
+                         
            
-      }
+                }
+    }
       else
         if(req.body.type == "criteria"){
           //console.log("decisor info update request");
@@ -113,6 +134,27 @@ module.exports.update = function (req, res) {
             }
 
           }
+          if(req.body.action == "add"){
+                  
+                  var newC = {
+                    name: req.body.name,
+                    fuzzyRating : findCriteriaRating(req.body.fuzzyRating),
+                    fuzzyValue1 : req.body.fuzzyValue1,
+                    fuzzyValue2 : req.body.fuzzyValue2,
+                    fuzzyValue3 : req.body.fuzzyValue3
+
+                  };
+                  //console.log(newC);
+                  results.criterias.push(newC);
+                  results.nc = results.nc +1;
+                  results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("criteria successfully added"); 
+                   });
+
+                         
+           
+                }
         }
         else
           if(req.body.type =="alternative"){
@@ -156,6 +198,27 @@ module.exports.update = function (req, res) {
               }
             }
             }
+             if(req.body.action == "add"){
+                  
+                  var newA = {
+                    name: req.body.name,
+                    fuzzyRating : findAlternativeRating(req.body.fuzzyRating),
+                    fuzzyValue1 : req.body.fuzzyValue1,
+                    fuzzyValue2 : req.body.fuzzyValue2,
+                    fuzzyValue3 : req.body.fuzzyValue3
+
+                  };
+                  //console.log(newA);
+                  results.alternatives.push(newA);
+                  results.na = results.na +1;
+                  results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("alternative successfully added"); 
+                   });
+
+                         
+           
+                }
           }
       else{
       results.name= req.body.name;

@@ -1,3 +1,4 @@
+<!-- Modal Structure -->
 <div id="newProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
@@ -200,10 +201,10 @@
            
     </div>
 </div>
-<div id="eraseCriteriaModal" class="modal">
-                        <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+<div id="eraseDecisorModal" class="modal">
+                        <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
                           <div class="modal-content">
-                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
+                            <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
                             <div class="row">
                             <div class="row"></div>
                             <div class="row"></div>
@@ -274,6 +275,33 @@
            
     </div>
 </div>
+<div id="eraseCriteriaModal" class="modal">
+                        <form ng-controller = "EraseCriteria as ec" ng-submit ="ec.eraseC()">
+                          <div class="modal-content">
+                            <h4><center>Delete Criteria {{cname}} ?</center></h4>
+                            <div class="row">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
+                          <i class="material-icons">delete</i></div>
+                        </button></center>
+                        </form>
+                          </div>
+                        </div>
+
+
 <div id="eraseAlternativeModal" class="modal">
                         <form ng-controller = "EraseAlternative as ea" ng-submit ="ea.eraseA()">
                           <div class="modal-content">
@@ -346,31 +374,3 @@
            
     </div>
 </div>
-
-              
-<div id="eraseDecisorModal" class="modal">
-                        <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
-                          <div class="modal-content">
-                            <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
-                            <div class="row">
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row">
-                            <p><center>Classifications, data and impact on the final result will be affected</center></p></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <div class="row">
-                            <center><button class="btn btn-large waves-effect red waves-light" type="submit" value = "Submit" name="action">
-                          <i class="material-icons">delete</i></div>
-                        </button></center>
-                        </form>
-                          </div>
-                        </div>
-

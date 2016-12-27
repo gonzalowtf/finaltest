@@ -394,6 +394,113 @@ app.controller("EraseAlternative",['$scope','$http','serveProblemName',function(
 			}
 	}]);
 
+app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.addD = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							
+							
+							$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "decisor",
+									action : "add",
+									name: this.review.name,
+									surname: this.review.surname,
+									fuzzyRating : this.review.fuzzyRating,
+									fuzzyValue1 : findV1Decisor(this.review.fuzzyRating),
+									fuzzyValue2 : findV2Decisor(this.review.fuzzyRating),
+									fuzzyValue3 : findV3Decisor(this.review.fuzzyRating)
+
+							});
+							
+							this.review = {};
+							toast4();
+							$scope.refresh();
+							break;
+						}
+					}
+									
+									
+
+			}
+	}]);
+app.controller("AddCriteria",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.addC = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							
+							
+							$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "criteria",
+									action : "add",
+									name: this.review.name,
+									fuzzyRating : this.review.fuzzyRating,
+									fuzzyValue1 : findV1Criteria(this.review.fuzzyRating),
+									fuzzyValue2 : findV2Criteria(this.review.fuzzyRating),
+									fuzzyValue3 : findV3Criteria(this.review.fuzzyRating)
+
+							});
+							
+							this.review = {};
+							toast11();
+							$scope.refresh();
+							break;
+						}
+					}
+									
+									
+
+			}
+	}]);
+app.controller("AddAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.addA = function(){
+					$scope.refresh();
+					var len = $scope.problemss.length;
+					for(i =0;i<len;i++){
+						var key = $scope.problemss[i]._id;
+						if(key == $scope.pName.id ){
+							
+							
+							$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "alternative",
+									action : "add",
+									name: this.review.name,
+									fuzzyRating : this.review.fuzzyRating,
+									fuzzyValue1 : findV1Alternative(this.review.fuzzyRating),
+									fuzzyValue2 : findV2Alternative(this.review.fuzzyRating),
+									fuzzyValue3 : findV3Alternative(this.review.fuzzyRating)
+
+							});
+							
+							this.review = {};
+							toast12();
+							$scope.refresh();
+							break;
+						}
+					}
+									
+									
+
+			}
+	}]);
+
 
 	function generateD(nd){
 		var data = [];

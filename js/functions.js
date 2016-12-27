@@ -15,6 +15,12 @@ function toast1(){
 function addDecisorClose(){
 	$('#addDecisorModal').closeModal();
 }
+function addCriteriaClose(){
+	$('#addCriteriaModal').closeModal();
+}
+function addAlternativeClose(){
+	$('#addAlternativeModal').closeModal();
+}
 function eraseDecisorClose(){
 	$('#eraseDecisorModal').closeModal();
 }
@@ -76,6 +82,14 @@ function toast10(){
 	Materialize.toast("Alternative Erased !",3000);
 	eraseAlternativeClose();
 }
+function toast11(){
+	Materialize.toast("Criteria Added!",3000);
+	addCriteriaClose();
+}
+function toast12(){
+	Materialize.toast("Alternative Added!",3000);
+	addAlternativeClose();
+}
 function editDecisorOpen(){
 	$('#editDecisorModal').openModal();
 }
@@ -95,6 +109,12 @@ function eraseCriteriaOpen(){
 }
 function addDecisorOpen(){
 	$('#addDecisorModal').openModal();
+}
+function addCriteriaOpen(){
+	$('#addCriteriaModal').openModal();
+}
+function addAlternativeOpen(){
+	$('#addAlternativeModal').openModal();
 }
 function editProblemOpen(){
 	$('#editProblemModal').openModal();
