@@ -15,7 +15,7 @@
 		Problem.then(function (results){
 			
 			$scope.problemss = results.data;
-			
+
 		});
 		};
 		$scope.refresh();
@@ -37,15 +37,25 @@
 			$scope.dsurname = decisorsurname;
 			$scope.dfuzzyrating = decisorfuzzyrating;
 		}
-		$scope.criteriaId = function(criteriaid,criterianame,criteriafuzzyrating){
+		$scope.criteriaId = function(criteriaid,criterianame){
 			$scope.cid = criteriaid;
 			$scope.cname = criterianame;
-			$scope.cfuzzyrating = criteriafuzzyrating;
+
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log($scope.problemss[i].criterias);
+				$scope.criterias = $scope.problemss[i].criterias;
+				$scope.decisors =$scope.problemss[i].decisors;
+			}
+			/*$scope.criterias = $http.get('/api/problems/',{
+				problemID :$scope.pName.id,
+				getType: "criterias"
+			});*/
+			
 		}
-		$scope.alternativeId = function(alternativeid,alternativename,alternativefuzzyrating){
+		$scope.alternativeId = function(alternativeid,alternativename){
 			$scope.aid = alternativeid;
 			$scope.aname = alternativename;
-			$scope.afuzzyrating = alternativefuzzyrating;
+			
 		}
 		
 	}]);
@@ -77,8 +87,8 @@
 					na: this.review.na,
 					decisors : generateD(this.review.nd),
 					criterias : generateC(this.review.nc),
-					alternatives: generateA(this.review.na)
-					
+					alternatives: generateA(this.review.na),
+
 				}
 				);
 
@@ -182,10 +192,17 @@
 									action: "edit",
 									_id:  $scope.cid,
 									name: this.review.name,
-									fuzzyRating : this.review.rating,
-									fuzzyValue1 : v1,
-									fuzzyValue2 : v2,
-									fuzzyValue3 : v3
+									
+							});
+									console.log($scope.criterias);
+									$http.put('/api/problems/' +$scope.pName.id ,{
+									type: "selectionsCriterias",
+									action: "edit",
+									criteriaId:  $scope.cid,
+									decisorId: $scope.did,
+									comparations: $scope.criterias
+									
+									
 							});
 							 $scope.refresh();
 							toast7();
@@ -525,11 +542,8 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 		var cri =0;
 		while(cri < nc){
 			data.push({
-				name: "c"+(cri+1),
-				fuzzyRating: "Same Importance",
-				fuzzyValue1 : 0,
-				fuzzyValue2 : 1,
-				fuzzyValue3: 2 
+				name: "c"+(cri+1)
+				
 			});
 			cri=cri+1;
 		} 
@@ -542,11 +556,7 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 		var alt =0;
 		while(alt < na){
 			data.push({
-				name: "a"+(alt+1),
-				fuzzyRating: "Medium",
-				fuzzyValue1 : 3,
-				fuzzyValue2 : 5,
-				fuzzyValue3: 7
+				name: "a"+(alt+1)
 			});
 			alt=alt+1;
 		} 

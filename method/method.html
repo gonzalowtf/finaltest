@@ -150,7 +150,6 @@
                     <thead>
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
-                          <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
                           <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Criteria" data-position="right" data-target= "addCriteriaModal" onclick="addCriteriaOpen()">add</i></th>
                       </tr>
@@ -158,7 +157,6 @@
                     <tbody>
                       <tr ng-repeat = "criteria in problem.criterias">
                         <td>{{criteria.name}}</td>
-                        <td>{{criteria.fuzzyRating}}</td>
                         <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()"  ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Criteria" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Criteria" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
@@ -171,7 +169,6 @@
                     <thead>
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
-                          <th><span class = "black-text text-darken-2">Rating</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
                           <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Alternative" data-position="right" data-target= "addAlternativeModal" onclick="addAlternativeOpen()">add</i></th>
                       
@@ -180,7 +177,6 @@
                     <tbody>
                       <tr ng-repeat = "alternative in problem.alternatives">
                         <td>{{alternative.name}}</td>
-                        <td>{{alternative.fuzzyRating}}</td>
                         <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
                        <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)" ><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Alternative" data-position="right" data-target = "editAlternativeModal"  onclick="editAlternativeOpen()" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Alternative" data-position = "right" data-target="eraseAlternativeModal" onclick="eraseAlternativeOpen()" >delete</i>
@@ -328,7 +324,7 @@
                 <label for="first_name" data-error="wrong" data-success="right">Criteria Name</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div>
             </div>
             <div class="row">
             <div class="col s6">
@@ -377,7 +373,7 @@
                 <label for="first_name" data-error="wrong" data-success="right">Alternative Name</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div>
             </div>
             <div class="row">
             <div class="col s6">
@@ -555,15 +551,23 @@
               </div>
               <div class="row"></div>
               <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
-            <div class="row">
-            <div class="col s6">
-              <h6><span>Rate Item</span></h6>
+              <div class="row">
+              <div class="col s6 center-align">
+                <center>
+                  <select class="browser-default" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value="d.name">{{d.name}}</option>                  
+                </select>
+                </center>
               </div>
-            
-              <div class="col s6">
-                <center>Actual weight: {{cfuzzyrating}}</center>
-                 <select class="browser-default" ng-model="ec.review.rating" required="">
-                  <option value="" disabled selected>Choose Weight</option>
+              </div>
+            <div class="row" ng-repeat ="criteria in criterias" ng-show =" criteria.name != cname">
+            <div class="col s4">
+              <h6><span>This criteria has a</span></h6>
+              </div>            
+              <div class="col s4">
+                <select class="browser-default" ng-model="criteria.fuzzyRating">
+                  <option value="" disabled selected>Weight</option>
                   <option value="(0,1,2)">Same Importance</option>
                   <option value="(1,2,3)">Weak Importance</option>
                   <option value="(2,3,4)">Light Importance</option>
@@ -575,9 +579,13 @@
                   <option value="(8,9,10)">Absolute Importance</option>
                 </select>
                 <div class="row">
-                <center><label>Value {{ec.review.rating}} </label></center>
+                <center><label>Value {{criteria.fuzzyRating}}</label></center>
                 </div>
-              </div></div>          
+              </div>
+                <div class="col s4">
+                  <h6><span>weight comparing with {{criteria.name}}</span></h6>            
+                </div>
+              </div>          
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -590,7 +598,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+                      
     </div>
 </div>
 <div id="eraseCriteriaModal" class="modal">
@@ -655,7 +663,7 @@
                 <label for="first_name" data-error="wrong" data-success="right">Change Alternative Name "{{aname}}"</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
             <div class="row">
             <div class="col s6">
               <h6><span>Rate Item</span></h6>

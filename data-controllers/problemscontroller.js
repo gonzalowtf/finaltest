@@ -9,8 +9,9 @@ module.exports.create = function (req, res) {
 
 module.exports.list = function (req, res) {
   Problem.find({}, function (err, results) {
-    res.json(results);
-  });
+      res.json(results);
+    });
+  
 }
 module.exports.delete = function (req, res) {
   var pid = req.params.id;
@@ -220,6 +221,20 @@ module.exports.update = function (req, res) {
            
                 }
           }
+          if(req.body.type =="selectionsCriterias"){
+            if(req.body.action == "edit"){
+                var newCComparations = {
+                decisorId :req.body.decisorId,
+                criteriaId : req.body.criteriaId,
+                comparations : getCComparations(req.body.comparations,req.body.criteriaId)
+
+            };
+            results.save(function (err, result) {
+                     res.json(result);
+                      //console.log("alternative successfully added"); 
+                   });
+            }
+          }
       else{
       results.name= req.body.name;
       //console.log(req.body.name + "just a problem name change request");
@@ -252,7 +267,23 @@ module.exports.update = function (req, res) {
   });
 }
 */
-
+function getCComparations(comparations,cid){
+  console.log(comparations);
+  console.log(comparations + " length" + comparations.length);
+  for(i =0; comparations.length;i++){
+        if(comparations[i]._id == cid){
+            //*
+        }
+        else{
+          comparations[i].criteriaId = comparations[i]._id,
+          comparations[i].fuzzyRating = findCriteriaRating(comparations[i].fuzzyRating),
+          comparations[i].fuzzyValue1 = findV1Criteria(comparations[i].fuzzyRating),
+          comparations[i].fuzzyValue2 = findV2Criteria(comparations[i].fuzzyRating),
+          comparations[i].fuzzyValue3 = findV3Criteria(comparations[i].fuzzyRating)
+        }
+  }
+  return comparations;
+}
 function findDecisorRating(fuzzyRating){
         var rating = "";
         if(fuzzyRating == "(2,5,8)"){
@@ -326,3 +357,202 @@ function findAlternativeRating(fuzzyRating){
         
           return rating;
 }
+function findV1Decisor(fuzzyRating){
+    if(fuzzyRating == "(0,0,4)"){
+      return 0;
+    }
+    if(fuzzyRating == "(2,5,8)"){
+          return 2;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 5;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 8;
+        }
+  }
+  function findV2Decisor(fuzzyRating){
+    if(fuzzyRating == "(0,0,4)"){
+      return 0;
+    }
+    if(fuzzyRating == "(2,5,8)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 8;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+  }
+  function findV3Decisor(fuzzyRating){
+    if(fuzzyRating == "(0,0,4)"){
+      return 4;
+    }
+    if(fuzzyRating == "(2,5,8)"){
+          return 8;
+        }
+        if(fuzzyRating == "(5,8,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+  }
+ function findV1Criteria(fuzzyRating){
+  if(fuzzyRating == "(0,1,2)"){
+          return 0;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+      return 1;       
+     }
+        if(fuzzyRating == "(2,3,4)"){
+          return 2;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 3;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 6;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 7;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 8;
+        }
+ }
+ function findV2Criteria(fuzzyRating){
+  if(fuzzyRating == "(0,1,2)"){
+          return 1;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+      return 2;       
+     }
+        if(fuzzyRating == "(2,3,4)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 4;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 6;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 7;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 8;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 9;
+        }
+ }
+
+ function findV3Criteria(fuzzyRating){
+  if(fuzzyRating == "(0,1,2)"){
+          return 2;
+        }
+        if(fuzzyRating == "(1,2,3)"){
+      return 3;       
+     }
+        if(fuzzyRating == "(2,3,4)"){
+          return 4;
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          return 5;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          return 8;
+        }
+        if(fuzzyRating == "(7,8,9)"){
+         return 9;
+        }
+        if(fuzzyRating == "(8,9,10)"){
+         return 10;
+        }
+ }
+ function findV1Alternative(fuzzyRating){
+  if(fuzzyRating == "(0,0,1)"){
+          return 0;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 0;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 1;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 3;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 5;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 7;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 9;
+        }
+ }
+  function findV2Alternative(fuzzyRating){
+  if(fuzzyRating == "(0,0,1)"){
+          return 0;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 1;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 3;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 5;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 7;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 9;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 10;
+        }
+ }
+ function findV3Alternative(fuzzyRating){
+  if(fuzzyRating == "(0,0,1)"){
+          return 1;
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          return 3;
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          return 5;
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          return 7;
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          return 9;
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          return 10;
+        }
+ }
