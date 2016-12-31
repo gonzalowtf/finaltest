@@ -45,6 +45,8 @@
 				//console.log($scope.problemss[i].criterias);
 				$scope.criterias = $scope.problemss[i].criterias;
 				$scope.decisors =$scope.problemss[i].decisors;
+				$scope.selectionsCriterias =$scope.problemss[i].selectionsCriterias;
+
 			}
 			/*$scope.criterias = $http.get('/api/problems/',{
 				problemID :$scope.pName.id,
@@ -55,6 +57,13 @@
 		$scope.alternativeId = function(alternativeid,alternativename){
 			$scope.aid = alternativeid;
 			$scope.aname = alternativename;
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log($scope.problemss[i].criterias);
+				$scope.decisors =$scope.problemss[i].decisors;
+				$scope.selectionsAlternatives =$scope.problemss[i].selectionsAlternatives;
+				// this las line have no use yet
+
+			}
 			
 		}
 		
@@ -194,19 +203,44 @@
 									name: this.review.name,
 									
 							});
-									console.log($scope.criterias);
-									$http.put('/api/problems/' +$scope.pName.id ,{
+									var selectionsCriterias = [];
+									selectionsCriterias = $scope.criterias.slice(0);
+									for(z=0;z < selectionsCriterias.length;z++){
+										if(selectionsCriterias[z]._id == $scope.cid || selectionsCriterias[z].fuzzyRating== ""){
+											selectionsCriterias[z].fuzzyRating = "*";
+										}
+										else{
+
+
+										if(selectionsCriterias[z].fuzzyRating == null || selectionsCriterias[z].fuzzyRating == ""){
+											selectionsCriterias[z].fuzzyRating = "(0,1,2)";
+											selectionsCriterias[z].fuzzyValue1 = 0;
+											selectionsCriterias[z].fuzzyValue2 = 1;
+											selectionsCriterias[z].fuzzyValue3 = 2;
+											}
+											selectionsCriterias[z].fuzzyValue1= findV1Criteria(selectionsCriterias[z].fuzzyRating);
+										selectionsCriterias[z].fuzzyValue2= findV2Criteria(selectionsCriterias[z].fuzzyRating);
+										selectionsCriterias[z].fuzzyValue3= findV3Criteria(selectionsCriterias[z].fuzzyRating);
+										
+										}
+										
+								}
+
+									console.log(selectionsCriterias);
+									var request = {
 									type: "selectionsCriterias",
 									action: "edit",
 									criteriaId:  $scope.cid,
-									decisorId: $scope.did,
-									comparations: $scope.criterias
-									
-									
-							});
+									decisorId: this.review.decisor,
+									comparations: selectionsCriterias
+																	
+									}
+									console.log(request);
+									$http.put('/api/problems/' +$scope.pName.id ,request);
 							 $scope.refresh();
 							toast7();
 							this.review = {};
+
 							
 								}
 							}
@@ -247,11 +281,28 @@
 									action : "edit",
 									_id:  $scope.aid,
 									name: this.review.name,
-									fuzzyRating : this.review.rating,
-									fuzzyValue1 : v1,
-									fuzzyValue2 : v2,
-									fuzzyValue3 : v3
+									
 							});
+
+									
+									
+
+								
+									var request = {
+									type: "selectionsAlternatives",
+									action: "edit",
+									alternativeId:  $scope.aid,
+									decisorId: this.review.decisor,
+									weight : this.review.fuzzyRating,
+									fuzzyValue1: findV1Alternative(this.review.fuzzyRating),
+									fuzzyValue2: findV2Alternative(this.review.fuzzyRating),
+									fuzzyValue3: findV3Alternative(this.review.fuzzyRating),
+
+																	
+									}
+									console.log(request);
+									$http.put('/api/problems/' +$scope.pName.id ,request);
+
 							 $scope.refresh();
 							toast8();
 							this.review = {};
@@ -695,6 +746,66 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
          return 10;
         }
  }
+ function findCriteriaRating(fuzzyRating){
+        var rating = "";
+        if(fuzzyRating == "(0,1,2)"){
+          rating = "Same Importance";
+        }
+        if(fuzzyRating == "(1,2,3)"){
+          rating = "Weak Importance";
+        }
+        if(fuzzyRating == "(2,3,4)"){
+          rating = "Light Importance";
+        }
+        if(fuzzyRating == "(3,4,5)"){
+          rating = "Importance between light and accentuated";
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          rating = "Importance Accentuated";
+        }
+        if(fuzzyRating == "(5,6,7)"){
+          rating = "Strong Importance";
+        }
+        if(fuzzyRating == "(6,7,8)"){
+          rating = "Very Strong Importance";
+        }
+        if(fuzzyRating == "(7,8,9)"){
+          rating = "Extremely Strong Importance";
+        }
+        if(fuzzyRating == "(8,9,10)"){
+          rating = "Absolute Importance";
+        }
+        if(fuzzyRating == "*"){
+          rating = "*";
+        }
+          return rating;
+}
+function findAlternativeRating(fuzzyRating){
+        var rating = "";
+        if(fuzzyRating == "(0,0,1)"){
+          rating = "Extremely Low";
+        }
+        if(fuzzyRating == "(0,1,3)"){
+          rating = "Very Low";
+        }
+        if(fuzzyRating == "(1,3,5)"){
+          rating = "Low";
+        }
+        if(fuzzyRating == "(3,5,7)"){
+          rating = "Medium";
+        }
+        if(fuzzyRating == "(5,7,9)"){
+          rating = "High";
+        }
+        if(fuzzyRating == "(7,9,10)"){
+          rating = "Very High";
+        }
+        if(fuzzyRating == "(9,10,10)"){
+          rating = "Extremely High";
+        }
+        
+          return rating;
+}
  function findV1Alternative(fuzzyRating){
  	if(fuzzyRating == "(0,0,1)"){
           return 0;

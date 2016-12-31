@@ -104,8 +104,6 @@ module.exports.update = function (req, res) {
                   //console.log(results.decisors[i].name);
                   results.criterias[i].name = req.body.name;
                   //console.log(results.decisors[i].name);
-                  results.criterias[i].fuzzyRating = findCriteriaRating(req.body.fuzzyRating);
-                  //console.log(results.decisors[i].fuzzyRating);
                   results.criterias[i].fuzzyValue1 = req.body.fuzzyValue1;
                   results.criterias[i].fuzzyValue2 = req.body.fuzzyValue2;
                   results.criterias[i].fuzzyValue3 = req.body.fuzzyValue3;
@@ -168,7 +166,6 @@ module.exports.update = function (req, res) {
                   //console.log(results.decisors[i].name);
                   results.alternatives[i].name = req.body.name;
                   //console.log(results.decisors[i].name);
-                  results.alternatives[i].fuzzyRating = findAlternativeRating(req.body.fuzzyRating);
                   //console.log(results.decisors[i].fuzzyRating);
                   results.alternatives[i].fuzzyValue1 = req.body.fuzzyValue1;
                   results.alternatives[i].fuzzyValue2 = req.body.fuzzyValue2;
@@ -221,20 +218,47 @@ module.exports.update = function (req, res) {
            
                 }
           }
+          else
           if(req.body.type =="selectionsCriterias"){
             if(req.body.action == "edit"){
-                var newCComparations = {
-                decisorId :req.body.decisorId,
-                criteriaId : req.body.criteriaId,
-                comparations : getCComparations(req.body.comparations,req.body.criteriaId)
-
-            };
+              console.log(req.body.decisorId);
+              console.log(req.body.criteriaId);
+              console.log(req.body.comparations);
+              var newCComparations = {
+                    decisorId :req.body.decisorId,
+                    criteriaId: req.body.criteriaId,
+                    comparations: getCComparations(req.body.comparations)
+              };
+            results.selectionsCriterias.push(newCComparations);
             results.save(function (err, result) {
                      res.json(result);
-                      //console.log("alternative successfully added"); 
+                     console.log("writed ?"+ result);
                    });
             }
           }
+          else
+            if(req.body.type =="selectionsAlternatives"){
+            if(req.body.action == "edit"){
+              console.log(req.body.decisorId);
+              console.log(req.body.alternativeId);
+              var newAWeightChoose = {
+                    decisorId :req.body.decisorId,
+                    alternativeId: req.body.alternativeId,
+                    weight: findAlternativeRating(req.body.weight),
+                    fuzzyValue1 :req.body.fuzzyValue1,
+                    fuzzyValue2 : req.body.fuzzyValue2,
+                    fuzzyValue3 : req.body.fuzzyValue3,
+
+
+              };
+            results.selectionsCriterias.push(newAWeightChoose);
+            results.save(function (err, result) {
+                     res.json(result);
+                     
+                   });
+            }
+          }
+
       else{
       results.name= req.body.name;
       //console.log(req.body.name + "just a problem name change request");
@@ -267,22 +291,19 @@ module.exports.update = function (req, res) {
   });
 }
 */
-function getCComparations(comparations,cid){
-  console.log(comparations);
-  console.log(comparations + " length" + comparations.length);
-  for(i =0; comparations.length;i++){
-        if(comparations[i]._id == cid){
-            //*
-        }
-        else{
-          comparations[i].criteriaId = comparations[i]._id,
-          comparations[i].fuzzyRating = findCriteriaRating(comparations[i].fuzzyRating),
-          comparations[i].fuzzyValue1 = findV1Criteria(comparations[i].fuzzyRating),
-          comparations[i].fuzzyValue2 = findV2Criteria(comparations[i].fuzzyRating),
-          comparations[i].fuzzyValue3 = findV3Criteria(comparations[i].fuzzyRating)
-        }
+function getCComparations(coll){
+  for(i =0;i< coll.length ;i++){
+     coll[i].criteriaId = coll[i]._id;
+     coll[i].fuzzyRating = findCriteriaRating(coll[i].fuzzyRating);
   }
-  return comparations;
+  return coll;
+}
+function getAComparations(coll){
+  for(i =0;i< coll.length ;i++){
+     coll[i].alternativeId = coll[i]._id;
+     coll[i].fuzzyRating = findAlternativeRating(coll[i].fuzzyRating);
+  }
+  return coll;
 }
 function findDecisorRating(fuzzyRating){
         var rating = "";
@@ -328,6 +349,9 @@ function findCriteriaRating(fuzzyRating){
         }
         if(fuzzyRating == "(8,9,10)"){
           rating = "Absolute Importance";
+        }
+        if(fuzzyRating == "*"){
+          rating = "*";
         }
           return rating;
 }
