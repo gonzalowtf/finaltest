@@ -221,14 +221,15 @@ module.exports.update = function (req, res) {
           else
           if(req.body.type =="selectionsCriterias"){
             if(req.body.action == "edit"){
-              console.log(req.body.decisorId);
-              console.log(req.body.criteriaId);
-              console.log(req.body.comparations);
+              //console.log(req.body.decisorId);
+              //console.log(req.body.criteriaId);
+              //console.log(req.body.comparations);
               var newCComparations = {
                     decisorId :req.body.decisorId,
                     criteriaId: req.body.criteriaId,
-                    comparations: getCComparations(req.body.comparations)
+                    comparations: req.body.comparations
               };
+              console.log(newCComparations + "line 232");
             results.selectionsCriterias.push(newCComparations);
             results.save(function (err, result) {
                      res.json(result);
@@ -239,22 +240,24 @@ module.exports.update = function (req, res) {
           else
             if(req.body.type =="selectionsAlternatives"){
             if(req.body.action == "edit"){
-              console.log(req.body.decisorId);
-              console.log(req.body.alternativeId);
+              //console.log(req.body.decisorId);
+              //console.log(req.body.alternativeId);
               var newAWeightChoose = {
                     decisorId :req.body.decisorId,
                     alternativeId: req.body.alternativeId,
-                    weight: findAlternativeRating(req.body.weight),
+                    fuzzyRating: req.body.fuzzyRating,
                     fuzzyValue1 :req.body.fuzzyValue1,
                     fuzzyValue2 : req.body.fuzzyValue2,
-                    fuzzyValue3 : req.body.fuzzyValue3,
+                    fuzzyValue3 : req.body.fuzzyValue3
 
 
               };
-            results.selectionsCriterias.push(newAWeightChoose);
+              console.log(newAWeightChoose + "line 254");
+            results.selectionsAlternatives.push(newAWeightChoose);
             results.save(function (err, result) {
                      res.json(result);
-                     
+                     console.log("writed ?"+ result);
+                    
                    });
             }
           }

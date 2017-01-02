@@ -206,8 +206,12 @@
 									var selectionsCriterias = [];
 									selectionsCriterias = $scope.criterias.slice(0);
 									for(z=0;z < selectionsCriterias.length;z++){
-										if(selectionsCriterias[z]._id == $scope.cid || selectionsCriterias[z].fuzzyRating== ""){
+										if(selectionsCriterias[z]._id == $scope.cid){
 											selectionsCriterias[z].fuzzyRating = "*";
+											selectionsCriterias[z].fuzzyValue1 = -1;
+ 											selectionsCriterias[z].fuzzyValue2 = -1;
+ 											selectionsCriterias[z].fuzzyValue3 = -1;
+
 										}
 										else{
 
@@ -221,12 +225,12 @@
 											selectionsCriterias[z].fuzzyValue1= findV1Criteria(selectionsCriterias[z].fuzzyRating);
 										selectionsCriterias[z].fuzzyValue2= findV2Criteria(selectionsCriterias[z].fuzzyRating);
 										selectionsCriterias[z].fuzzyValue3= findV3Criteria(selectionsCriterias[z].fuzzyRating);
-										
+										selectionsCriterias[z].fuzzyRating= findCriteriaRating(selectionsCriterias[z].fuzzyRating);
 										}
 										
 								}
 
-									console.log(selectionsCriterias);
+									//console.log(selectionsCriterias);
 									var request = {
 									type: "selectionsCriterias",
 									action: "edit",
@@ -293,10 +297,10 @@
 									action: "edit",
 									alternativeId:  $scope.aid,
 									decisorId: this.review.decisor,
-									weight : this.review.fuzzyRating,
+									fuzzyRating : findAlternativeRating(this.review.fuzzyRating),
 									fuzzyValue1: findV1Alternative(this.review.fuzzyRating),
 									fuzzyValue2: findV2Alternative(this.review.fuzzyRating),
-									fuzzyValue3: findV3Alternative(this.review.fuzzyRating),
+									fuzzyValue3: findV3Alternative(this.review.fuzzyRating)
 
 																	
 									}
