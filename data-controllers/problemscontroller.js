@@ -58,7 +58,18 @@ module.exports.update = function (req, res) {
             //console.log("decisor q:"+len);
             for(i=0;i<len;i++){
               if(results.decisors[i]._id ==req.body._id){
-                
+                for(j=0;j<results.selectionsCriterias.length;j++){
+                  if(results.selectionsCriterias[j].decisorId ==req.body._id ){
+                      results.selectionsCriterias.splice(j,1);
+                  }
+                  
+                }
+                for(j=0;j<results.selectionsAlternatives.length;j++){
+                  if(results.selectionsAlternatives[j].decisorId ==req.body._id ){
+                      results.selectionsAlternatives.splice(j,1);
+                  }
+                  
+                }
                 results.decisors.splice(i,1);
                 results.nd = results.nd -1;
                 results.save(function (err, result) {
@@ -120,9 +131,23 @@ module.exports.update = function (req, res) {
             //console.log("decisor q:"+len);
             for(i=0;i<len;i++){
               if(results.criterias[i]._id ==req.body._id){
+                for(j=0;j<results.selectionsCriterias.length;j++){
+                for(z=0;z<results.selectionsCriterias[j].comparations.length;z++){
+                    if(results.selectionsCriterias[j].comparations[z]._id ==req.body._id ){
+                      results.selectionsCriterias[j].comparations.splice(z,1);
+                        }
+                  }
                 
+                  if(results.selectionsCriterias[j].criteriaId ==req.body._id ){
+                      results.selectionsCriterias.splice(j,1);
+                  }
+                  
+                  
+                
+                }
                 results.criterias.splice(i,1);
                 results.nc = results.nc -1;
+                               
                 results.save(function (err, result) {
                      res.json(result);
                       //console.log("decisor successfully updated"); 
@@ -184,7 +209,12 @@ module.exports.update = function (req, res) {
             //console.log("decisor q:"+len);
             for(i=0;i<len;i++){
               if(results.alternatives[i]._id ==req.body._id){
-                
+                for(j=0;j<results.selectionsAlternatives.length;j++){
+                  if(results.selectionsAlternatives[j].alternativeId ==req.body._id ){
+                      results.selectionsAlternatives.splice(j,1);
+                  }
+                  
+                }
                 results.alternatives.splice(i,1);
                 results.na = results.na -1;
                 results.save(function (err, result) {
@@ -224,16 +254,29 @@ module.exports.update = function (req, res) {
               //console.log(req.body.decisorId);
               //console.log(req.body.criteriaId);
               //console.log(req.body.comparations);
+              for(i =0;i< results.selectionsCriterias.length;i++){
+                    if(results.selectionsCriterias[i].criteriaId == req.body.criteriaId){
+                      if(results.selectionsCriterias[i].decisorId == req.body.decisorId){
+                        results.selectionsCriterias.splice(i,1);
+                        /*results.save(function (err, result) {
+                            res.json(result);
+                            console.log("erased match" + result);
+                                                  });*/
+                        break;
+                      } 
+                    }
+                  }
+                  
+
+            
               var newCComparations = {
                     decisorId :req.body.decisorId,
                     criteriaId: req.body.criteriaId,
                     comparations: req.body.comparations
               };
-              console.log(newCComparations + "line 232");
             results.selectionsCriterias.push(newCComparations);
             results.save(function (err, result) {
                      res.json(result);
-                     console.log("writed ?"+ result);
                    });
             }
           }
@@ -242,7 +285,19 @@ module.exports.update = function (req, res) {
             if(req.body.action == "edit"){
               //console.log(req.body.decisorId);
               //console.log(req.body.alternativeId);
-              var newAWeightChoose = {
+               for(i =0;i< results.selectionsAlternatives.length;i++){
+                    if(results.selectionsAlternatives[i].alternativeId == req.body.alternativeId){
+                      if(results.selectionsAlternatives[i].decisorId == req.body.decisorId){
+                        results.selectionsAlternatives.splice(i,1);
+                        /*results.save(function (err, result) {
+                            res.json(result);
+                            console.log("erased match" + result);
+                                                  });*/
+                        break;
+                      } 
+                    }
+                  }
+              var newAChoose = {
                     decisorId :req.body.decisorId,
                     alternativeId: req.body.alternativeId,
                     fuzzyRating: req.body.fuzzyRating,
@@ -252,11 +307,9 @@ module.exports.update = function (req, res) {
 
 
               };
-              console.log(newAWeightChoose + "line 254");
-            results.selectionsAlternatives.push(newAWeightChoose);
+            results.selectionsAlternatives.push(newAChoose);
             results.save(function (err, result) {
                      res.json(result);
-                     console.log("writed ?"+ result);
                     
                    });
             }

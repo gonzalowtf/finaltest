@@ -137,10 +137,10 @@
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							if(this.review.name == null){
+							if(this.review.name == null || this.review.name == "" ){
 							this.review.name = $scope.dname;
 								}
-						if(this.review.surname == null){
+						if(this.review.surname == null || this.review.surname =="" ){
 							this.review.surname = $scope.dsurname;
 							}
 							var len2 = $scope.problemss[i].decisors.length;
@@ -239,7 +239,7 @@
 									comparations: selectionsCriterias
 																	
 									}
-									console.log(request);
+									//console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id ,request);
 							 $scope.refresh();
 							toast7();
@@ -289,7 +289,9 @@
 							});
 
 									
-									
+									if(this.review.fuzzyRating == null || this.review.fuzzyRating == ""){
+										this.review.fuzzyRating = "(3,5,7)"
+									}
 
 								
 									var request = {
@@ -304,7 +306,7 @@
 
 																	
 									}
-									console.log(request);
+									//console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id ,request);
 
 							 $scope.refresh();
