@@ -409,6 +409,9 @@ function findCriteriaRating(fuzzyRating){
         if(fuzzyRating == "*"){
           rating = "*";
         }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          rating = "*";
+        }
           return rating;
 }
 function findAlternativeRating(fuzzyRating){

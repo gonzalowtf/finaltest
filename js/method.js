@@ -111,6 +111,72 @@
 			}
 			
 		}
+
+		$scope.method = function(){
+			var len = $scope.problemss.length;
+			var CWeights = [];
+			$scope.pName = serveProblemName;
+			for(z= 0; z< len;z++){
+				if($scope.pName.id == $scope.problemss[z]._id){
+					var k = $scope.problemss[z].decisors.length;
+					var lenCriterias = $scope.problemss[z].criterias.length;
+					for(i= 0;i<k;i++){
+						var idd = $scope.problemss[z].decisors[i]._id;
+						var n = $scope.problemss[z].selectionsCriterias.length;
+						for(selCindex = 0;selCindex<n;selCindex++){
+							if(idd == $scope.problemss[z].selectionsCriterias[selCindex].decisorId){
+								var idc = $scope.problemss[z].selectionsCriterias[selCindex].criteriaId;
+								var lenCom = $scope.problemss[z].selectionsCriterias[selCindex].comparations.length;
+								var acv1 = 1;
+								var acv2 = 1;
+								var acv3 = 1;
+								for(comIndex =0; comIndex< lenCom; comIndex++){
+									if($scope.problemss[z].selectionsCriterias[selCindex].comparations[comIndex]._id == idc || $scope.problemss[z].selectionsCriterias[selCindex].comparations[comIndex].fuzzyValue1==-1 ){
+										//nada
+									}
+									else{
+										var fv1 = $scope.problemss[z].selectionsCriterias[selCindex].comparations[comIndex].fuzzyValue1;
+										var fv2 = $scope.problemss[z].selectionsCriterias[selCindex].comparations[comIndex].fuzzyValue2;
+										var fv3 = $scope.problemss[z].selectionsCriterias[selCindex].comparations[comIndex].fuzzyValue3;
+										acv1 = acv1 * fv1;
+										acv2 = acv2 * fv2;
+										acv3 = acv3 * fv3;
+										
+									}
+								}
+
+								var sqrt1 = raizN(acv1,lenCriterias);
+								var sqrt2 = raizN(acv2,lenCriterias);
+								var sqrt3 = raizN(acv3,lenCriterias);
+								var decisorSelection = {
+									decisorId : idd,
+									criteriaId: idc,
+									w1:sqrt1,
+									w2: sqrt2,
+									w3: sqrt3
+								}
+								
+								CWeights.push(decisorSelection);
+
+
+							}
+						}
+					}
+				}
+			}
+			//console.log(CWeights);
+			var sum1 = 0;
+			var sum2 = 0;
+			var sum3 = 0;
+			for(CWindex = 0; CWindex<CWeights.length;CWindex++){
+				var id = CWeights[CWindex].decisorId;
+				if(id ==)
+				sum1=sum1+CWeights[CWindex].w1;
+				sum2=sum2+CWeights[CWindex].w2;
+				sum3=sum3+CWeights[CWindex].w3;
+
+			}
+		}
 		
 	}]);
 
@@ -808,6 +874,13 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         if(fuzzyRating == "(8,9,10)"){
          return 8;
         }
+        if(fuzzyRating == "(-1,-1,-1)"){
+         return -1;
+        }
+        if(fuzzyRating == "*"){
+         return -1;
+        }
+
  }
  function findV2Criteria(fuzzyRating){
  	if(fuzzyRating == "(0,1,2)"){
@@ -836,6 +909,12 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         }
         if(fuzzyRating == "(8,9,10)"){
          return 9;
+        }
+        if(fuzzyRating == "(-1,-1,-1)"){
+         return -1;
+        }
+        if(fuzzyRating == "*"){
+         return -1;
         }
  }
 
@@ -867,6 +946,12 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         if(fuzzyRating == "(8,9,10)"){
          return 10;
         }
+        if(fuzzyRating == "(-1,-1,-1)"){
+         return -1;
+        }
+        if(fuzzyRating == "*"){
+         return -1;
+        }
  }
  function findCriteriaRating(fuzzyRating){
         var rating = "";
@@ -896,6 +981,9 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         }
         if(fuzzyRating == "(8,9,10)"){
           rating = "Absolute Importance";
+        }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          rating = "*";
         }
         if(fuzzyRating == "*"){
           rating = "*";
@@ -974,6 +1062,9 @@ function findAlternativeRating(fuzzyRating){
           return 10;
         }
  }
+ function raizN(x, n) {
+    return Math.exp(Math.log(x) / n);
+}
  function findV3Alternative(fuzzyRating){
  	if(fuzzyRating == "(0,0,1)"){
           return 1;

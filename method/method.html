@@ -188,7 +188,9 @@
                   </table>
                 </div>
                 <div class="panel" ng-show = "table == 4">
-                  <center><h2><span class = "flow-text orange-text text-lighten-2 animated fadeInRight">Here will be the results</span></h2></center>
+                  <center><button class="btn waves-effect yellow waves-light" ng-click = "method()" type="submit" name="action">Calculate results
+                    <i class="material-icons right">send</i>
+                  </button></center>
                 </div>
               </div>
               
@@ -641,6 +643,7 @@
                   <option value="(6,7,8)">Very Strong Importance</option>
                   <option value="(7,8,9)">Extremely Strong Importance</option>
                   <option value="(8,9,10)">Absolute Importance</option>
+                  <option value="(-1,-1,-1)">*</option>
                 </select>
                 <div class="row">
                 <center><label>Value {{criteria.fuzzyRating}}</label></center>
