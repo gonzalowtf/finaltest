@@ -164,18 +164,37 @@
 					}
 				}
 			}
-			//console.log(CWeights);
+			console.log(CWeights);
 			var sum1 = 0;
 			var sum2 = 0;
 			var sum3 = 0;
 			for(CWindex = 0; CWindex<CWeights.length;CWindex++){
-				var id = CWeights[CWindex].decisorId;
-				if(id ==)
-				sum1=sum1+CWeights[CWindex].w1;
-				sum2=sum2+CWeights[CWindex].w2;
-				sum3=sum3+CWeights[CWindex].w3;
+				var idd = CWeights[CWindex].decisorId;
+				for(CWindex2 =0; CWindex2<CWeights.length;CWindex2++){
+					var idd2 = CWeights[CWindex2].decisorId;
+					if(idd == idd2){
+						sum1=sum1+CWeights[CWindex2].w1;
+						sum2=sum2+CWeights[CWindex2].w2;
+						sum3=sum3+CWeights[CWindex2].w3;
+					}
+				}
+				var w1 =  CWeights[CWindex].w1;
+				var w2 =  CWeights[CWindex].w2;
+				var w3 =  CWeights[CWindex].w3;
+				var w1res = w1/sum1;
+				var w2res = w2/sum2;
+				var w3res = w3/sum3;
+
+				CWeights[CWindex].w1 = w1res;
+				CWeights[CWindex].w2 = w2res;
+				CWeights[CWindex].w3 = w3res;
+
+				sum1 = 0;
+				sum2 = 0;
+				sum3 = 0;
 
 			}
+
 		}
 		
 	}]);
