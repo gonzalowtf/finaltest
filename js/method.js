@@ -15,6 +15,12 @@
 		Problem.then(function (results){
 			
 			$scope.problemss = results.data;
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log($scope.problemss[i].criterias);
+				$scope.criterias = $scope.problemss[i].criterias;
+				$scope.decisors =$scope.problemss[i].decisors;
+
+			}
 
 		});
 		};
@@ -30,7 +36,46 @@
 		
 		
 		$scope.problemss = [];
-
+		$scope.getCName = function(pid,id){
+			var name = "";
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log(pid);
+				//console.log($scope.problemss[i]._id);
+				if(pid ==$scope.problemss[i]._id){
+					//console.log("in");
+					for(j=0;j<$scope.problemss[i].criterias.length;j++){
+						if(id ==$scope.problemss[i].criterias[j]._id){
+								//console.log("in 2");
+								name = $scope.problemss[i].criterias[j].name;
+								break;
+									}
+					}
+					
+				}
+				
+			}
+			return name;
+		};
+		$scope.getAName = function(pid,id){
+			var name = "";
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log(pid);
+				//console.log($scope.problemss[i]._id);
+				if(pid ==$scope.problemss[i]._id){
+					//console.log("in");
+					for(j=0;j<$scope.problemss[i].alternatives.length;j++){
+						if(id ==$scope.problemss[i].alternatives[j]._id){
+								//console.log("in 2");
+								name = $scope.problemss[i].alternatives[j].name;
+								break;
+									}
+					}
+					
+				}
+				
+			}
+			return name;
+		};
 		$scope.decisorId = function(decisorid,decisorname,decisorsurname,decisorfuzzyrating){
 			$scope.did = decisorid;
 			$scope.dname = decisorname;
@@ -340,6 +385,77 @@
 									
 
 			}
+	}]);
+	app.controller("ViewCriterias",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			this.review = {};
+			this.selections =[];			
+			$scope.pName = serveProblemName;
+			this.viewC = function(){
+				this.selections =[];
+				for(i =0; i< $scope.problemss.length;i++){
+					if($scope.problemss[i]._id == $scope.pName.id){
+						for(j=0;j<$scope.problemss[i].selectionsCriterias.length;j++){
+							var pid = $scope.problemss[i]._id;
+							if($scope.problemss[i].selectionsCriterias[j].decisorId == this.review.decisor){
+							//console.log("llegue 369");
+							if($scope.problemss[i].selectionsCriterias[j].criteriaId == this.review.criteria){
+								//console.log("llegue 370");
+								var compp = $scope.problemss[i].selectionsCriterias[j].comparations.slice(0);
+								//console.log(compp);
+								for(z=0;z<compp.length;z++){
+								var newCView = {
+								name :$scope.getCName(pid,compp[z]._id),
+								fuzzyRating : compp[z].fuzzyRating,
+								fuzzyValue1 : compp[z].fuzzyValue1,
+								fuzzyValue2 : compp[z].fuzzyValue2,
+								fuzzyValue3 : compp[z].fuzzyValue3
+								}
+								//console.log(newCView);
+								this.selections.push(newCView);
+								}
+							}
+							break;
+							this.review = {};
+						}
+					}
+				}
+			}
+			};
+	}]);
+	app.controller("ViewAlternatives",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
+
+			this.review = {};
+			$scope.pName = serveProblemName;
+			this.selections =[];
+			this.viewA = function(){
+				this.selections = [];
+				for(i =0; i< $scope.problemss.length;i++){
+					if($scope.problemss[i]._id == $scope.pName.id){
+						var pid = $scope.problemss[i]._id
+						var compp = $scope.problemss[i].selectionsAlternatives.slice(0);
+						console.log(compp);
+						for(j=0;j<compp.length;j++){
+							if(compp[j].decisorId == this.review.decisor){
+													
+								var newAView = {
+								name :$scope.getAName(pid,compp[j]._id),
+								fuzzyRating : compp[j].fuzzyRating,
+								fuzzyValue1 : compp[j].fuzzyValue1,
+								fuzzyValue2 : compp[j].fuzzyValue2,
+								fuzzyValue3 : compp[j].fuzzyValue3
+								}
+								//console.log(newAView);
+								this.selections.push(newAView);
+								
+							
+						}
+					}
+					break
+					this.review = {};
+				}
+			}
+			};
 	}]);
 	app.controller("EditProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 

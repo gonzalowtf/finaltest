@@ -30,6 +30,13 @@ function eraseCriteriaClose(){
 function eraseAlternativeClose(){
 	$('#eraseAlternativeModal').closeModal();
 }
+function viewAlternativeClose(){
+		$('#viewAlternativesWeights').closeModal();
+
+}
+function viewCriteriaClose(){
+	$('#viewCriteriasWeights').closeModal();
+}
 function eraseProblemClose(){
 	$('#eraseProblemModal').closeModal();
 }
@@ -125,5 +132,12 @@ function eraseProblemOpen(){
 }
 function eraseAlternativeOpen(){
 	$('#eraseAlternativeModal').openModal();
+
+}
+function viewCriteriaOpen(){
+	$('#viewCriteriasWeights').openModal();
+}
+function viewAlternativeOpen(){
+		$('#viewAlternativesWeights').openModal();
 
 }

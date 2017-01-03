@@ -151,7 +151,8 @@
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Criteria" data-position="right" data-target= "addCriteriaModal" onclick="addCriteriaOpen()">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Criteria" data-position="right" data-target= "addCriteriaModal" onclick="addCriteriaOpen()">add</i>
+                          <a class="btn-floating btn-small orange lighten-1 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="See Criterias Values" data-position="right" data-target= "viewCriteriasWeights" onclick="viewCriteriaOpen()">search</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -170,7 +171,8 @@
                       <tr>
                           <th><span class = "black-text text-darken-2">Name</span></th>
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
-                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Alternative" data-position="right" data-target= "addAlternativeModal" onclick="addAlternativeOpen()">add</i></th>
+                          <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Alternative" data-position="right" data-target= "addAlternativeModal" onclick="addAlternativeOpen()">add</i>
+                          <a class="btn-floating btn-small orange lighten-1 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="See Alternatives Values" data-position="right" data-target= "viewAlternativesWeights" onclick="viewAlternativeOpen()">search</i></th>
                       
                       </tr>
                     </thead>
@@ -342,6 +344,104 @@
            <div class="row"></div>
            <div class="row"></div>
            
+    </div>
+</div>
+<div id="viewCriteriasWeights" class="modal">
+    <div class="modal-content">
+      <center><h4>Criterias Weights</h4></center>
+      <form name = "ViewCriteriasForm" ng-controller = "ViewCriterias as vc" ng-submit = "vc.viewC()">
+            <div class="row">
+            <div class="col s6">
+            <select class="browser-default" ng-model = "vc.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
+                </select>
+                </div>
+                <div class="col s6">
+            <select class="browser-default" ng-model = "vc.review.criteria" required>
+                  <option value="" disabled selected>Criteria</option>
+                  <option ng-repeat = "c in criterias" value = "{{c._id}}">{{c.name}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="row">
+              <center><button class="waves-effect waves-light btn"  type="Submit" value = "submit" ><i class="material-icons left">search</i>Search</button></center>
+            </div>
+            <div class="row">
+            <div class="col s12">
+              <table>
+                <thead>
+                  <th>Criteria</th>
+                  <th>Fuzzy Rating</th>
+                  <th>Value</th>
+                </thead>
+                <tbody>
+                                <tr ng-repeat = "selection in vc.selections">
+                          <td>{{selection.name}}</td>
+                          <td>{{selection.fuzzyRating}}</td>
+                          <td>({{selection.fuzzyValue1}},{{selection.fuzzyValue2}},{{selection.fuzzyValue3}})</td>
+                        </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>     
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>   
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>    
+    </div>
+</div>
+<div id="viewAlternativesWeights" class="modal">
+    <div class="modal-content">
+      <center><h4>Alternatives Weights</h4></center>
+      <form name = "ViewAlternativesForm" ng-controller = "ViewAlternatives as va" ng-submit = "va.viewA()">
+            <div class="row">
+            <div class="col s12">
+            <select class="browser-default" ng-model = "va.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
+                </select>
+                </div>                
+            </div>
+            <div class="row">
+              <center><button class="waves-effect waves-light btn"  type="Submit" value = "submit" ><i class="material-icons left">search</i>Search</button></center>
+            </div>
+            <div class="row">
+            <div class="col s12">
+              <table>
+                <thead>
+                  <th>Alternative</th>
+                  <th>Fuzzy Rating</th>
+                  <th>Value</th>
+                </thead>
+                <tbody>
+                                <tr ng-repeat = "selection in vc.selections">
+                          <td>{{selection.name}}</td>
+                          <td>{{selection.fuzzyRating}}</td>
+                          <td>({{selection.fuzzyValue1}},{{selection.fuzzyValue2}},{{selection.fuzzyValue3}})</td>
+                        </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>         
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>  
     </div>
 </div>
 <div id="addAlternativeModal" class="modal">
