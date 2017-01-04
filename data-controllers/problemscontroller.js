@@ -287,6 +287,7 @@ module.exports.update = function (req, res) {
               //console.log(req.body.alternativeId);
                for(i =0;i< results.selectionsAlternatives.length;i++){
                     if(results.selectionsAlternatives[i].alternativeId == req.body.alternativeId){
+                      if(results.selectionsAlternatives[i].criteriaId ==  req.body.criteriaId){
                       if(results.selectionsAlternatives[i].decisorId == req.body.decisorId){
                         results.selectionsAlternatives.splice(i,1);
                         /*results.save(function (err, result) {
@@ -294,11 +295,13 @@ module.exports.update = function (req, res) {
                             console.log("erased match" + result);
                                                   });*/
                         break;
+                      }
                       } 
                     }
                   }
               var newAChoose = {
                     decisorId :req.body.decisorId,
+                    criteriaId: req.body.criteriaId,
                     alternativeId: req.body.alternativeId,
                     fuzzyRating: req.body.fuzzyRating,
                     fuzzyValue1 :req.body.fuzzyValue1,
@@ -307,10 +310,11 @@ module.exports.update = function (req, res) {
 
 
               };
+              console.log(newAChoose);
             results.selectionsAlternatives.push(newAChoose);
             results.save(function (err, result) {
                      res.json(result);
-                    
+                      console.log("escribio");
                    });
             }
           }

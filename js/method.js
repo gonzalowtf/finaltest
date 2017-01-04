@@ -155,21 +155,33 @@
 									w2: sqrt2,
 									w3: sqrt3
 								}
-								
+								//console.log(decisorSelection);
 								CWeights.push(decisorSelection);
 
-
 							}
+
 						}
+						
 					}
+					
 				}
+
 			}
-			console.log(CWeights);
 			var sum1 = 0;
 			var sum2 = 0;
 			var sum3 = 0;
+			var idda = "--";
 			for(CWindex = 0; CWindex<CWeights.length;CWindex++){
 				var idd = CWeights[CWindex].decisorId;
+				if(idda == idd){
+					//nada
+					//console.log("match");
+					
+				}
+				else{
+				sum1 = 0;
+				sum2 = 0;
+				sum3 = 0;
 				for(CWindex2 =0; CWindex2<CWeights.length;CWindex2++){
 					var idd2 = CWeights[CWindex2].decisorId;
 					if(idd == idd2){
@@ -178,6 +190,8 @@
 						sum3=sum3+CWeights[CWindex2].w3;
 					}
 				}
+			}
+				idda = idd;
 				var w1 =  CWeights[CWindex].w1;
 				var w2 =  CWeights[CWindex].w2;
 				var w3 =  CWeights[CWindex].w3;
@@ -189,9 +203,91 @@
 				CWeights[CWindex].w2 = w2res;
 				CWeights[CWindex].w3 = w3res;
 
-				sum1 = 0;
-				sum2 = 0;
-				sum3 = 0;
+				
+
+			}
+			//alternatives
+			var AWeights = [];
+			for(z =0; z< $scope.problemss.length;z++){
+				if($scope.problemss[z]._id == $scope.pName.id){
+					var k = $scope.problemss[z].decisors.length;
+					var lenCriterias = $scope.problemss[z].criterias.length;
+					for(i =0; i<k;i++){
+						var idd = $scope.problemss[z].decisors[i]._id;
+						var lenSelA = $scope.problemss[z].selectionsAlternatives.length;
+						for(j =0; j<lenSelA;j++){
+							if(idd ==$scope.problemss[z].selectionsAlternatives[j].decisorId){
+							var weightA1 = $scope.problemss[z].selectionsAlternatives[j].fuzzyValue1;
+							var weightA2 = $scope.problemss[z].selectionsAlternatives[j].fuzzyValue2;
+							var weightA3 = $scope.problemss[z].selectionsAlternatives[j].fuzzyValue3;
+							var idc =  $scope.problemss[z].selectionsAlternatives[j].criteriaId;
+							var ida =  $scope.problemss[z].selectionsAlternatives[j].alternativeId;
+							if(weightA1 == -1){
+								//nada
+							}
+							else{
+							for(c=0; c< CWeights.length;c++){
+								if(idd == CWeights[c].decisorId){
+									if(CWeights[c].criteriaId == idc){
+										var w1 = CWeights[c].w1;
+										var w2 = CWeights[c].w2;
+										var w3 = CWeights[c].w3;
+										var resMul1 = w1*weightA1;
+										var resMul2 = w2*weightA2;
+										var resMul3 = w3*weightA3;
+
+										var decisorSelection = {
+											decisorId : idd,
+											criteriaId: idc,
+											alternativeId :ida,
+											w1: resMul1,
+											w2 : resMul2,
+											w3: resMul3
+										}
+										AWeights.push(decisorSelection);
+
+										}
+
+								}
+								}
+							}
+							}
+						}
+					}
+				}
+			}
+			var sum1 =0;
+			var sum2 =0;
+			var sum3 =0;
+			var ida = "--";
+			var defWeights = [];
+			for(i = 0;i<AWeights.length;i++){
+				var id = AWeights[i].decisorid;
+				if(id== ida){
+					//nada
+				}
+				else{
+					sum1 = 0;
+					sum2 = 0;
+					sum3 = 0;
+
+				for(j=0; j<AWeights.length;j++){
+					if(id== AWeights[j].decisorid){
+						sum1 = sum1 + AWeights[j].w1;
+						sum2 = sum2 + AWeights[j].w2;
+						sum3 = sum3 + AWeights[j].w3;
+					}
+				}
+				// guardo aqui pesos definitivos
+				var defWeight ={
+					decisorId: id,
+					w1: sum1,
+					w2:sum2,
+					w3: sum3
+				}
+				console.log(defWeight);
+				defWeights.push(defWeight);
+			}
 
 			}
 
@@ -423,12 +519,12 @@
 										this.review.fuzzyRating = "(3,5,7)"
 									}
 
-								
 									var request = {
 									type: "selectionsAlternatives",
 									action: "edit",
 									alternativeId:  $scope.aid,
 									decisorId: this.review.decisor,
+									criteriaId : this.review.criteria,
 									fuzzyRating : findAlternativeRating(this.review.fuzzyRating),
 									fuzzyValue1: findV1Alternative(this.review.fuzzyRating),
 									fuzzyValue2: findV2Alternative(this.review.fuzzyRating),
@@ -436,7 +532,7 @@
 
 																	
 									}
-									//console.log(request);
+									console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id ,request);
 
 							 $scope.refresh();
@@ -1032,6 +1128,12 @@ function findAlternativeRating(fuzzyRating){
         if(fuzzyRating == "(9,10,10)"){
           rating = "Extremely High";
         }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          rating = "**";
+        }
+        if(fuzzyRating == "**"){
+          rating = "**";
+        }
         
           return rating;
 }
@@ -1057,6 +1159,9 @@ function findAlternativeRating(fuzzyRating){
         if(fuzzyRating == "(9,10,10)"){
           return 9;
         }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          return -1;
+        }
  }
   function findV2Alternative(fuzzyRating){
  	if(fuzzyRating == "(0,0,1)"){
@@ -1079,6 +1184,9 @@ function findAlternativeRating(fuzzyRating){
         }
         if(fuzzyRating == "(9,10,10)"){
           return 10;
+        }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          return -1;
         }
  }
  function raizN(x, n) {
@@ -1105,6 +1213,9 @@ function findAlternativeRating(fuzzyRating){
         }
         if(fuzzyRating == "(9,10,10)"){
           return 10;
+        }
+        if(fuzzyRating == "(-1,-1,-1)"){
+          return -1;
         }
  }
 	

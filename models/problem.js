@@ -65,8 +65,9 @@ module.exports = mongoose.model('Problem',{
 
 			{
 		decisorId: {type : String , require : true},
+		criteriaId: {type : String , require : true},
 		alternativeId:{type : String , require : true},
-		fuzzyRating: {type : String ,enum:['Extremely Low','Very Low','Low','Medium','High','Very High','Extremely High'], require : true},
+		fuzzyRating: {type : String ,enum:['Extremely Low','Very Low','Low','Medium','High','Very High','Extremely High','**'], require : true},
 		fuzzyValue1 : {type : Number , require : true},
 		fuzzyValue2 : {type : Number , require : true},
 		fuzzyValue3: {type : Number , require : true}

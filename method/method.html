@@ -732,13 +732,23 @@
               <div class="row"></div>
               <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
               <div class="row">
-              <div class="col s6 center-align">
+              <div class="col s6">
                 <center>
+                For
                   <select class="browser-default" ng-model = "ea.review.decisor" required>
                   <option value="" disabled selected>Decisor</option>
-                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>                  
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
                 </select>
                 </center>
+              </div>
+              <div class="col s6">
+                <center>
+                Using
+                  <select class="browser-default" ng-model = "ea.review.criteria" required>
+                  <option value="" disabled selected>Criteria</option>
+                  <option ng-repeat = "c in criterias" value = "{{c._id}}">{{c.name}}</option>             </select>
+                </center>
+
               </div>
               </div>
             <div class="row">
@@ -755,12 +765,13 @@
                   <option value="(5,7,9)">High</option>
                   <option value="(7,9,10)">Very High</option>
                   <option value="(9,10,10)">Extremely High</option>
+                  <option value="(-1,-1,-1)">**</option>
                 </select>
                 <div class="row">
                 <center><label>Value {{ea.review.fuzzyRating}}</label></center>
                 </div>
               </div>
-              <div class="col s4">Weight</div>
+              <div class="col s4"><br>Weight</div>
               </div>          
             <div class="row"></div>
             <div class="row"></div>

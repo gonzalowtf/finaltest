@@ -1,4 +1,3 @@
- <!-- Modal Structure -->
 <div id="newProblemModal" class="modal">
     <div class="modal-content">
       <center><h4>Enter a New Problem</h4></center>
@@ -106,32 +105,13 @@
                 <label for="first_name" data-error="wrong" data-success="right">Criteria Name</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div>
             </div>
-            <div class="row">
-            <div class="col s6">
-              <h6><span>Rate Item</span></h6>
-              </div>
-            
-              <div class="col s6">
-                 <select class="browser-default" ng-model = "ac.review.fuzzyRating" required>
-                  <option value="" disabled selected>Choose Weight</option>
-                  <option value="(0,1,2)">Same Importance</option>
-                  <option value="(1,2,3)">Weak Importance</option>
-                  <option value="(2,3,4)">Light Importance</option>
-                  <option value="(3,4,5)">Importance between light and accentuated</option>
-                  <option value="(3,5,7)">Importance Accentuated</option>
-                  <option value="(5,6,7)">Strong Importance</option>
-                  <option value="(6,7,8)">Very Strong Importance</option>
-                  <option value="(7,8,9)">Extremely Strong Importance</option>
-                  <option value="(8,9,10)">Absolute Importance</option>
-                </select>
-                <div class="row">
-                <center><label>value {{ac.review.fuzzyRating}}</label></center>
-                </div>
-              </div></div>          
             <div class="row"></div>
             <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
            <div class="row"></div>
             <div class="row">
               <center><button class="btn waves-effect waves-light teal darken-1" type="submit" value="Submit" name="action">Add
@@ -145,6 +125,104 @@
            
     </div>
 </div>
+<div id="viewCriteriasWeights" class="modal">
+    <div class="modal-content">
+      <center><h4>Criterias Weights</h4></center>
+      <form name = "ViewCriteriasForm" ng-controller = "ViewCriterias as vc" ng-submit = "vc.viewC()">
+            <div class="row">
+            <div class="col s6">
+            <select class="browser-default" ng-model = "vc.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
+                </select>
+                </div>
+                <div class="col s6">
+            <select class="browser-default" ng-model = "vc.review.criteria" required>
+                  <option value="" disabled selected>Criteria</option>
+                  <option ng-repeat = "c in criterias" value = "{{c._id}}">{{c.name}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="row">
+              <center><button class="waves-effect waves-light btn"  type="Submit" value = "submit" ><i class="material-icons left">search</i>Search</button></center>
+            </div>
+            <div class="row">
+            <div class="col s12">
+              <table>
+                <thead>
+                  <th>Criteria</th>
+                  <th>Fuzzy Rating</th>
+                  <th>Value</th>
+                </thead>
+                <tbody>
+                                <tr ng-repeat = "selection in vc.selections">
+                          <td>{{selection.name}}</td>
+                          <td>{{selection.fuzzyRating}}</td>
+                          <td>({{selection.fuzzyValue1}},{{selection.fuzzyValue2}},{{selection.fuzzyValue3}})</td>
+                        </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>     
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>   
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>    
+    </div>
+</div>
+<div id="viewAlternativesWeights" class="modal">
+    <div class="modal-content">
+      <center><h4>Alternatives Weights</h4></center>
+      <form name = "ViewAlternativesForm" ng-controller = "ViewAlternatives as va" ng-submit = "va.viewA()">
+            <div class="row">
+            <div class="col s12">
+            <select class="browser-default" ng-model = "va.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
+                </select>
+                </div>                
+            </div>
+            <div class="row">
+              <center><button class="waves-effect waves-light btn"  type="Submit" value = "submit" ><i class="material-icons left">search</i>Search</button></center>
+            </div>
+            <div class="row">
+            <div class="col s12">
+              <table>
+                <thead>
+                  <th>Alternative</th>
+                  <th>Fuzzy Rating</th>
+                  <th>Value</th>
+                </thead>
+                <tbody>
+                                <tr ng-repeat = "selection in vc.selections">
+                          <td>{{selection.name}}</td>
+                          <td>{{selection.fuzzyRating}}</td>
+                          <td>({{selection.fuzzyValue1}},{{selection.fuzzyValue2}},{{selection.fuzzyValue3}})</td>
+                        </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            </form>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>         
+            <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>  
+    </div>
+</div>
 <div id="addAlternativeModal" class="modal">
     <div class="modal-content">
       <center><h4>Add Alternative</h4></center>
@@ -155,30 +233,13 @@
                 <label for="first_name" data-error="wrong" data-success="right">Alternative Name</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div>
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div>
             </div>
-            <div class="row">
-            <div class="col s6">
-              <h6><span>Rate Item</span></h6>
-              </div>
-            
-              <div class="col s6">
-                 <select class="browser-default" ng-model = "aa.review.fuzzyRating" required>
-                  <option value="" selected>Choose Weight</option>
-                  <option value="(0,0,1)">Extremely Low</option>
-                  <option value="(0,1,3)">Very Low</option>
-                  <option value="(1,3,5)">Low</option>
-                  <option value="(3,5,7)">Medium</option>
-                  <option value="(5,7,9)">High</option>
-                  <option value="(7,9,10)">Very High</option>
-                  <option value="(9,10,10)">Extremely High</option>
-                </select>
-                <div class="row">
-                <center><label>value {{aa.review.fuzzyRating}}</label></center>
-                </div>
-              </div></div>          
             <div class="row"></div>
             <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
            <div class="row"></div>
             <div class="row">
               <center><button class="btn waves-effect waves-light teal darken-1" type="submit" value="Submit" name="action">Add
@@ -271,7 +332,7 @@
             
               <div class="col s6">
               <center>Actual weight: {{dfuzzyrating}}</center>
-                 <select class="browser-default" ng-model="ed.review.rating" required="">
+                 <select class="browser-default" ng-model="ed.review.rating" required>
                   <option value="" selected>Choose Weight</option>
                   <option value="(0,0,4)">Normal</option>
                   <option value="(2,5,8)">Important</option>
@@ -333,15 +394,23 @@
               </div>
               <div class="row"></div>
               <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
-            <div class="row">
-            <div class="col s6">
-              <h6><span>Rate Item</span></h6>
+              <div class="row">
+              <div class="col s6 center-align">
+                <center>
+                  <select class="browser-default" ng-model = "ec.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>                  
+                </select>
+                </center>
               </div>
-            
-              <div class="col s6">
-                <center>Actual weight: {{cfuzzyrating}}</center>
-                 <select class="browser-default" ng-model="ec.review.rating" required="">
-                  <option value="" disabled selected>Choose Weight</option>
+              </div>
+            <div class="row" ng-repeat ="criteria in criterias" ng-show =" criteria.name != cname">
+            <div class="col s4">
+              <h6><span>This criteria has a</span></h6>
+              </div>            
+              <div class="col s4">
+                <select class="browser-default" ng-model="criteria.fuzzyRating">
+                  <option value="" disabled selected>Weight</option>
                   <option value="(0,1,2)">Same Importance</option>
                   <option value="(1,2,3)">Weak Importance</option>
                   <option value="(2,3,4)">Light Importance</option>
@@ -351,11 +420,16 @@
                   <option value="(6,7,8)">Very Strong Importance</option>
                   <option value="(7,8,9)">Extremely Strong Importance</option>
                   <option value="(8,9,10)">Absolute Importance</option>
+                  <option value="(-1,-1,-1)">*</option>
                 </select>
                 <div class="row">
-                <center><label>Value {{ec.review.rating}} </label></center>
+                <center><label>Value {{criteria.fuzzyRating}}</label></center>
                 </div>
-              </div></div>          
+              </div>
+                <div class="col s4">
+                  <h6><span>weight comparing with {{criteria.name}}</span></h6>            
+                </div>
+              </div>          
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -368,7 +442,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+                      
     </div>
 </div>
 <div id="eraseCriteriaModal" class="modal">
@@ -425,23 +499,41 @@
                         </div>
 <div id="editAlternativeModal" class="modal">
     <div class="modal-content">
-      <center><h4>Edit Alternative</h4></center>
+      <center><h4>Edit Criteria</h4></center>
       <form class="col s12" name = "EditAlternativeForm" ng-controller = "EditAlternative as ea" ng-submit ="ea.editA()">
            <div class="row">
               <div class="input-field col s12">
-                <input id="item_name" type="text" class="validate" ng-model = "ea.review.name" pattern="[a-zA-Z0-9]+" >
+                <input id="item_name" type="text" class="validate" ng-model = "ea.review.name" pattern="[a-zA-Z0-9]+">
                 <label for="first_name" data-error="wrong" data-success="right">Change Alternative Name "{{aname}}"</label>
               </div>
               <div class="row"></div>
-              <div class="row"><center><span class = "grey-text text-lighten-1">This fields must have no spaces</span></center></div></div>
-            <div class="row">
-            <div class="col s6">
-              <h6><span>Rate Item</span></h6>
-              </div>
-            
+              <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
+              <div class="row">
               <div class="col s6">
-              <center>Actual weight: {{afuzzyrating}}</center>
-                 <select class="browser-default" ng-model="ea.review.rating" required="">
+                <center>
+                For
+                  <select class="browser-default" ng-model = "ea.review.decisor" required>
+                  <option value="" disabled selected>Decisor</option>
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
+                </select>
+                </center>
+              </div>
+              <div class="col s6">
+                <center>
+                Using
+                  <select class="browser-default" ng-model = "ea.review.criteria" required>
+                  <option value="" disabled selected>Criteria</option>
+                  <option ng-repeat = "c in criterias" value = "{{c._id}}">{{c.name}}</option>             </select>
+                </center>
+
+              </div>
+              </div>
+            <div class="row">
+            <div class="col s4">
+              <h6><span>This alternative has a</span></h6>
+              </div>            
+              <div class="col s4">
+                <select class="browser-default" ng-model="ea.review.fuzzyRating">
                   <option value="" selected>Choose Weight</option>
                   <option value="(0,0,1)">Extremely Low</option>
                   <option value="(0,1,3)">Very Low</option>
@@ -450,11 +542,13 @@
                   <option value="(5,7,9)">High</option>
                   <option value="(7,9,10)">Very High</option>
                   <option value="(9,10,10)">Extremely High</option>
-                 </select>
+                </select>
                 <div class="row">
-                <center><label>Value {{ea.review.rating}} </label></center>
+                <center><label>Value {{ea.review.fuzzyRating}}</label></center>
                 </div>
-              </div></div>          
+              </div>
+              <div class="col s4"><br>Weight</div>
+              </div>          
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -467,6 +561,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+                      
     </div>
 </div>
+
