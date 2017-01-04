@@ -256,39 +256,94 @@
 					}
 				}
 			}
+			// pesos definitivos de alternativas
 			var sum1 =0;
 			var sum2 =0;
 			var sum3 =0;
-			var ida = "--";
-			var defWeights = [];
-			for(i = 0;i<AWeights.length;i++){
-				var id = AWeights[i].decisorid;
-				if(id== ida){
-					//nada
-				}
-				else{
-					sum1 = 0;
-					sum2 = 0;
-					sum3 = 0;
+			var AWeights2 =[];
+			for(z =0; z< $scope.problemss.length;z++){
+				if($scope.problemss[z]._id == $scope.pName.id){
+					var k = $scope.problemss[z].decisors.length;
+					for(i=0;i<k;i++){
+						var idd = $scope.problemss[z].decisors[i]._id;
+						var al = $scope.problemss[z].alternatives.length;
+					for(j=0;j<al;j++){
+						var ida =  $scope.problemss[z].alternatives[j]._id;
+						console.log(ida);
+						sum1 =0;
+						sum2 =0;
+						sum3 =0;
+						for (awIndex =0;awIndex< AWeights.length;awIndex++){
+							if(idd ==AWeights[awIndex].decisorId){
+							if(ida == AWeights[awIndex].alternativeId){
+								sum1 = sum1 +AWeights[awIndex].w1;
+								sum2 = sum2 +AWeights[awIndex].w2;
+								sum3 = sum3 +AWeights[awIndex].w3;
 
-				for(j=0; j<AWeights.length;j++){
-					if(id== AWeights[j].decisorid){
-						sum1 = sum1 + AWeights[j].w1;
-						sum2 = sum2 + AWeights[j].w2;
-						sum3 = sum3 + AWeights[j].w3;
+							}
+						}
+						}
+						var defAWeight = {
+							decisorId : idd,
+							alternativeId : ida,
+							w1: sum1,
+							w2: sum2,
+							w3 : sum3
+
+						}
+						AWeights2.push(defAWeight);
+						
+								
+					}
+					
 					}
 				}
-				// guardo aqui pesos definitivos
-				var defWeight ={
-					decisorId: id,
-					w1: sum1,
-					w2:sum2,
-					w3: sum3
-				}
-				console.log(defWeight);
-				defWeights.push(defWeight);
 			}
+			
+			// tazacion de los decisores 
+			var DWeights = [];
+			for(z =0; z< $scope.problemss.length;z++){
+				if($scope.problemss[z]._id == $scope.pName.id){
+					var k = $scope.problemss[z].decisors.length;
+					var sum1 =0;
+					var sum2 =0;
+					var sum3 =0;
 
+					for(i =0;i<k;i++){
+						sum1 = sum1 + $scope.problemss[z].decisors[i].fuzzyValue1;
+						sum2 = sum2 + $scope.problemss[z].decisors[i].fuzzyValue2;
+						sum3 = sum3 + $scope.problemss[z].decisors[i].fuzzyValue3;
+
+
+
+					}
+					for(i=0;i<k;i++){
+						var div1 = $scope.problemss[z].decisors[i].fuzzyValue1/sum1;
+						var div2 = $scope.problemss[z].decisors[i].fuzzyValue2/sum2;
+						var div3 = $scope.problemss[z].decisors[i].fuzzyValue3/sum3;
+						
+						var decisorNWeight ={
+							decisorId:$scope.problemss[z].decisors[i]._id,
+							w1: div1,
+							w2: div2,
+							w3: div3
+						}
+						DWeights.push(decisorNWeight);
+					}
+
+				}
+			}
+				
+			// obtencion del vector r
+			var RWeights = [];
+			for(z =0; z< $scope.problemss.length;z++){
+				if($scope.problemss[z]._id == $scope.pName.id){
+					var len1 = AWeights.length;
+					for(i =0;i< len1;i++){
+
+					}
+
+				}
 			}
 
 		}

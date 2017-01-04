@@ -310,11 +310,11 @@ module.exports.update = function (req, res) {
 
 
               };
-              console.log(newAChoose);
+              //console.log(newAChoose);
             results.selectionsAlternatives.push(newAChoose);
             results.save(function (err, result) {
                      res.json(result);
-                      console.log("escribio");
+                      //console.log("escribio");
                    });
             }
           }
