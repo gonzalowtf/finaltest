@@ -269,7 +269,6 @@
 						var al = $scope.problemss[z].alternatives.length;
 					for(j=0;j<al;j++){
 						var ida =  $scope.problemss[z].alternatives[j]._id;
-						console.log(ida);
 						sum1 =0;
 						sum2 =0;
 						sum3 =0;
@@ -333,18 +332,118 @@
 
 				}
 			}
-				
+			
 			// obtencion del vector r
 			var RWeights = [];
 			for(z =0; z< $scope.problemss.length;z++){
 				if($scope.problemss[z]._id == $scope.pName.id){
-					var len1 = AWeights.length;
+					var len1 = $scope.problemss[z].alternatives.length;
 					for(i =0;i< len1;i++){
+						var ida = $scope.problemss[z].alternatives[i]._id;
+						var sum1=0;
+						var sum2=0;
+						var sum3=0;
+						for(j=0;j<AWeights2.length;j++){
+							if(AWeights2[j].alternativeId == ida){
+								var v1 = AWeights2[j].w1;
+								var v2 = AWeights2[j].w2;
+								var v3 = AWeights2[j].w3;
+								var idd = AWeights2[j].decisorId;
+								for(dIndex =0;dIndex< DWeights.length;dIndex++){
+									if(idd == DWeights[dIndex].decisorId){
+										var d1 = DWeights[dIndex].w1;
+										var d2 = DWeights[dIndex].w2;
+										var d3 = DWeights[dIndex].w3;
+										var resMul1 = d1*v1;
+										var resMul2 = d2*v2;
+										var resMul3 = d3*v3;
+										console.log(d1 +"*"+v1+" ="+resMul1);
+										console.log(d2 +"*"+v2+" ="+resMul2);
+										console.log(d3 +"*"+v3+" ="+resMul3);
+									}
+								}
+
+
+								sum1 = sum1+ resMul1;
+								sum2 = sum2+ resMul2;
+								sum3 = sum3+ resMul3;
+							}
+						}
+						var res = {
+							alternativeId: ida,
+							w1: sum1,
+							w2: sum2,
+							w3 : sum3
+						}
+						RWeights.push(res);
+						/*console.log(sum1);
+						console.log(sum2);
+						console.log(sum3);
+						*/
+
 
 					}
 
 				}
 			}
+			//console.log(RWeights);
+			for(i =0;i< RWeights.length;i++){
+				RWeights[i].w1 = RWeights[i].w1/10;
+				RWeights[i].w2 = RWeights[i].w2/10;
+				RWeights[i].w3 = RWeights[i].w3/10;
+			}
+			var v1P = 1;
+			var v2P = 1;
+			var v3P = 1;
+			var v1N = 0;
+			var v2N = 0;
+			var v3N = 0;
+
+			
+			for(i =0;i< RWeights.length;i++){
+				var negDistance = distance(RWeights[i].w1,RWeights[i].w2,RWeights[i].w3,v1N,v2N,v3N);
+				var posDistance = distance(RWeights[i].w1,RWeights[i].w2,RWeights[i].w3,v1P,v2P,v3P);
+				RWeights[i].negDistance = negDistance;
+				RWeights[i].posDistance = posDistance;
+			}
+			for(i =0;i< RWeights.length;i++){
+				var coef = 0.5*(RWeights[i].negDistance +(1-RWeights[i].posDistance));
+				RWeights[i].coef = coef;
+			}
+			var ca =0;
+			var aux = {};
+			for(i =0;i< RWeights.length;i++){
+				for(j=0;j<RWeights.length;j++){
+					if(RWeights[i].coef >RWeights[j].coef){
+						aux = RWeights[i];
+						RWeights[i] = RWeights[j];
+						RWeights[j] = aux;
+					}
+				}
+			}
+			
+			console.log(RWeights);
+			for(z =0; z< $scope.problemss.length;z++){
+				if($scope.problemss[z]._id == $scope.pName.id){
+					var len1 = $scope.problemss[z].alternatives.length;
+					for(i =0;i< len1;i++){
+						var ida = $scope.problemss[z].alternatives[i]._id;
+						var name =$scope.problemss[z].alternatives[i].name;
+						for(j=0;j<RWeights.length;j++){
+							RWeights[j].pos = j+1;
+							if(RWeights[j].alternativeId == ida){
+								RWeights[j].name = name;
+							}
+						}
+						
+
+					}
+
+				}
+			}
+			$scope.results = [];
+			$scope.results = RWeights;
+			
 
 		}
 		
@@ -1273,6 +1372,13 @@ function findAlternativeRating(fuzzyRating){
           return -1;
         }
  }
+
+  function distance(a1, a2, a3, b1, b2, b3)
+        {
+            var distance = Math.sqrt((Math.pow(a1 - b1, 2) + Math.pow(a2 - b2, 2) + Math.pow(a3 - b3, 2)) / 3);
+            console.log(distance);
+            return distance;
+        }
 	
 	
 
