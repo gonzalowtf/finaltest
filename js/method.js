@@ -32,6 +32,7 @@
 			$scope.pName =pname;
 			serveProblemName.name = $scope.pName;
 			serveProblemName.id = idp;
+			$scope.results = [];
 		};
 		
 		
@@ -357,9 +358,9 @@
 										var resMul1 = d1*v1;
 										var resMul2 = d2*v2;
 										var resMul3 = d3*v3;
-										console.log(d1 +"*"+v1+" ="+resMul1);
-										console.log(d2 +"*"+v2+" ="+resMul2);
-										console.log(d3 +"*"+v3+" ="+resMul3);
+										//console.log(d1 +"*"+v1+" ="+resMul1);
+										//console.log(d2 +"*"+v2+" ="+resMul2);
+										//console.log(d3 +"*"+v3+" ="+resMul3);
 									}
 								}
 
@@ -422,7 +423,7 @@
 				}
 			}
 			
-			console.log(RWeights);
+			//console.log(RWeights);
 			for(z =0; z< $scope.problemss.length;z++){
 				if($scope.problemss[z]._id == $scope.pName.id){
 					var len1 = $scope.problemss[z].alternatives.length;
@@ -455,7 +456,7 @@
 		this.problem = "";
 		this.isSelected = function(tab){
 			this.selected = tab;
-			console.log(this.selected);
+			//console.log(this.selected);
 		};
 		
 		
@@ -686,7 +687,7 @@
 
 																	
 									}
-									console.log(request);
+									
 									$http.put('/api/problems/' +$scope.pName.id ,request);
 
 							 $scope.refresh();
@@ -721,77 +722,7 @@
 
 			}
 	}]);
-	app.controller("ViewCriterias",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
-
-			this.review = {};
-			this.selections =[];			
-			$scope.pName = serveProblemName;
-			this.viewC = function(){
-				this.selections =[];
-				for(i =0; i< $scope.problemss.length;i++){
-					if($scope.problemss[i]._id == $scope.pName.id){
-						for(j=0;j<$scope.problemss[i].selectionsCriterias.length;j++){
-							var pid = $scope.problemss[i]._id;
-							if($scope.problemss[i].selectionsCriterias[j].decisorId == this.review.decisor){
-							//console.log("llegue 369");
-							if($scope.problemss[i].selectionsCriterias[j].criteriaId == this.review.criteria){
-								//console.log("llegue 370");
-								var compp = $scope.problemss[i].selectionsCriterias[j].comparations.slice(0);
-								//console.log(compp);
-								for(z=0;z<compp.length;z++){
-								var newCView = {
-								name :$scope.getCName(pid,compp[z]._id),
-								fuzzyRating : compp[z].fuzzyRating,
-								fuzzyValue1 : compp[z].fuzzyValue1,
-								fuzzyValue2 : compp[z].fuzzyValue2,
-								fuzzyValue3 : compp[z].fuzzyValue3
-								}
-								//console.log(newCView);
-								this.selections.push(newCView);
-								}
-							}
-							break;
-							this.review = {};
-						}
-					}
-				}
-			}
-			};
-	}]);
-	app.controller("ViewAlternatives",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
-
-			this.review = {};
-			$scope.pName = serveProblemName;
-			this.selections =[];
-			this.viewA = function(){
-				this.selections = [];
-				for(i =0; i< $scope.problemss.length;i++){
-					if($scope.problemss[i]._id == $scope.pName.id){
-						var pid = $scope.problemss[i]._id
-						var compp = $scope.problemss[i].selectionsAlternatives.slice(0);
-						console.log(compp);
-						for(j=0;j<compp.length;j++){
-							if(compp[j].decisorId == this.review.decisor){
-													
-								var newAView = {
-								name :$scope.getAName(pid,compp[j]._id),
-								fuzzyRating : compp[j].fuzzyRating,
-								fuzzyValue1 : compp[j].fuzzyValue1,
-								fuzzyValue2 : compp[j].fuzzyValue2,
-								fuzzyValue3 : compp[j].fuzzyValue3
-								}
-								//console.log(newAView);
-								this.selections.push(newAView);
-								
-							
-						}
-					}
-					break
-					this.review = {};
-				}
-			}
-			};
-	}]);
+	
 	app.controller("EditProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
 				
@@ -930,7 +861,6 @@ app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							
 							
 							$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "decisor",
@@ -1376,10 +1306,9 @@ function findAlternativeRating(fuzzyRating){
   function distance(a1, a2, a3, b1, b2, b3)
         {
             var distance = Math.sqrt((Math.pow(a1 - b1, 2) + Math.pow(a2 - b2, 2) + Math.pow(a3 - b3, 2)) / 3);
-            console.log(distance);
             return distance;
         }
 	
-	
+
 
 })();
