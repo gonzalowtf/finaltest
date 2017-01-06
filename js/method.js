@@ -514,6 +514,8 @@
 				var v2 = findV2Decisor(this.review.rating);
 				var v3 = findV3Decisor(this.review.rating);
 				var len = $scope.problemss.length;
+				this.review.name = firstUp(this.review.name);
+				this.review.surname = firstUp(this.review.surname);
 				$scope.refresh();
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
@@ -857,6 +859,8 @@ app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope
 			$scope.pName = serveProblemName;
 			this.addD = function(){
 					$scope.refresh();
+					this.review.name = firstUp(this.review.name);
+					this.review.surname = firstUp(this.review.surname);
 					var len = $scope.problemss.length;
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
@@ -1309,6 +1313,8 @@ function findAlternativeRating(fuzzyRating){
             return distance;
         }
 	
-
+function firstUp(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 })();
