@@ -367,16 +367,16 @@ function getAComparations(coll){
 }
 function findDecisorRating(fuzzyRating){
         var rating = "";
-        if(fuzzyRating == "(2,5,8)"){
+        if(fuzzyRating == "(2,5,8)" || fuzzyRating == "Important"){
           rating = "Important";
         }
-        if(fuzzyRating == "(0,0,4)"){
+        if(fuzzyRating == "(0,0,4)" || fuzzyRating == "Normal"){
           rating = "Normal";
         }
-        if(fuzzyRating == "(5,8,10)"){
+        if(fuzzyRating == "(5,8,10)" || fuzzyRating == "Very Important"){
           rating = "Very Important";
         }
-        if(fuzzyRating == "(8,10,10)"){
+        if(fuzzyRating == "(8,10,10)" || fuzzyRating == "Most Important"){
           rating = "Most Important";
         }
           return rating;
@@ -457,6 +457,18 @@ function findV1Decisor(fuzzyRating){
         if(fuzzyRating == "(8,10,10)"){
           return 8;
         }
+        if(fuzzyRating == "Normal"){
+      return 0;
+    }
+    if(fuzzyRating == "Important"){
+          return 2;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 5;
+        }
+        if(fuzzyRating == "Most Important"){
+          return 8;
+        }
   }
   function findV2Decisor(fuzzyRating){
     if(fuzzyRating == "(0,0,4)"){
@@ -471,6 +483,18 @@ function findV1Decisor(fuzzyRating){
         if(fuzzyRating == "(8,10,10)"){
           return 10;
         }
+        if(fuzzyRating == "Normal"){
+      return 0;
+    }
+    if(fuzzyRating == "Important"){
+          return 5;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 8;
+        }
+        if(fuzzyRating == "Most Important"){
+          return 10;
+        }
   }
   function findV3Decisor(fuzzyRating){
     if(fuzzyRating == "(0,0,4)"){
@@ -483,6 +507,18 @@ function findV1Decisor(fuzzyRating){
           return 10;
         }
         if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "Normal"){
+      return 4;
+    }
+    if(fuzzyRating == "Important"){
+          return 8;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 10;
+        }
+        if(fuzzyRating == "Most Important"){
           return 10;
         }
   }

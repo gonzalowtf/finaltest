@@ -141,3 +141,11 @@ function viewAlternativeOpen(){
 		$('#viewAlternativesWeights').openModal();
 
 }
+function noChangesAlternativeToast(){
+	Materialize.toast("No Changes Saved",3000);
+	$('#editAlternativeModal').closeModal();
+}
+function noChangesDecisorToast(){
+	Materialize.toast("No Changes Saved",3000);
+	$('#editDecisorModal').closeModal();
+}

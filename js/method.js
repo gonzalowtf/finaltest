@@ -444,8 +444,36 @@
 			}
 			$scope.results = [];
 			$scope.results = RWeights;
-			
 
+
+		}
+
+		$scope.findDecisor = function(decisorId){
+			var dName = "";
+			for(i = 0;i< $scope.problemss.length;i++){
+				if(serveProblemName.id ==$scope.problemss[i]._id){
+					for(j=0; j<$scope.problemss[i].decisors.length;j++){
+						if($scope.problemss[i].decisors[j]._id == decisorId){
+							dName = $scope.problemss[i].decisors[j].name;
+						}
+					}
+				}
+			}
+			return dName;
+		}
+
+		$scope.findCriteria = function(criteriaId){
+			var cName = "";
+			for(i = 0;i< $scope.problemss.length;i++){
+				if(serveProblemName.id ==$scope.problemss[i]._id){
+					for(j=0; j<$scope.problemss[i].criterias.length;j++){
+						if($scope.problemss[i].criterias[j]._id == criteriaId){
+							cName = $scope.problemss[i].criterias[j].name;
+						}
+					}
+				}
+			}
+			return cName;
 		}
 		
 	}]);
@@ -510,49 +538,70 @@
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.editD = function(){
-				var v1 = findV1Decisor(this.review.rating);
-				var v2 = findV2Decisor(this.review.rating);
-				var v3 = findV3Decisor(this.review.rating);
+				
 				var len = $scope.problemss.length;
-				this.review.name = firstUp(this.review.name);
-				this.review.surname = firstUp(this.review.surname);
 				$scope.refresh();
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
+						var flag = 1;
 						if(key == $scope.pName.id ){
-							if(this.review.name == null || this.review.name == "" ){
-							this.review.name = $scope.dname;
-								}
-						if(this.review.surname == null || this.review.surname =="" ){
-							this.review.surname = $scope.dsurname;
+							var f = (this.review.name == null||this.review.name == "") && (this.review.surname == null||this.review.surname== "")  && this.review.fuzzyRating == null;
+							console.log(f);
+							if((this.review.name == null||this.review.name == "") && (this.review.surname == null||this.review.surname== "")  && this.review.fuzzyRating == null){
+								flag = 1;
 							}
+							else{
+								flag =0;
+								if(this.review.name == null || this.review.name == "" ){
+									this.review.name = $scope.dname;
+								}
+								if(this.review.surname == null || this.review.surname =="" ){
+									this.review.surname = $scope.dsurname;
+								}
+								if(this.review.fuzzyRating == null){
+									this.review.fuzzyRating = $scope.dfuzzyrating;
+									
+								}
+								var v1 = findV1Decisor(this.review.fuzzyRating);
+								var v2 = findV2Decisor(this.review.fuzzyRating);
+								var v3 = findV3Decisor(this.review.fuzzyRating);
+
+							}
+							if(flag == 0){
 							var len2 = $scope.problemss[i].decisors.length;
 							//$scope.did
 							$scope.refresh();
 							for(j= 0;j<len2;j++){
 								if($scope.did == $scope.problemss[i].decisors[j]._id){
-									$http.put('/api/problems/' +$scope.pName.id ,{
+									var request = {
 									type: "decisor",
 									action: "edit",
 									_id:  $scope.did,
 									name: this.review.name,
 									surname: this.review.surname,
-									fuzzyRating : this.review.rating,
+									fuzzyRating : this.review.fuzzyRating,
 									fuzzyValue1 : v1,
 									fuzzyValue2 : v2,
 									fuzzyValue3 : v3
-							});
-							 $scope.refresh();
+							}
+							console.log(request);
+									$http.put('/api/problems/' +$scope.pName.id , request);
+
+							$scope.refresh();
+							
+							}
+							}
 							toast3();
-							this.review = {};
-							}
-							}
 						}
+						else{
+							noChangesDecisorToast();
+						}
+						this.review = {};
 					}
 				
 					
 			}
-
+		}
 
 
 
@@ -653,10 +702,15 @@
 				var len = $scope.problemss.length;
 				$scope.refresh();
 				 for(i =0;i<len;i++){
+				 	var flag =1;
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
 							if(this.review.name == null){
 							this.review.name = $scope.aname;
+							flag=1;
+								}
+								else{
+									flag = 0;
 								}
 							var len2 = $scope.problemss[i].alternatives.length;
 							//$scope.did
@@ -671,7 +725,10 @@
 									
 							});
 
-									
+									if(this.review.decisor== null ||this.review.criteria== null){
+										//console.log("null");
+									}
+									else{
 									if(this.review.fuzzyRating == null || this.review.fuzzyRating == ""){
 										this.review.fuzzyRating = "(3,5,7)"
 									}
@@ -691,9 +748,15 @@
 									}
 									
 									$http.put('/api/problems/' +$scope.pName.id ,request);
-
-							 $scope.refresh();
-							toast8();
+									flag = 0;
+									}
+							$scope.refresh();
+							if(flag ==0){
+								toast8();
+							}
+							else{
+								noChangesAlternativeToast();
+							}
 							this.review = {};
 								}
 							}
@@ -1020,6 +1083,18 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         if(fuzzyRating == "(8,10,10)"){
           return 8;
         }
+        if(fuzzyRating == "Normal"){
+			return 0;
+		}
+		if(fuzzyRating == "Important"){
+          return 2;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 5;
+        }
+        if(fuzzyRating == "Most Important"){
+          return 8;
+        }
 	}
 	function findV2Decisor(fuzzyRating){
 		if(fuzzyRating == "(0,0,4)"){
@@ -1034,6 +1109,18 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
         if(fuzzyRating == "(8,10,10)"){
           return 10;
         }
+        if(fuzzyRating == "Normal"){
+			return 0;
+		}
+		if(fuzzyRating == "Important"){
+          return 5;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 8;
+        }
+        if(fuzzyRating == "Most Important"){
+          return 10;
+        }
 	}
 	function findV3Decisor(fuzzyRating){
 		if(fuzzyRating == "(0,0,4)"){
@@ -1046,6 +1133,18 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
           return 10;
         }
         if(fuzzyRating == "(8,10,10)"){
+          return 10;
+        }
+        if(fuzzyRating == "Normal"){
+			return 4;
+		}
+		if(fuzzyRating == "Important"){
+          return 8;
+        }
+        if(fuzzyRating == "Very Important"){
+          return 10;
+        }
+        if(fuzzyRating == "Most Important"){
           return 10;
         }
 	}

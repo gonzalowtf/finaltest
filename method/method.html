@@ -158,7 +158,11 @@
                     <tbody>
                       <tr ng-repeat = "criteria in problem.criterias">
                         <td>{{criteria.name}}</td>
-                        <td>({{criteria.fuzzyValue1}},{{criteria.fuzzyValue2}},{{criteria.fuzzyValue3}})</td>
+                        <td>
+                          <ul class="collection">
+                              <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id != fv.criteriaId">{{fv.criteriaId}}</li>
+                          </ul>
+                        </td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()"  ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Criteria" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Criteria" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
                         </td>
@@ -179,7 +183,11 @@
                     <tbody>
                       <tr ng-repeat = "alternative in problem.alternatives">
                         <td>{{alternative.name}}</td>
-                        <td>({{alternative.fuzzyValue1}},{{alternative.fuzzyValue2}},{{alternative.fuzzyValue3}})</td>
+                        <td>
+                           <ul class="collection">
+                              <li class="collection-item" ng-repeat = "fv in problem.selectionsAlternatives" ng-show ="alternative._id == fv.alternativeId">For Decisor {{findDecisor(fv.decisorId)}} Using Criteria {{findCriteria(fv.criteriaId)}} this Alternative has a "{{fv.fuzzyRating}}" weight ({{fv.fuzzyValue1}},{{fv.fuzzyValue2}},{{fv.fuzzyValue3}})</li>
+                          </ul>
+                        </td>
                        <td><a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)" ><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Alternative" data-position="right" data-target = "editAlternativeModal"  onclick="editAlternativeOpen()" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click ="alternativeId(alternative._id,alternative.name,alternative.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Alternative" data-position = "right" data-target="eraseAlternativeModal" onclick="eraseAlternativeOpen()" >delete</i>
                         </td>
@@ -472,8 +480,7 @@
               </div>
             
               <div class="col s6">
-              <center>Actual weight: {{dfuzzyrating}}</center>
-                 <select class="browser-default" ng-model="ed.review.rating" required>
+              <select class="browser-default" ng-model="ed.review.fuzzyRating">
                   <option value="" selected>Choose Weight</option>
                   <option value="(0,0,4)">Normal</option>
                   <option value="(2,5,8)">Important</option>
@@ -481,7 +488,7 @@
                   <option value="(8,10,10)">Most Important</option>
                 </select>
                 <div class="row">
-                <center><label>Value {{ed.review.rating}} </label></center>
+                <center><label>Value {{ed.review.fuzzyRating}} </label></center>
                 </div>
               </div></div>          
             <div class="row"></div>
@@ -653,7 +660,7 @@
               <div class="col s6">
                 <center>
                 For
-                  <select class="browser-default" ng-model = "ea.review.decisor" required>
+                  <select class="browser-default" ng-model = "ea.review.decisor">
                   <option value="" disabled selected>Decisor</option>
                   <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
                 </select>
@@ -662,7 +669,7 @@
               <div class="col s6">
                 <center>
                 Using
-                  <select class="browser-default" ng-model = "ea.review.criteria" required>
+                  <select class="browser-default" ng-model = "ea.review.criteria">
                   <option value="" disabled selected>Criteria</option>
                   <option ng-repeat = "c in criterias" value = "{{c._id}}">{{c.name}}</option>             </select>
                 </center>
