@@ -159,9 +159,12 @@
                       <tr ng-repeat = "criteria in problem.criterias">
                         <td>{{criteria.name}}</td>
                         <td>
-                          <ul class="collection">
-                              <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id != fv.criteriaId">{{fv.criteriaId}}</li>
-                          </ul>
+                         
+                              <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id == fv.criteriaId">For Decisor {{findDecisor(fv.decisorId)}} this Criteria has a <li ng-repeat = "com in fv.comparations" ng-show = "com._id != fv.criteriaId">
+                                {{com.fuzzyRating}} weight comparing with 
+                              </li>
+                              </li>
+                          
                         </td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()"  ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Criteria" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Criteria" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
@@ -545,7 +548,7 @@
               <div class="row">
               <div class="col s6 center-align">
                 <center>
-                  <select class="browser-default" ng-model = "ec.review.decisor" required>
+                  <select class="browser-default" ng-model = "ec.review.decisor">
                   <option value="" disabled selected>Decisor</option>
                   <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>                  
                 </select>

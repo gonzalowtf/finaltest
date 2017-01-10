@@ -149,3 +149,7 @@ function noChangesDecisorToast(){
 	Materialize.toast("No Changes Saved",3000);
 	$('#editDecisorModal').closeModal();
 }
+function noChangesCriteriaToast(){
+	Materialize.toast("No Changes Saved",3000);
+	$('#editCriteriaModal').closeModal();
+}

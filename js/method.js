@@ -546,7 +546,7 @@
 						var flag = 1;
 						if(key == $scope.pName.id ){
 							var f = (this.review.name == null||this.review.name == "") && (this.review.surname == null||this.review.surname== "")  && this.review.fuzzyRating == null;
-							console.log(f);
+							//console.log(f);
 							if((this.review.name == null||this.review.name == "") && (this.review.surname == null||this.review.surname== "")  && this.review.fuzzyRating == null){
 								flag = 1;
 							}
@@ -584,7 +584,7 @@
 									fuzzyValue2 : v2,
 									fuzzyValue3 : v3
 							}
-							console.log(request);
+							//console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id , request);
 
 							$scope.refresh();
@@ -619,15 +619,20 @@
 				$scope.refresh();
 				 for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
+						var flag = 1;
+						var flag2 =1 ;
 						if(key == $scope.pName.id ){
-							if(this.review.name == null){
+							if(this.review.name == null || this.review.name == ""){
 							this.review.name =$scope.cname;
+								}
+								else{
+									flag =0;
 								}
 							var len2 = $scope.problemss[i].criterias.length;
 							//$scope.did
 							$scope.refresh();
 							for(j= 0;j<len2;j++){
-								if($scope.cid == $scope.problemss[i].criterias[j]._id){
+									if($scope.cid == $scope.problemss[i].criterias[j]._id){
 									$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "criteria",
 									action: "edit",
@@ -637,6 +642,7 @@
 							});
 									var selectionsCriterias = [];
 									selectionsCriterias = $scope.criterias.slice(0);
+									var con =0;
 									for(z=0;z < selectionsCriterias.length;z++){
 										if(selectionsCriterias[z]._id == $scope.cid){
 											selectionsCriterias[z].fuzzyRating = "*";
@@ -649,21 +655,26 @@
 
 
 										if(selectionsCriterias[z].fuzzyRating == null || selectionsCriterias[z].fuzzyRating == ""){
-											selectionsCriterias[z].fuzzyRating = "(0,1,2)";
-											selectionsCriterias[z].fuzzyValue1 = 0;
-											selectionsCriterias[z].fuzzyValue2 = 1;
-											selectionsCriterias[z].fuzzyValue3 = 2;
+											con++;
 											}
-											selectionsCriterias[z].fuzzyValue1= findV1Criteria(selectionsCriterias[z].fuzzyRating);
+									else{
+										selectionsCriterias[z].fuzzyValue1= findV1Criteria(selectionsCriterias[z].fuzzyRating);
 										selectionsCriterias[z].fuzzyValue2= findV2Criteria(selectionsCriterias[z].fuzzyRating);
 										selectionsCriterias[z].fuzzyValue3= findV3Criteria(selectionsCriterias[z].fuzzyRating);
 										selectionsCriterias[z].fuzzyRating= findCriteriaRating(selectionsCriterias[z].fuzzyRating);
+									}
 										}
 										
 								}
+								if(con == $scope.problemss[i].criterias.length-1){
+									flag2 = 1;
+								}
+								else{
+									flag2 =0;
+								}
 
-									//console.log(selectionsCriterias);
-									var request = {
+							if(flag2 ==0 && this.review.decisor != null){
+								var request = {
 									type: "selectionsCriterias",
 									action: "edit",
 									criteriaId:  $scope.cid,
@@ -673,11 +684,22 @@
 									}
 									//console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id ,request);
-							 $scope.refresh();
-							toast7();
+							 
+							if(flag==1){
+								flag =0;
+							}
+							else{
+								// flag =0
+							}
+							}
+									
 							this.review = {};
-
-							
+							if(flag ==0){
+								toast7();
+							}else{
+								noChangesCriteriaToast();
+							}
+							$scope.refresh();
 								}
 							}
 						}
