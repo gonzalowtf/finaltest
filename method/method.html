@@ -159,12 +159,15 @@
                       <tr ng-repeat = "criteria in problem.criterias">
                         <td>{{criteria.name}}</td>
                         <td>
-                         
-                              <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id == fv.criteriaId">For Decisor {{findDecisor(fv.decisorId)}} this Criteria has a <li ng-repeat = "com in fv.comparations" ng-show = "com._id != fv.criteriaId">
-                                {{com.fuzzyRating}} weight comparing with 
+                         <ul class="collection">            
+                            <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id == fv.criteriaId">For Decisor {{findDecisor(fv.decisorId)}} this Criteria has a: 
+                          <ul class="collection teal">
+                            <li class = "collection-item" ng-repeat = "com in fv.comparations" ng-hide = "com._id == fv.criteriaId || com.fuzzyRating == null">
+                                "{{com.fuzzyRating}}" weight comparing with {{findCriteria(com._id)}}
+                              </li> 
+                            </ul>
                               </li>
-                              </li>
-                          
+                          </ul>
                         </td>
                         <td><a class="btn-floating btn-small red waves-effect waves-light" onclick="editCriteriaOpen()"  ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped " data-tooltip ="Edit Criteria" data-position="right" data-target = "editCriteriaModal" >mode_edit</i></a>
                         <a class="btn-floating btn-small red waves-effect waves-light" ng-click="criteriaId(criteria._id,criteria.name,criteria.fuzzyRating)"><i class="large material-icons modal-trigger tooltipped" data-tooltip="Delete Criteria" data-position = "right" data-target="eraseCriteriaModal" onclick="eraseCriteriaOpen()" >delete</i>
