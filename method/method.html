@@ -241,11 +241,11 @@
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li><a class="btn-floating red btn tooltipped" data-position="top" data-delay="50" data-tooltip="Results"><i class="material-icons">clear_all</i></a></li>
-      <li><a class="btn-floating yellow darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Alternatives"><i class="material-icons">spellcheck</i></a></li>
-      <li><a class="btn-floating blue darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Criterias"><i class="material-icons">library_books</i></a></li>
-      <li><a class="btn-floating green btn tooltipped" data-position="top" data-delay="50" data-tooltip="Decisors"><i class="material-icons">perm_identity</i></a></li>
-      <li><a class="btn-floating teal btn tooltipped modal-trigger" data-target = "newProblemModal" data-position="top" data-delay="50" data-tooltip="Add New Problem"><i class="material-icons">add</i></a></li>
+      <li><a class="btn-floating red btn tooltipped" data-position="top" data-delay="50" data-tooltip="Results" onclick="ResultsHelpOpen()"><i class="material-icons">clear_all</i></a></li>
+      <li><a class="btn-floating yellow darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Alternatives" onclick="AlternativesHelpOpen()"><i class="material-icons">spellcheck</i></a></li>
+      <li><a class="btn-floating blue darken-1 btn tooltipped" data-position="top" data-delay="50" data-tooltip="Criterias" onclick="CriteriasHelpOpen()"><i class="material-icons">library_books</i></a></li>
+      <li><a class="btn-floating green btn tooltipped" data-position="top"  onclick="DecisorsHelpOpen()" data-delay="50" data-tooltip="Decisors"><i class="material-icons">perm_identity</i></a></li>
+      <li><a class="btn-floating teal btn tooltipped modal-trigger" data-target = "newProblemModal" data-position="top" data-delay="50" data-tooltip="Add New Problem" ><i class="material-icons">add</i></a></li>
     </ul>
   </div>
       </div>
@@ -719,6 +719,88 @@
                       
     </div>
 </div>
+
+<div id="DecisorsHelpModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <center><i class="medium material-icons">perm_identity</i><br><h4>Decisors</h4>
+      <p>Are the members of the decision making group.</p>
+      <p>To make this method works we need the next information of the Decisors.</p></center>
+      <p>
+        <ul>
+        <li><blockquote class = " teal lighten-2"><center>Decisor Weight</center><br> The method needs an abstract valuation of every decisor, making reference to the other members of the group. For example: "this Decisor has a very Important weight, comparing with Decisor 2" </blockquote></li>
+        <li><blockquote>
+          <center>Valuation of Criterias</center><br> Our problem has "criterias" that must be valued using Decisiors assessments, comparing them to each other. 
+        </blockquote></li>
+        <li><blockquote class="light-green lighten-2">
+          <center>Valuation of alternatives</center><br>Decisors must evaluate each possible solution for the problem, Using Criterias to get Closeness to the definitely solution.
+        </blockquote></li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <center><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a></center>
+    </div>
+  </div>
+  <div id="CriteriasHelpModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <center><i class="medium material-icons">library_books</i><br><h4>Criterias</h4>
+      <p>Are the characteristics that we look for in our ideal solution.</p>
+      <p>To make this method works we need the next information of the Criterias.</p></center>
+      <p>
+        <ul>
+        <li><blockquote class = " orange lighten-2"><center>Criterias Comparation of every Decisor</center><br>
+        Every Criteria must have a comparison with the other ones, and each Decisor must have it own respective valuations. For example: " for decisor 1 , this criteria has an "importance accentuated" comparing with the criteria 2.
+        </blockquote></li>
+        <li><blockquote class="lime lighten-4">
+          <center>What if a decisor cannot give us a criteria comparison ?</center><br> This will be a valid valuation too.. setting it as a "*" value for the comparison. This means that the current Decisor can't specify the weight of the criteria vs the other one.
+        </blockquote></li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <center><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a></center>
+    </div>
+  </div>
+  <div id="AlternativesHelpModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <center><i class="medium material-icons">spellcheck</i><br><h4>Alternatives</h4>
+      <p>Are the possible solutions to our problem.</p>
+      <p>To make this method works we need the next information of the Alternatives.</p></center>
+      <p>
+        <ul>
+        <li><blockquote class = "green accent-2"><center>Valuation of the Alternative by every Decisor based on every Criteria </center><br>
+        Every Alternative must have a weight, settled by a Decisior, and based on a Criteria. For example: "For Decisor 2 , based on Criteria 3 , this Alternative has a Very Low weight".
+        </blockquote></li>
+        <li><blockquote class="lime lighten-4">
+          <center>What if a decisor cannot give us an Alternative weight?</center><br> This will be a valid valuation too.. setting it as a "**" weight value. This means that the current Decisor based on the current Criteria can't specify the weight of the Alternative.
+        </blockquote></li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <center><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a></center>
+    </div>
+  </div>
+  <div id="ResultsHelpModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <center><i class="medium material-icons">clear_all</i><br><h4>Results</h4>
+      <p>The Solution of your Problem.</p>
+      <p>
+        <ul>
+        <li><blockquote class = " lime accent-1"><center>Calculating the best Alternative</center><br>
+        You will get the best Alternative, based on all data you support to us. 
+        </blockquote></li>
+        <li><blockquote class="green accent-4">
+          <center>Ranking</center><br> 
+          You will get a rated list of all your  alternatives.
+        </blockquote></li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <center><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a></center>
+    </div>
+  </div>
 
 
 

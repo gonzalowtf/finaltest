@@ -153,3 +153,19 @@ function noChangesCriteriaToast(){
 	Materialize.toast("No Changes Saved",3000);
 	$('#editCriteriaModal').closeModal();
 }
+function DecisorsHelpOpen(){
+	$('#DecisorsHelpModal').openModal();
+
+}
+function CriteriasHelpOpen(){
+	$('#CriteriasHelpModal').openModal();
+
+}
+function AlternativesHelpOpen(){
+	$('#AlternativesHelpModal').openModal();
+
+}
+function ResultsHelpOpen(){
+	$('#ResultsHelpModal').openModal();
+
+}
