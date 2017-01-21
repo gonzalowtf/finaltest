@@ -268,7 +268,7 @@
             <center><label> <span class = "teal-text text-darken-2">Decisors</span></label>
                <div class="chip light-blue lighten-4" id= "showD" >{{np.review.nd}}</div></center>
                <p class="range-field">
-                <input type="range" id="decisorsQ" min="1" max="30" ng-model = "np.review.nd" required></input>
+                <input type="range" id="decisorsQ" min="2" max="60" ng-model = "np.review.nd" required></input>
               </p>
             </div>
             </div>
@@ -277,7 +277,7 @@
             <center><label> <span class = "teal-text text-darken-2">Criterias</span></label>
                <div class="chip light-blue lighten-4" id= "showC" >{{np.review.nc}}</div></center>
                <p class="range-field">
-                <input type="range" id="criteriasQ" min="1" max="30"  ng-model = "np.review.nc" required></input>
+                <input type="range" id="criteriasQ" min="2" max="30"  ng-model = "np.review.nc" required></input>
               </p>
             </div>
             </div>
@@ -286,7 +286,7 @@
             <center><label> <span class = "teal-text text-darken-2">Alternatives</span></label>
                <div class="chip light-blue lighten-4" id= "showA" >{{np.review.na}}</div></center>
                <p class="range-field">
-                <input type="range" id="alternativesQ" min="1" max="100" ng-model = "np.review.na" required></input>
+                <input type="range" id="alternativesQ" min="2" max="200" ng-model = "np.review.na" required></input>
               </p>
             </div> 
             </div> 
@@ -653,7 +653,7 @@
                         </div>
 <div id="editAlternativeModal" class="modal">
     <div class="modal-content">
-      <center><h4>Edit Criteria</h4></center>
+      <center><h4>Edit Alternative</h4></center>
       <form class="col s12" name = "EditAlternativeForm" ng-controller = "EditAlternative as ea" ng-submit ="ea.editA()">
            <div class="row">
               <div class="input-field col s12">
