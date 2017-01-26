@@ -63,7 +63,7 @@
       </ul>
       
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#"><span class="black-text text-darken-2">How it works ?</span></a></li>
+        <li><a href="#" onclick="HowItWorksOpen()"><span class="black-text text-darken-2">How it works ?</span></a></li>
         <li><a href="#"><span class="black-text text-darken-2">View Doc</span></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -790,6 +790,28 @@
           <center>Ranking</center><br> 
           You will get a rated list of all your  alternatives.
         </blockquote></li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <center><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a></center>
+    </div>
+  </div>
+  <div id="HowItWorksModal" class="modal modal-fixed-footer red">
+    <div class="modal-content">
+      <center><h4>How it works ?</h4>
+      <ul>
+        <li>1. Establish the numbers of decisors, criterias and alternatives of your problem.</li>
+        <li>2. Establish the decisors weights for final decision.</li>
+        <li>3. Establish for every decisor, the comparative weights between criterias.</li>
+        <li>4. Establish for every decisor, the weight of each alternative using every criteria</li>
+        <li>5. The method obtains consistent weights for each criteria</li>
+        <li>6.The method exchanges the valuations of the alternatives with the consistent weights obtained from the criterias</li>
+        <li>7. The method obtains consistent weights for each decisor</li>
+        <li>8.The method exchanges the valuations of the alternatives, already instantiated with the consistent weights obtained from the criteria, with the weights of the decision makers</li>
+        <li>9.the method obtains the consistent weights of each alternative</li>
+        <li>10. The method calculates the distance of these fuzzy values to the maximum and minimum values</li>
+        <li>11.Using these values, the method calculates a coefficient, according to this, we will know the alternative more close to the maximum value and more remote the minimum value</li>
         </ul>
       </p>
     </div>

@@ -169,3 +169,6 @@ function ResultsHelpOpen(){
 	$('#ResultsHelpModal').openModal();
 
 }
+function HowItWorksOpen(){
+	$('#HowItWorksModal').openModal();
+}
