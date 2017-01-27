@@ -172,3 +172,8 @@ function ResultsHelpOpen(){
 function HowItWorksOpen(){
 	$('#HowItWorksModal').openModal();
 }
+function openPDF(){
+
+window.open('/files/UserManual.pdf');
+
+}
