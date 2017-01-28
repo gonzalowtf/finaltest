@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app = "logg">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Fuzzy Multi-Criteria Method of Group Decision Making</title>
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src = "/js/bootbox.min.js"></script>
+  
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abel|Exo+2|Inconsolata|Indie+Flower|Josefin+Sans|Yanone+Kaffeesatz" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/animate.css">
+<style type="text/css">
+	#table{
+		font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+	}
+	#problems{
+		font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+	}
+	#enter{
+		font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+	}
+  	
+</style>
+<link rel="stylesheet" type="text/css" href="/method/modals.html">
+</head>
+<body ng-controller = "LoggControler as lg">
+<nav id = "navigation" class="black" role="navigation">
+    <div class="nav-wrapper container">
+      <ul class="center hide-on-med-and-down">
+        <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2 flow-text">Fuzzy Multi-Criteria of Group Decision Making</span></a>
+      </ul>
+      <ul class="center hide-on-med-and-up">
+        <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2 flow-text">F.M.C.G.D.M.</span></a>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row">
+  <div class="col s3"></div>
+    <div class="col s6">
+    <div class="row">
+      <div class="card-panel orange lighten-3 flow-text white-text z-depth-3 animated bounce"><center><span id="problems">Sign Up</span></center></div>
+    </div>
+    <div class="row">
+    <center>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="first_name" type="text" class="validate">
+              <label for="first_name">Username</label>
+            </div>
+          </div>
+           <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Repeat Password</label>
+        </div>
+      </div>
+      <div class="row"></div>
+      <div class="row">
+        <div class="col s1"></div>
+        <a class="btn waves-effect waves-light center-align" type="submit" name="action">Join
+          <i class="material-icons right">play_arrow</i>
+        </a>
+      </div>  
+      </form>
+      </center>
+      </div>        
+      </div>
+    </div>
+  </div>
+  </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src = "/js/angular.min.js"></script>
+<script type="text/javascript" src = "/js/angular-resource.js"></script>
+<script type="text/javascript" src = "/js/bootbox.min.js"></script>
+<script type="text/javascript" src ="/js/jquery.min.js"></script>
+<script src="/js/materialize.js"></script>
+<script src="/js/init.js"></script>
+</html>
