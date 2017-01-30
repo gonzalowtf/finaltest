@@ -6,7 +6,8 @@ var express = require("express"),
 	mongoose = require('mongoose'),
 	assert = require('assert'),
 	bodyparser = require('body-parser'),
-	pController = require('./data-controllers/problemscontroller.js');
+	pController = require('./data-controllers/problemscontroller.js'),
+	uController = require('./data-controllers/userscontroller.js'),
 	port = process.env.PORT || 3000;
 
 
@@ -83,4 +84,9 @@ app.post('/api/problems', pController.create);
 app.delete('/api/problems/:id',pController.delete);
 app.put('/api/problems/:id',pController.update);
 //app.put('/api/problems/:id/decisors/:id',pController.updateDecisor);
+//---------------------------------users---------------------------------
+app.get('/api/users', uController.list);
+app.post('/api/users', uController.create);
+//app.delete('/api/users/:id',uController.delete);
+//app.put('/api/users/:id',uController.update);
 //-------------------------------------------------------------------------

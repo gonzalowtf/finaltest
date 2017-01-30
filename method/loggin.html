@@ -49,9 +49,8 @@
 	}
   	
 </style>
-<link rel="stylesheet" type="text/css" href="/method/modals.html">
 </head>
-<body ng-controller = "LoggControler as lg">
+<body>
 <nav id = "navigation" class="black" role="navigation">
     <div class="nav-wrapper container">
       <ul class="center hide-on-med-and-down">
@@ -72,36 +71,36 @@
     <div class="row">
     <div class="card-panel green accent-2 lighten-3 flow-text white-text z-depth-3 animated bounce"><center><span id="problems">Log in</span></center></div>
     <center>
-        <form class="col s12">
+        <form class="col s12" name="LoggForm" ng-controller = "UserController as us" ng-submit= "us.getIn()">
         <div class="row"></div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="first_name" type="text" class="validate">
+              <input id="first_name" type="text" class="validate" ng-model = "us.review.username" pattern="[a-zA-Z0-9]+" >
               <label for="first_name">Username</label>
             </div>
           </div>
            <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input id="password" type="password" class="validate" ng-model = "us.review.password">
           <label for="password">Password</label>
         </div>
       </div>
       <div class="row"></div>
       <div class="row">
         <div class="col s1"></div>
-        <a class="btn waves-effect waves-light center-align" type="submit" name="action">Sign In
+        <button class="btn waves-effect waves-light center-align" type="submit" value= "Submit" name="action">Sign In
           <i class="material-icons right">play_arrow</i>
-        </a>
-      </div>  
-      <div class="row">
+        </button>
+      </div> 
+      </form> 
+      
         <div class="col s1"></div>
-        <a href="/method/signup.html" class="btn waves-effect waves-light center-align orange" type="submit" name="action">Sign Up
+        <a href="/method/signup.html" class="btn waves-effect waves-light center-align orange" name="action2">Sign Up
           <i class="material-icons right">thumb_up</i>
-        </a>
-        </form>
+        </a>        
         </center>
       </div>        
-      </div>
+      
     </div>
   </div>
   </div>
@@ -113,4 +112,5 @@
 <script type="text/javascript" src ="/js/jquery.min.js"></script>
 <script src="/js/materialize.js"></script>
 <script src="/js/init.js"></script>
+<script type="text/javascript" src = "/js/logg.js"></script>
 </html>
