@@ -29,7 +29,7 @@ app.controller("UserController",['$scope','$http',function($scope,$http){
 						  if(this.review.username == $scope.users[i].username){
 						  	
 						  		if(this.review.password ==$scope.users[i].password){
-						  			location.href= "/method/method.html";
+						  			location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
 						  			break;
 						  		}else{
 						  			Materialize.toast("Wrong password!",3000);

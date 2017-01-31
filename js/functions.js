@@ -177,3 +177,15 @@ function openPDF(){
 window.open('/files/UserManual.pdf');
 
 }
+function getVar(){
+      
+      var url = location.search.replace("?",",");
+      var arr=url.split("&");
+      var obj = {};
+      for (var i =0; i<arr.length;i++){
+        var x = arr[i].split("=");
+        obj[x[0]]=x[1];
+      }
+      return obj;
+      
+    }

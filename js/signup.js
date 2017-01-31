@@ -46,7 +46,7 @@ app.controller('SignUpController',['$scope','$http',function($scope,$http){
 						};
 						console.log(usr);
 						$http.post('/api/users',usr);
-						location.href= "/method/method.html";
+						location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
 
 					}
 

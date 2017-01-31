@@ -79,7 +79,7 @@ mongoose.connect(url2,function(err){
 //---------------------getting , posting and deleting ---------------------
 
 
-app.get('/api/problems', pController.list);
+app.get('/api/problems/:usr', pController.list);
 app.post('/api/problems', pController.create);
 app.delete('/api/problems/:id',pController.delete);
 app.put('/api/problems/:id',pController.update);

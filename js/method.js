@@ -10,8 +10,9 @@
 		}]);
 	app.controller("ProblemsController",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 		//$scope.problemss = problems;
+		var user = getVar();
 		$scope.refresh = function(){
-			var Problem = $http.get('/api/problems');
+			var Problem = $http.get('/api/problems/'+user.u);
 		Problem.then(function (results){
 			
 			$scope.problemss = results.data;
@@ -498,8 +499,10 @@
 		
 		this.newP = function(){
 			//console.log(this.review.nd);
+			var user = getVar();
 			$http.post('/api/problems',{
 					name: this.review.name,
+					user: user.u,
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,

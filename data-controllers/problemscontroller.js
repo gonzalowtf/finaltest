@@ -8,7 +8,7 @@ module.exports.create = function (req, res) {
 }
 
 module.exports.list = function (req, res) {
-  Problem.find({}, function (err, results) {
+  Problem.find({user:req.params.usr}, function (err, results) {
       res.json(results);
     });
   
