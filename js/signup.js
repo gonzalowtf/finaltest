@@ -1,8 +1,13 @@
 (function(){
 	
 var app = angular.module('signup',[]);
+app.service('serveUsername',[function(){
+		return{
+			username : ""
+		}
 
-app.controller('SignUpController',['$scope','$http',function($scope,$http){
+	}]);
+app.controller('SignUpController',['$scope','$http','serveUsername',function($scope,$http,serveUsername){
 	$scope.refresh = function(){
 			var User = $http.get('/api/users');
 		User.then(function (results){
@@ -46,7 +51,10 @@ app.controller('SignUpController',['$scope','$http',function($scope,$http){
 						};
 						console.log(usr);
 						$http.post('/api/users',usr);
-						location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
+						//location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
+						serveUsername.username = this.review.username;
+                        location.href= "/method/method.html";
+						//console.log(serveUsername + "signup page line 57");
 
 					}
 

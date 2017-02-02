@@ -1,8 +1,13 @@
 (function(){
 	
 var app = angular.module('logg',[]);
+app.service('serveUsername',[function(){
+		return{
+			username : ""
+		}
 
-app.controller("UserController",['$scope','$http',function($scope,$http){
+	}]);
+app.controller("UserController",['$scope','$http','serveUsername',function($scope,$http,serveUsername){
 	$scope.refresh = function(){
 			var User = $http.get('/api/users');
 		User.then(function (results){
@@ -29,7 +34,10 @@ app.controller("UserController",['$scope','$http',function($scope,$http){
 						  if(this.review.username == $scope.users[i].username){
 						  	
 						  		if(this.review.password ==$scope.users[i].password){
-						  			location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
+						  			//location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
+						  			serveUsername.username = this.review.username;
+						  			location.href= "/method/method.html";
+						  			//console.log(serveUsername);
 						  			break;
 						  		}else{
 						  			Materialize.toast("Wrong password!",3000);
