@@ -625,7 +625,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 		
 		this.newP = function(){
 			//console.log(this.review.nd);
-			var user = getVar().username;
+			var user = getVar();
 			$http.post('/api/problems',{
 					name: this.review.name,
 					user: user.u,
