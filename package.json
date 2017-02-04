@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start":"node server.js"
-  }
+  },
   "dependencies": {
     "angular-resource": "^1.6.0",
     "assert": "x.x.x",
