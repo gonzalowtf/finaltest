@@ -2,14 +2,18 @@
   "name": "finaltest",
   "version": "0.1.0",
   "scripts": {
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "angular-resource": "^1.6.0",
     "assert": "x.x.x",
     "body-parser": "x.x.x",
+    "cookie-parser": "x.x.x",
     "express": "x.x.x",
+    "express-session": "x.x.x",
+    "express-validator": "^3.1.2",
     "mongodb": "^2.2.12",
-    "mongoose": "x.x.x"
+    "mongoose": "x.x.x",
+    "morgan": "^1.8.0"
   }
 }

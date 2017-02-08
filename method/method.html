@@ -66,7 +66,7 @@
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#" onclick="HowItWorksOpen()"><span class="black-text text-darken-2">How it works ?</span></a></li>
         <li><a href="#" onclick="openPDF()"><span class="black-text text-darken-2">View Doc</span></a></li>
-        <li><a id = "user2" href="/method/loggin.html">Log out</a></li>
+        <li><a id = "user2" ng-click = "destroySession()" href="/login">Log out</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       
@@ -237,7 +237,7 @@
       <i class="large material-icons">add</i>
     </a>
     <ul>
-    <li><a id= "user" class="btn-floating red lighten-1 btn tooltipped" href="/method/loggin.html" data-position="left" data-delay="50" data-tooltip="Log out"><i class="material-icons">person_pin</i></a></li>
+    <li><a id= "user" class="btn-floating red lighten-1 btn tooltipped" ng-click = "destroySession()" data-position="left" data-delay="50" data-tooltip="Log out"><i class="material-icons">person_pin</i></a></li>
     <li><a class="btn-floating deep-purple lighten-1 btn tooltipped" data-position="left" data-delay="50" data-tooltip="View Doc" onclick="openPDF()"><i class="material-icons">business</i></a></li>
     <li><a class="btn-floating cyan accent-1 btn tooltipped" data-position="left" data-delay="50" data-tooltip="How it works? (steps)" onclick="HowItWorksOpen()"><i class="material-icons">dashboard</i></a></li>
       </ul>
@@ -853,8 +853,6 @@
 <script type="text/javascript" src = "/js/angular-resource.js"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
 <script type="text/javascript" src ="/js/jquery.min.js"></script>
-<script type="text/javascript" src = "/js/logg.js"></script>
-<script type="text/javascript" src = "/js/signup.js"></script>
 <script type="text/javascript" src = "/js/method.js"></script>
 <script src="/js/materialize.js"></script>
 <script type="text/javascript" src = "/js/modals.js"></script>

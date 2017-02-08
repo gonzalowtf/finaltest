@@ -8,19 +8,61 @@ var express = require("express"),
 	bodyparser = require('body-parser'),
 	pController = require('./data-controllers/problemscontroller.js'),
 	uController = require('./data-controllers/userscontroller.js'),
+	sController = require('./data-controllers/sessionscontroller.js'),
+	session = require("express-session"),
+	cookieParser = require('cookie-parser'),
+    morgan = require('morgan'),
+	expressValidator = require('express-validator');
 	port = process.env.PORT || 3000;
 
+app.use(morgan('combined'));
+
+var User= require('./models/user');
 
 
+		app.use(bodyparser());
+		app.use(expressValidator());
+		app.use(cookieParser());
+		app.use(session({
+			secret: "asdasdasdnasdnan7868767868767867sd",
+			
+		}));
 
 app.get('/', function(req, res) {
           //console.log(req.url);  actual direction
-     
+          console.log('session index?' + req.session.username);
+          console.log('session index?' + req.session.user_id);
           res.sendfile(__dirname + '/index.html');  
           //res.end("hello world!");    
       
       });
 
+app.get('/method', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session method?' + req.session.username);
+          console.log('session method?' + req.session.user_id);
+          if(req.session.username){
+          	res.sendfile(__dirname + '/method/method.html');  
+      		}
+      	else{
+      		res.sendfile(__dirname + '/method/loggin.html'); 
+          //res.end("hello world!");    
+      			}
+      		
+      });
+app.get('/login', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session login?' + req.session.username);
+          console.log('session login?' + req.session.user_id);
+          if(req.session.username){
+          	  res.sendfile(__dirname + '/method/method.html');  
+
+          }
+          else{
+          res.sendfile(__dirname + '/method/loggin.html');  
+          //res.end("hello world!");    
+      		}
+      });
 app.use('/files', express.static(__dirname + '/files'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
@@ -28,10 +70,15 @@ app.use('/js', express.static(__dirname + '/js'));
 app.use('/method', express.static(__dirname + '/method'));
 app.use('/models', express.static(__dirname + '/models'));
 app.use('/data-controllers', express.static(__dirname + '/data-controllers'));
-app.use(bodyparser());
+
 //app.use(bodyparser.json());
 
 
+//------------------------------------ manejo de sesiones----------------------
+
+
+
+//-----------------------------------------------------------------------------
 
 
 
@@ -68,7 +115,7 @@ mongoclient.connect(url, function(err, db) {
 
 
 
-mongoose.connect(url2,function(err){
+mongoose.connect(url,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });
@@ -85,8 +132,24 @@ app.delete('/api/problems/:id',pController.delete);
 app.put('/api/problems/:id',pController.update);
 //app.put('/api/problems/:id/decisors/:id',pController.updateDecisor);
 //---------------------------------users---------------------------------
-app.get('/api/users', uController.list);
+app.get('/api/users/:usr/:pass/:number', uController.list);
 app.post('/api/users', uController.create);
 //app.delete('/api/users/:id',uController.delete);
 //app.put('/api/users/:id',uController.update);
 //-------------------------------------------------------------------------
+// -------------------------------Sessions---------------------------------
+app.post('/sessions', function(req,res){
+	if(req.body.destroy == 0){
+User.findOne({username: req.body.username,password:req.body.password},function(err,results){
+		req.session.user_id = results._id;
+		req.session.username = results.username;
+        res.status(200).send(req.session);
+
+
+	});
+}
+else{
+	req.session.destroy();
+}
+
+});

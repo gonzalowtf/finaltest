@@ -14,19 +14,9 @@
 		}
 
 	}]);
+
 app.controller("UserController",['$scope','$http','serveUsername',function($scope,$http,serveUsername){
-	$scope.refresh = function(){
-			var User = $http.get('/api/users');
-		User.then(function (results){
-			
-			$scope.users = results.data;
-			
-		});
-		};
-		$scope.refresh();
-
-
-	this.review ={};
+	this.review = {};
 	this.getIn = function(){
 		if(this.review.username == "" ||this.review.username==null){
 			Materialize.toast("Please enter username",3000);
@@ -36,47 +26,39 @@ app.controller("UserController",['$scope','$http','serveUsername',function($scop
 				Materialize.toast("Please enter password",3000);
 			}
 			else{
-				var con = 0;
-					for(i =0; i< $scope.users.length;i++){
-						  if(this.review.username == $scope.users[i].username){
-						  	
-						  		if(this.review.password ==$scope.users[i].password){
-						  			location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
-						  			serveUsername.username = this.review.username;
-						  			//location.href= "/method/method.html";
-						  			//console.log(serveUsername);
-						  			break;
-						  		}else{
-						  			Materialize.toast("Wrong password!",3000);
-						  			this.review.password = "";
-						  			break;
-						  		}
-						  }
-						  con = con+1;
-						}
-						console.log(con);
-						if(con == $scope.users.length){
-							Materialize.toast("Username does not exist!",3000);		
-							this.review.username = "";
-							this.review.password = "";
-							}
-				}
-		
-	};
+					var user = $http.get('/api/users/'+this.review.username+'/'+this.review.password+'/0');
+					var u = this.review.username;
+					var p = this.review.password;
+					user.then(function(results){
+						
+						if(results.data.length ==0){
+								Materialize.toast("Username or password incorrect",3000);
+								
 
+							}
+						else{
+						var session ={
+							username:u,
+							password:p,
+							destroy: 0
+						};
+						$http.post('/sessions',session);
+						location.href = '/method/method.html?y=nothing&u='+u+'&';
+						
+					}
+
+
+					});
+					
+					this.review = {};
+		}
+	};
 
 }]);
 
 app.controller('SignUpController',['$scope','$http','serveUsername',function($scope,$http,serveUsername){
-	$scope.refresh = function(){
-			var User = $http.get('/api/users');
-		User.then(function (results){
-			
-			$scope.users = results.data;
-			
-		});
-		};
-		$scope.refresh();
+	
+	 	
 	this.review = {};
 	this.newU = function(){
 		if(this.review.username == "" ||this.review.username==null){
@@ -93,31 +75,30 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			else{
 				
 				if(this.review.password == this.review.password2){
-					var con =0;
-					for(i=0;i<$scope.users.length;i++){
-						if(this.review.username == $scope.users[i].username){
-							Materialize.toast("Username already exists !");
-							this.review.username = "";
-							this.review.password = "";
-							this.review.password2 = "";
-							break;
+					var u = this.review.username;
+					var p = this.review.password;
+					var user = $http.get('/api/users/'+this.review.username+'/'+this.review.password+'/1');
+					user.then(function(results){
+
+						if(results.data.length == 0){
+							var usr ={
+										username : u,
+										password : p
+								};
+							$http.post('/api/users',usr);
+							Materialize.toast("User created !",1000);
+							location.href = "/login";
 						}
-						con=con+1;
-					}
-					if(con == $scope.users.length){
-						var usr ={
-							username : this.review.username,
-							password : this.review.password
-						};
-						console.log(usr);
-						$http.post('/api/users',usr);
-						location.href= "/method/method.html?y=nothing&u="+this.review.username+"&";
-						serveUsername.username = this.review.username;
-                        //location.href= "/method/method.html";
-						//console.log(serveUsername + "signup page line 57");
+						else{
+							Materialize.toast("Username already exists !",3000);
+							
+						}
 
-					}
 
+					});
+					
+					this.review = {};
+					
 				}
 				else{
 					Materialize.toast("Passwords do not match!",3000);
@@ -239,6 +220,15 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			}
 			
 		}
+		$scope.destroySession = function(){
+			var session ={
+							username: 'asdasdasdasd',
+							password: ' asjndajnsdjnajsdnasjndjasndnas',
+							destroy: 1
+						};
+						$http.post('/sessions',session);
+			location = "/login";
+		};
 
 		$scope.method = function(){
 			var len = $scope.problemss.length;
