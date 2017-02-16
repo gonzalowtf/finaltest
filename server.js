@@ -149,7 +149,7 @@ mongoclient.connect(url, function(err, db) {
 
 
 
-mongoose.connect(url,function(err){
+mongoose.connect(url2,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });
