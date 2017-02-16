@@ -43,14 +43,15 @@ app.controller("UserController",['$scope','$http','serveUsername',function($scop
 							destroy: 0
 						};
 						$http.post('/sessions',session);
-						location.href = '/method/method.html?y=nothing&u='+u+'&';
+						Materialize.toast("Done !",2000);
+						location.href = '/method';
 						
 					}
 
 
 					});
-					
 					this.review = {};
+					
 		}
 	};
 
@@ -117,22 +118,31 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 	app.controller("ProblemsController",['$scope','$http','serveProblemName','serveUsername',function($scope,$http,serveProblemName,serveUsername){
 		//$scope.problemss = problems;
-		var user = getVar();
-		$scope.refresh = function(){
-			var Problem = $http.get('/api/problems/'+user.u);
-		Problem.then(function (results){
-			
-			$scope.problemss = results.data;
-			for(i =0; i< $scope.problemss.length;i++){
-				//console.log($scope.problemss[i].criterias);
-				$scope.criterias = $scope.problemss[i].criterias;
-				$scope.decisors =$scope.problemss[i].decisors;
+        
+       
+		
+         $scope.refresh = function(){
+		        var User = $http.get('/sessions');
+					User.then(function(user){
+									
+					       	
+		        var Problem = $http.get('/api/problems/'+user.data.username);                
+				Problem.then(function (results){
+					$scope.username =user.data.username;
+					$scope.problemss = results.data;
+					for(i =0; i< $scope.problemss.length;i++){
+						//console.log($scope.problemss[i].criterias);
+						$scope.criterias = $scope.problemss[i].criterias;
+						$scope.decisors =$scope.problemss[i].decisors;
 
-			}
+					}
+					});
 
-		});
+		});	
 		};
+		
 		$scope.refresh();
+		Materialize.toast("Welcome !",4000);
 		
 		
 		$scope.problemss = [];
@@ -615,10 +625,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 		
 		this.newP = function(){
 			//console.log(this.review.nd);
-			var user = getVar();
 			$http.post('/api/problems',{
 					name: this.review.name,
-					user: user.u,
+					user: $scope.username,
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,
@@ -632,6 +641,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			$scope.problemss.push(
 				{
 					name: this.review.name,
+					user: $scope.username,
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,
@@ -645,7 +655,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			$scope.refresh();
 			this.review.name = '';
 			toast1();
-						
+				
 		};
 
 

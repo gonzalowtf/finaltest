@@ -67,7 +67,7 @@
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#" onclick="HowItWorksOpen()"><span class="black-text text-darken-2">How it works ?</span></a></li>
         <li><a href="#" onclick="openPDF()"><span class="black-text text-darken-2">View Doc</span></a></li>
-        <li><a id = "user2" ng-click = "destroySession()" href="/login">Log out</a></li>
+        <li><a id = "user2" ng-click = "destroySession()" href="/login">Log out - {{username}}</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       
@@ -85,6 +85,9 @@
       	<div class="card-panel teal lighten-1 flow-text white-text z-depth-3 animated bounce"><center><span id="problems">Problems</span></center></div>
           </div>
       	</div>
+        <div class="row">
+          <center><i>{{username}}</i></center>
+        </div>
 
       	<div class="row">
       		<ul class="collection collapsible collapsible-accordion popout" data-collapsible ="accordion">

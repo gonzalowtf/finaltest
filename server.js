@@ -11,9 +11,10 @@ var express = require("express"),
 	sController = require('./data-controllers/sessionscontroller.js'),
 	session = require("express-session"),
 	cookieParser = require('cookie-parser'),
-    morgan = require('morgan'),
-	expressValidator = require('express-validator');
+  morgan = require('morgan'),
+	expressValidator = require('express-validator'),
 	port = process.env.PORT || 3000;
+  
 
 app.use(morgan('combined'));
 
@@ -37,10 +38,14 @@ app.get('/', function(req, res) {
       
       });
 
+function n(){
+  h = 1;
+};
 app.get('/method', function(req, res) {
           //console.log(req.url);  actual direction
           console.log('session method?' + req.session.username);
           console.log('session method?' + req.session.user_id);
+          setTimeout(n,6000);
           if(req.session.username){
           	res.sendfile(__dirname + '/method/method.html');  
       		}
@@ -63,6 +68,35 @@ app.get('/login', function(req, res) {
           //res.end("hello world!");    
       		}
       });
+app.get('/signup', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session signup?' + req.session.username);
+          console.log('session signup?' + req.session.user_id);
+          if(req.session.username){
+          	  res.sendfile(__dirname + '/method/method.html');  
+
+          }
+          else{
+          res.sendfile(__dirname + '/method/signup.html');  
+          //res.end("hello world!");    
+      		}
+      });
+app.get('/sessions',function(req,res){
+        if(req.session.username){
+             User.findOne({username: req.session.username,_id: req.session.user_id},function(err, results){
+              if(err){
+                console.log(" Error !!! line 83" + err);
+              }
+              console.log(results);
+              res.json(results);
+             });
+            
+      		}
+      	else{
+      		res.sendfile(__dirname + '/method/loggin.html'); 
+          //res.end("hello world!");    
+      			}
+});
 app.use('/files', express.static(__dirname + '/files'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
@@ -115,7 +149,7 @@ mongoclient.connect(url, function(err, db) {
 
 
 
-mongoose.connect(url2,function(err){
+mongoose.connect(url,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });
@@ -143,13 +177,17 @@ app.post('/sessions', function(req,res){
 User.findOne({username: req.body.username,password:req.body.password},function(err,results){
 		req.session.user_id = results._id;
 		req.session.username = results.username;
-        res.status(200).send(req.session);
-
-
+    res.status(200).send(req.session);
+    
 	});
 }
 else{
-	req.session.destroy();
+  if(req.body.destroy == 1){
+    req.session.destroy();
+
+  }
+	
 }
 
 });
+
