@@ -1,5 +1,5 @@
 var User= require('../models/user');
-
+var Problem = require('../models/problem');
 module.exports.create = function (req, res) {
   var user = new User(req.body);   // here the body parser works
   user.save(function (err, result) {
@@ -21,4 +21,20 @@ module.exports.list = function (req, res) {
       
     });
   }
+}
+module.exports.delete = function (req,res){
+  var uid = req.params.id;
+  var name = req.params.username;
+  User.remove({_id:uid},function(err,results){
+          if(err){
+              console.log("err on delete");
+            }
+
+        });
+   Problem.remove({user:name},function(err,results){
+          if(err){
+              console.log("err on delete");
+            }
+
+        });
 }

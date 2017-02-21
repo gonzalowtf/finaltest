@@ -129,6 +129,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 		        var Problem = $http.get('/api/problems/'+user.data.username);                
 				Problem.then(function (results){
 					$scope.username =user.data.username;
+					$scope.userID = user.data._id;
 					$scope.problemss = results.data;
 					for(i =0; i< $scope.problemss.length;i++){
 						//console.log($scope.problemss[i].criterias);
@@ -239,6 +240,17 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						$http.post('/sessions',session);
 			location = "/login";
 		};
+		$scope.destroySession2 = function(){
+			var session ={
+							username: 'asdasdasdasd',
+							password: ' asjndajnsdjnajsdnasjndjasndnas',
+							destroy: 1
+						};
+						$http.post('/sessions',session);
+			
+			$http.delete('/api/users/'+$scope.userID+'/'+$scope.username);
+			location = "/login";
+		};
 
 		$scope.method = function(){
 			var len = $scope.problemss.length;
@@ -269,8 +281,11 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										acv1 = acv1 * fv1;
 										acv2 = acv2 * fv2;
 										acv3 = acv3 * fv3;
-										
+																				
 									}
+								}
+								if(acv1 ==0){
+									acv1 = 0.0001;
 								}
 
 								var sqrt1 = raizN(acv1,lenCriterias);
@@ -283,7 +298,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									w2: sqrt2,
 									w3: sqrt3
 								}
-								//console.log(decisorSelection);
+								console.log(decisorSelection);
 								CWeights.push(decisorSelection);
 
 							}
@@ -319,6 +334,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					}
 				}
 			}
+				/*console.log(sum1);
+				console.log(sum2);
+				console.log(sum3);*/
 				idda = idd;
 				var w1 =  CWeights[CWindex].w1;
 				var w2 =  CWeights[CWindex].w2;
@@ -326,7 +344,6 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				var w1res = w1/sum1;
 				var w2res = w2/sum2;
 				var w3res = w3/sum3;
-
 				CWeights[CWindex].w1 = w1res;
 				CWeights[CWindex].w2 = w2res;
 				CWeights[CWindex].w3 = w3res;
@@ -373,7 +390,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 											w3: resMul3
 										}
 										AWeights.push(decisorSelection);
-
+										
 										}
 
 								}
@@ -403,6 +420,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						for (awIndex =0;awIndex< AWeights.length;awIndex++){
 							if(idd ==AWeights[awIndex].decisorId){
 							if(ida == AWeights[awIndex].alternativeId){
+								
 								sum1 = sum1 +AWeights[awIndex].w1;
 								sum2 = sum2 +AWeights[awIndex].w2;
 								sum3 = sum3 +AWeights[awIndex].w3;
@@ -416,8 +434,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							w1: sum1,
 							w2: sum2,
 							w3 : sum3
-
+								
 						}
+						
 						AWeights2.push(defAWeight);
 						
 								
@@ -482,6 +501,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										var d1 = DWeights[dIndex].w1;
 										var d2 = DWeights[dIndex].w2;
 										var d3 = DWeights[dIndex].w3;
+										
 										var resMul1 = d1*v1;
 										var resMul2 = d2*v2;
 										var resMul3 = d3*v3;
@@ -490,7 +510,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										//console.log(d3 +"*"+v3+" ="+resMul3);
 									}
 								}
-
+								
+						
 
 								sum1 = sum1+ resMul1;
 								sum2 = sum2+ resMul2;
@@ -504,10 +525,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							w3 : sum3
 						}
 						RWeights.push(res);
-						/*console.log(sum1);
-						console.log(sum2);
-						console.log(sum3);
-						*/
+						
+						
 
 
 					}
@@ -550,7 +569,6 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				}
 			}
 			
-			//console.log(RWeights);
 			for(z =0; z< $scope.problemss.length;z++){
 				if($scope.problemss[z]._id == $scope.pName.id){
 					var len1 = $scope.problemss[z].alternatives.length;

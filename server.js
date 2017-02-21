@@ -8,26 +8,42 @@ var express = require("express"),
 	bodyparser = require('body-parser'),
 	pController = require('./data-controllers/problemscontroller.js'),
 	uController = require('./data-controllers/userscontroller.js'),
-	sController = require('./data-controllers/sessionscontroller.js'),
 	session = require("express-session"),
 	cookieParser = require('cookie-parser'),
   morgan = require('morgan'),
 	expressValidator = require('express-validator'),
+  MongoStore = require('connect-mongo')(session),
+  //csrf = require('csurf'),
+  passport = require('passport'),
+  flash = require('connect-flash'),
 	port = process.env.PORT || 3000;
   
-
+//var csrfProtecction = csrf();
 app.use(morgan('combined'));
 
 var User= require('./models/user');
 
-
+    //app.use(csrfProtecction());
 		app.use(bodyparser());
 		app.use(expressValidator());
 		app.use(cookieParser());
 		app.use(session({
 			secret: "asdasdasdnasdnan7868767868767867sd",
+      store : new MongoStore({
+        mongooseConnection : mongoose.connection
+      })
+      //cookie:{maxAge: 867400}
 			
 		}));
+    app.use(flash());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use(function(req,res,next){
+      res.locals.isLogged = req.isAuthenticated;
+      res.locals.session = req.session;
+      next();
+
+    });
 
 app.get('/', function(req, res) {
           //console.log(req.url);  actual direction
@@ -68,7 +84,7 @@ app.get('/login', function(req, res) {
           //res.end("hello world!");    
       		}
       });
-app.get('/signup', function(req, res) {
+app.get('/signup', function(req, res,next) {
           //console.log(req.url);  actual direction
           console.log('session signup?' + req.session.username);
           console.log('session signup?' + req.session.user_id);
@@ -78,7 +94,7 @@ app.get('/signup', function(req, res) {
           }
           else{
           res.sendfile(__dirname + '/method/signup.html');  
-          //res.end("hello world!");    
+          //res.end("hello world!");
       		}
       });
 app.get('/sessions',function(req,res){
@@ -149,7 +165,7 @@ mongoclient.connect(url, function(err, db) {
 
 
 
-mongoose.connect(url2,function(err){
+mongoose.connect(url,function(err){
 	assert.equal(null, err);
   console.log("Connected successfully to server with mongoose");
 });
@@ -168,7 +184,7 @@ app.put('/api/problems/:id',pController.update);
 //---------------------------------users---------------------------------
 app.get('/api/users/:usr/:pass/:number', uController.list);
 app.post('/api/users', uController.create);
-//app.delete('/api/users/:id',uController.delete);
+app.delete('/api/users/:id/:username',uController.delete);
 //app.put('/api/users/:id',uController.update);
 //-------------------------------------------------------------------------
 // -------------------------------Sessions---------------------------------
@@ -177,6 +193,7 @@ app.post('/sessions', function(req,res){
 User.findOne({username: req.body.username,password:req.body.password},function(err,results){
 		req.session.user_id = results._id;
 		req.session.username = results.username;
+    req.session.save();
     res.status(200).send(req.session);
     
 	});

@@ -242,6 +242,7 @@
     </a>
     <ul>
     <li><a id= "user" class="btn-floating red lighten-1 btn tooltipped" ng-click = "destroySession()" data-position="left" data-delay="50" data-tooltip="Log out"><i class="material-icons">person_pin</i></a></li>
+    <li><a id= "user" class="btn-floating black lighten-1 btn tooltipped" onclick="eraseAccount()"  data-position="left" data-delay="50" data-tooltip="Erase account"><i class="material-icons">delete</i></a></li>
     <li><a class="btn-floating deep-purple lighten-1 btn tooltipped" data-position="left" data-delay="50" data-tooltip="View Doc" onclick="openPDF()"><i class="material-icons">business</i></a></li>
     <li><a class="btn-floating cyan accent-1 btn tooltipped" data-position="left" data-delay="50" data-tooltip="How it works? (steps)" onclick="HowItWorksOpen()"><i class="material-icons">dashboard</i></a></li>
       </ul>
@@ -466,7 +467,7 @@
            <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Update
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -514,7 +515,7 @@
             <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Update
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -601,7 +602,7 @@
             <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Update
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -721,7 +722,7 @@
             <div class="row"></div>
            <div class="row"></div>
             <div class="row">
-              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Change
+              <center><button class="btn waves-effect waves-light red" type="submit" value="Submit" name="action">Update
             <i class="material-icons right">send</i>
             </button></center>
             </div>
@@ -841,7 +842,31 @@
 
 
 </div>
-
+<div id="eraseAccount" class="modal">
+    <div class="modal-content">
+      <center><h4>Erase whole account of {{username}}?</h4></center>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <p><center>All user data and problems will be erased</center></p></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <div class="row">
+                            <center><a class="btn btn-large waves-effect red waves-light" ng-click = "destroySession2()">
+                          <i class="material-icons">delete</i>
+                        </a></center></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           <div class="row"></div>
+           
+    </div>
+</div>
 
 
               

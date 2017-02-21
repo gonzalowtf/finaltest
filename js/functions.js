@@ -177,6 +177,11 @@ function openPDF(){
 window.open('/files/UserManual.pdf');
 
 }
+function eraseAccount(){
+	$('#eraseAccount').openModal();
+
+}
+
 function getVar(){
       
       var url = location.search.replace("?",",");
