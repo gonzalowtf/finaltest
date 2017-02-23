@@ -30,10 +30,10 @@ app.controller("UserController",['$scope','$http','serveUsername',function($scop
 					var u = this.review.username;
 					var p = this.review.password;
 					user.then(function(results){
-						
+
 						if(results.data.length ==0){
 								Materialize.toast("Username or password incorrect",3000);
-								
+
 
 							}
 						else{
@@ -44,22 +44,22 @@ app.controller("UserController",['$scope','$http','serveUsername',function($scop
 						};
 						$http.post('/sessions',session);
 						Materialize.toast("Done !",2000);
-						location.href = '/method';
-						
+						location.href = '/method/loading.html';
+						//location.href = '/method';
 					}
 
 
 					});
 					this.review = {};
-					
+
 		}
 	};
 
 }]);
 
 app.controller('SignUpController',['$scope','$http','serveUsername',function($scope,$http,serveUsername){
-	
-	 	
+
+
 	this.review = {};
 	this.newU = function(){
 		if(this.review.username == "" ||this.review.username==null){
@@ -74,7 +74,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				Materialize.toast("Please repeat password",3000);
 			}
 			else{
-				
+
 				if(this.review.password == this.review.password2){
 					var u = this.review.username;
 					var p = this.review.password;
@@ -92,22 +92,22 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						}
 						else{
 							Materialize.toast("Username already exists !",3000);
-							
+
 						}
 
 
 					});
-					
+
 					this.review = {};
-					
+
 				}
 				else{
 					Materialize.toast("Passwords do not match!",3000);
 					this.review.password = "";
 					this.review.password2 = "";
-				}			
-		
-		
+				}
+
+
 			}
 }
 
@@ -118,15 +118,15 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 	app.controller("ProblemsController",['$scope','$http','serveProblemName','serveUsername',function($scope,$http,serveProblemName,serveUsername){
 		//$scope.problemss = problems;
-        
-       
-		
+
+
+
          $scope.refresh = function(){
 		        var User = $http.get('/sessions');
 					User.then(function(user){
-									
-					       	
-		        var Problem = $http.get('/api/problems/'+user.data.username);                
+
+
+		        var Problem = $http.get('/api/problems/'+user.data.username);
 				Problem.then(function (results){
 					$scope.username =user.data.username;
 					$scope.userID = user.data._id;
@@ -139,13 +139,13 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					}
 					});
 
-		});	
+		});
 		};
-		
+
 		$scope.refresh();
 		Materialize.toast("Welcome !",4000);
-		
-		
+
+
 		$scope.problemss = [];
 		$scope.problemName = function(pname,idp){
 			$scope.pName =pname;
@@ -153,8 +153,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			serveProblemName.id = idp;
 			$scope.results = [];
 		};
-		
-		
+
+
 		$scope.problemss = [];
 		$scope.getCName = function(pid,id){
 			var name = "";
@@ -170,9 +170,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 								break;
 									}
 					}
-					
+
 				}
-				
+
 			}
 			return name;
 		};
@@ -190,9 +190,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 								break;
 									}
 					}
-					
+
 				}
-				
+
 			}
 			return name;
 		};
@@ -217,7 +217,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				problemID :$scope.pName.id,
 				getType: "criterias"
 			});*/
-			
+
 		}
 		$scope.alternativeId = function(alternativeid,alternativename){
 			$scope.aid = alternativeid;
@@ -229,7 +229,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				// this las line have no use yet
 
 			}
-			
+
 		}
 		$scope.destroySession = function(){
 			var session ={
@@ -247,7 +247,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							destroy: 1
 						};
 						$http.post('/sessions',session);
-			
+
 			$http.delete('/api/users/'+$scope.userID+'/'+$scope.username);
 			location = "/login";
 		};
@@ -281,7 +281,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										acv1 = acv1 * fv1;
 										acv2 = acv2 * fv2;
 										acv3 = acv3 * fv3;
-																				
+
 									}
 								}
 								if(acv1 ==0){
@@ -304,9 +304,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							}
 
 						}
-						
+
 					}
-					
+
 				}
 
 			}
@@ -319,7 +319,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				if(idda == idd){
 					//nada
 					//console.log("match");
-					
+
 				}
 				else{
 				sum1 = 0;
@@ -348,7 +348,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				CWeights[CWindex].w2 = w2res;
 				CWeights[CWindex].w3 = w3res;
 
-				
+
 
 			}
 			//alternatives
@@ -390,7 +390,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 											w3: resMul3
 										}
 										AWeights.push(decisorSelection);
-										
+
 										}
 
 								}
@@ -420,7 +420,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						for (awIndex =0;awIndex< AWeights.length;awIndex++){
 							if(idd ==AWeights[awIndex].decisorId){
 							if(ida == AWeights[awIndex].alternativeId){
-								
+
 								sum1 = sum1 +AWeights[awIndex].w1;
 								sum2 = sum2 +AWeights[awIndex].w2;
 								sum3 = sum3 +AWeights[awIndex].w3;
@@ -434,19 +434,19 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							w1: sum1,
 							w2: sum2,
 							w3 : sum3
-								
+
 						}
-						
+
 						AWeights2.push(defAWeight);
-						
-								
+
+
 					}
-					
+
 					}
 				}
 			}
-			
-			// tazacion de los decisores 
+
+			// tazacion de los decisores
 			var DWeights = [];
 			for(z =0; z< $scope.problemss.length;z++){
 				if($scope.problemss[z]._id == $scope.pName.id){
@@ -467,7 +467,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						var div1 = $scope.problemss[z].decisors[i].fuzzyValue1/sum1;
 						var div2 = $scope.problemss[z].decisors[i].fuzzyValue2/sum2;
 						var div3 = $scope.problemss[z].decisors[i].fuzzyValue3/sum3;
-						
+
 						var decisorNWeight ={
 							decisorId:$scope.problemss[z].decisors[i]._id,
 							w1: div1,
@@ -479,7 +479,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 				}
 			}
-			
+
 			// obtencion del vector r
 			var RWeights = [];
 			for(z =0; z< $scope.problemss.length;z++){
@@ -501,7 +501,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										var d1 = DWeights[dIndex].w1;
 										var d2 = DWeights[dIndex].w2;
 										var d3 = DWeights[dIndex].w3;
-										
+
 										var resMul1 = d1*v1;
 										var resMul2 = d2*v2;
 										var resMul3 = d3*v3;
@@ -510,8 +510,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										//console.log(d3 +"*"+v3+" ="+resMul3);
 									}
 								}
-								
-						
+
+
 
 								sum1 = sum1+ resMul1;
 								sum2 = sum2+ resMul2;
@@ -525,8 +525,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							w3 : sum3
 						}
 						RWeights.push(res);
-						
-						
+
+
 
 
 					}
@@ -546,7 +546,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			var v2N = 0;
 			var v3N = 0;
 
-			
+
 			for(i =0;i< RWeights.length;i++){
 				var negDistance = distance(RWeights[i].w1,RWeights[i].w2,RWeights[i].w3,v1N,v2N,v3N);
 				var posDistance = distance(RWeights[i].w1,RWeights[i].w2,RWeights[i].w3,v1P,v2P,v3P);
@@ -568,7 +568,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					}
 				}
 			}
-			
+
 			for(z =0; z< $scope.problemss.length;z++){
 				if($scope.problemss[z]._id == $scope.pName.id){
 					var len1 = $scope.problemss[z].alternatives.length;
@@ -581,7 +581,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 								RWeights[j].name = name;
 							}
 						}
-						
+
 
 					}
 
@@ -620,7 +620,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			}
 			return cName;
 		}
-		
+
 	}]);
 
 	app.controller("Tables",function(){
@@ -631,8 +631,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			this.selected = tab;
 			//console.log(this.selected);
 		};
-		
-		
+
+
 	});
 
 	app.controller("NewProblem",['$scope','$http' ,function($scope,$http){
@@ -640,7 +640,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 		this.review.nd = 4;
 		this.review.nc = 4;
 		this.review.na = 8;
-		
+
 		this.newP = function(){
 			//console.log(this.review.nd);
 			$http.post('/api/problems',{
@@ -666,14 +666,14 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					decisors : generateD(this.review.nd),
 					criterias : generateC(this.review.nc),
 					alternatives: generateA(this.review.na)
-					
+
 				}
 				);
-				
+
 			$scope.refresh();
 			this.review.name = '';
 			toast1();
-				
+
 		};
 
 
@@ -681,11 +681,11 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 	app.controller("EditDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.editD = function(){
-				
+
 				var len = $scope.problemss.length;
 				$scope.refresh();
 				 for(i =0;i<len;i++){
@@ -707,7 +707,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 								}
 								if(this.review.fuzzyRating == null){
 									this.review.fuzzyRating = $scope.dfuzzyrating;
-									
+
 								}
 								var v1 = findV1Decisor(this.review.fuzzyRating);
 								var v2 = findV2Decisor(this.review.fuzzyRating);
@@ -735,7 +735,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									$http.put('/api/problems/' +$scope.pName.id , request);
 
 							$scope.refresh();
-							
+
 							}
 							}
 							toast3();
@@ -745,8 +745,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 						}
 						this.review = {};
 					}
-				
-					
+
+
 			}
 		}
 
@@ -755,7 +755,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 	}]);
 	app.controller("EditCriteria",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.editC = function(){
@@ -785,7 +785,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									action: "edit",
 									_id:  $scope.cid,
 									name: this.review.name,
-									
+
 							});
 									var selectionsCriterias = [];
 									selectionsCriterias = $scope.criterias.slice(0);
@@ -811,7 +811,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 										selectionsCriterias[z].fuzzyRating= findCriteriaRating(selectionsCriterias[z].fuzzyRating);
 									}
 										}
-										
+
 								}
 								if(con == $scope.problemss[i].criterias.length-1){
 									flag2 = 1;
@@ -827,11 +827,11 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									criteriaId:  $scope.cid,
 									decisorId: this.review.decisor,
 									comparations: selectionsCriterias
-																	
+
 									}
 									//console.log(request);
 									$http.put('/api/problems/' +$scope.pName.id ,request);
-							 
+
 							if(flag==1){
 								flag =0;
 							}
@@ -839,7 +839,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 								// flag =0
 							}
 							}
-									
+
 							this.review = {};
 							if(flag ==0){
 								toast7();
@@ -851,8 +851,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							}
 						}
 					}
-				
-					
+
+
 			}
 
 
@@ -861,7 +861,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 	}]);
 	app.controller("EditAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.editA = function(){
@@ -891,7 +891,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									action : "edit",
 									_id:  $scope.aid,
 									name: this.review.name,
-									
+
 							});
 
 									if(this.review.decisor== null ||this.review.criteria== null){
@@ -913,9 +913,9 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									fuzzyValue2: findV2Alternative(this.review.fuzzyRating),
 									fuzzyValue3: findV3Alternative(this.review.fuzzyRating)
 
-																	
+
 									}
-									
+
 									$http.put('/api/problems/' +$scope.pName.id ,request);
 									flag = 0;
 									}
@@ -931,8 +931,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 							}
 						}
 					}
-				
-					
+
+
 			}
 
 
@@ -941,25 +941,25 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 	}]);
 	app.controller("EraseProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
-			
+
+
 			$scope.pName = serveProblemName;
 			$scope.eraseP = function(){
-					
+
 					var id = $scope.pName.id;
 					$http.delete('/api/problems/'+id);
 					$scope.refresh();
 					toast5();
 					$scope.refresh();
-					
-									
+
+
 
 			}
 	}]);
-	
+
 	app.controller("EditProblem",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-				
+
 			$scope.pName = serveProblemName;
 			$scope.editP= function(){
 					var id = $scope.pName.id;
@@ -982,8 +982,8 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 	app.controller("EraseDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
-			
+
+
 			$scope.pName = serveProblemName;
 			this.eraseD = function(){
 					$scope.refresh();
@@ -1000,19 +1000,19 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									type: "decisor",
 									action : "erase",
 									_id:  $scope.did,
-									
+
 							});
 							 	$scope.refresh();
 								toast2();
 								break;
 
-							
+
 								}
 							}
 						}
 					}
-									
-									
+
+
 
 			}
 	}]);
@@ -1034,22 +1034,22 @@ app.controller("EraseCriteria",['$scope','$http','serveProblemName',function($sc
 									type: "criteria",
 									action : "erase",
 									_id:  $scope.cid,
-									
+
 							});
 							 	$scope.refresh();
 								toast9();
 								break;
 
-							
+
 								}
 							}
 						}
 					}
-									
-									
+
+
 
 			}
-	}]);	
+	}]);
 app.controller("EraseAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 			$scope.pName = serveProblemName;
 			this.eraseA = function(){
@@ -1067,26 +1067,26 @@ app.controller("EraseAlternative",['$scope','$http','serveProblemName',function(
 									type: "alternative",
 									action : "erase",
 									_id:  $scope.aid,
-									
+
 							});
 							 	$scope.refresh();
 								toast10();
 								break;
 
-							
+
 								}
 							}
 						}
 					}
-									
-									
+
+
 
 			}
 	}]);
 
 app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.addD = function(){
@@ -1097,7 +1097,7 @@ app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							
+
 							$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "decisor",
 									action : "add",
@@ -1109,21 +1109,21 @@ app.controller("AddDecisor",['$scope','$http','serveProblemName',function($scope
 									fuzzyValue3 : findV3Decisor(this.review.fuzzyRating)
 
 							});
-							
+
 							this.review = {};
 							toast4();
 							$scope.refresh();
 							break;
 						}
 					}
-									
-									
+
+
 
 			}
 	}]);
 app.controller("AddCriteria",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.addC = function(){
@@ -1132,8 +1132,8 @@ app.controller("AddCriteria",['$scope','$http','serveProblemName',function($scop
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							
-							
+
+
 							$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "criteria",
 									action : "add",
@@ -1144,21 +1144,21 @@ app.controller("AddCriteria",['$scope','$http','serveProblemName',function($scop
 									fuzzyValue3 : findV3Criteria(this.review.fuzzyRating)
 
 							});
-							
+
 							this.review = {};
 							toast11();
 							$scope.refresh();
 							break;
 						}
 					}
-									
-									
+
+
 
 			}
 	}]);
 app.controller("AddAlternative",['$scope','$http','serveProblemName',function($scope,$http,serveProblemName){
 
-			
+
 			this.review = {};
 			$scope.pName = serveProblemName;
 			this.addA = function(){
@@ -1167,8 +1167,8 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i]._id;
 						if(key == $scope.pName.id ){
-							
-							
+
+
 							$http.put('/api/problems/' +$scope.pName.id ,{
 									type: "alternative",
 									action : "add",
@@ -1179,15 +1179,15 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 									fuzzyValue3 : findV3Alternative(this.review.fuzzyRating)
 
 							});
-							
+
 							this.review = {};
 							toast12();
 							$scope.refresh();
 							break;
 						}
 					}
-									
-									
+
+
 
 			}
 	}]);
@@ -1203,12 +1203,12 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 				fuzzyRating: "Important",
 				fuzzyValue1 : 2,
 				fuzzyValue2 : 5,
-				fuzzyValue3: 8 
+				fuzzyValue3: 8
 			});
 			des=des+1;
-		} 
-		
-		
+		}
+
+
 		return data;
 	}
 	function generateC(nc){
@@ -1217,12 +1217,12 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 		while(cri < nc){
 			data.push({
 				name: "c"+(cri+1)
-				
+
 			});
 			cri=cri+1;
-		} 
-		
-		
+		}
+
+
 		return data;
 	}
 	function generateA(na){
@@ -1233,9 +1233,9 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
 				name: "a"+(alt+1)
 			});
 			alt=alt+1;
-		} 
-		
-		
+		}
+
+
 		return data;
 	}
 
@@ -1322,7 +1322,7 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
           return 0;
         }
         if(fuzzyRating == "(1,2,3)"){
-			return 1;       
+			return 1;
 		 }
         if(fuzzyRating == "(2,3,4)"){
           return 2;
@@ -1358,7 +1358,7 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
           return 1;
         }
         if(fuzzyRating == "(1,2,3)"){
-			return 2;       
+			return 2;
 		 }
         if(fuzzyRating == "(2,3,4)"){
           return 3;
@@ -1394,7 +1394,7 @@ app.controller("AddAlternative",['$scope','$http','serveProblemName',function($s
           return 2;
         }
         if(fuzzyRating == "(1,2,3)"){
-			return 3;       
+			return 3;
 		 }
         if(fuzzyRating == "(2,3,4)"){
           return 4;
@@ -1490,7 +1490,7 @@ function findAlternativeRating(fuzzyRating){
         if(fuzzyRating == "**"){
           rating = "**";
         }
-        
+
           return rating;
 }
  function findV1Alternative(fuzzyRating){
@@ -1585,11 +1585,11 @@ function findAlternativeRating(fuzzyRating){
         if(a3<0){
         	a3 = a3*-1;
         }
-        
+
             var distance = Math.sqrt((Math.pow(a1 - b1, 2) + Math.pow(a2 - b2, 2) + Math.pow(a3 - b3, 2)) / 3);
             return distance;
         }
-	
+
 function firstUp(string){
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -10,6 +10,7 @@ var express = require("express"),
 	uController = require('./data-controllers/userscontroller.js'),
 	session = require("express-session"),
 	cookieParser = require('cookie-parser'),
+	cookieSession = require('cookie-session')
   morgan = require('morgan'),
 	expressValidator = require('express-validator'),
   MongoStore = require('connect-mongo')(session),
@@ -17,23 +18,34 @@ var express = require("express"),
   passport = require('passport'),
   flash = require('connect-flash'),
 	port = process.env.PORT || 3000;
-  
+
+
+
 //var csrfProtecction = csrf();
+//app.use(csrfProtecction);
 app.use(morgan('combined'));
 
 var User= require('./models/user');
 
     //app.use(csrfProtecction());
 		app.use(bodyparser());
+		app.use(bodyparser.json());
+		app.use(bodyparser.urlencoded({extended : false}));
 		app.use(expressValidator());
 		app.use(cookieParser());
+		/*app.use(cookieSession({
+			key : "fuzzy.sess",
+			secret: "fuzzy secret"
+		}));*/
 		app.use(session({
 			secret: "asdasdasdnasdnan7868767868767867sd",
+      resave: false,
+      saveUninitialized:false,
       store : new MongoStore({
         mongooseConnection : mongoose.connection
       })
       //cookie:{maxAge: 867400}
-			
+
 		}));
     app.use(flash());
     app.use(passport.initialize());
@@ -45,74 +57,7 @@ var User= require('./models/user');
 
     });
 
-app.get('/', function(req, res) {
-          //console.log(req.url);  actual direction
-          console.log('session index?' + req.session.username);
-          console.log('session index?' + req.session.user_id);
-          res.sendfile(__dirname + '/index.html');  
-          //res.end("hello world!");    
-      
-      });
 
-function n(){
-  h = 1;
-};
-app.get('/method', function(req, res) {
-          //console.log(req.url);  actual direction
-          console.log('session method?' + req.session.username);
-          console.log('session method?' + req.session.user_id);
-          setTimeout(n,6000);
-          if(req.session.username){
-          	res.sendfile(__dirname + '/method/method.html');  
-      		}
-      	else{
-      		res.sendfile(__dirname + '/method/loggin.html'); 
-          //res.end("hello world!");    
-      			}
-      		
-      });
-app.get('/login', function(req, res) {
-          //console.log(req.url);  actual direction
-          console.log('session login?' + req.session.username);
-          console.log('session login?' + req.session.user_id);
-          if(req.session.username){
-          	  res.sendfile(__dirname + '/method/method.html');  
-
-          }
-          else{
-          res.sendfile(__dirname + '/method/loggin.html');  
-          //res.end("hello world!");    
-      		}
-      });
-app.get('/signup', function(req, res,next) {
-          //console.log(req.url);  actual direction
-          console.log('session signup?' + req.session.username);
-          console.log('session signup?' + req.session.user_id);
-          if(req.session.username){
-          	  res.sendfile(__dirname + '/method/method.html');  
-
-          }
-          else{
-          res.sendfile(__dirname + '/method/signup.html');  
-          //res.end("hello world!");
-      		}
-      });
-app.get('/sessions',function(req,res){
-        if(req.session.username){
-             User.findOne({username: req.session.username,_id: req.session.user_id},function(err, results){
-              if(err){
-                console.log(" Error !!! line 83" + err);
-              }
-              console.log(results);
-              res.json(results);
-             });
-            
-      		}
-      	else{
-      		res.sendfile(__dirname + '/method/loggin.html'); 
-          //res.end("hello world!");    
-      			}
-});
 app.use('/files', express.static(__dirname + '/files'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/fonts', express.static(__dirname + '/fonts'));
@@ -146,8 +91,8 @@ server.listen(port,function(err){
 //------------------------------Data Base Connection--------------------------
 
 
-var url = 'mongodb://localhost:27017/datafuzzy';	
-var url2 = "mongodb://hutter:cancer29@ds133438.mlab.com:33438/datafuzzy"; 
+var url = 'mongodb://localhost:27017/datafuzzy';
+var url2 = "mongodb://hutter:cancer29@ds133438.mlab.com:33438/datafuzzy";
 
 
 /*
@@ -171,7 +116,102 @@ mongoose.connect(url2,function(err){
 });
 
 
+app.get('/', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session index?' + req.session.username);
+          console.log('session index?' + req.session.user_id);
+          res.sendfile(__dirname + '/index.html');
+          //res.end("hello world!");
 
+      });
+			app.post('/sessions', function(req,res,next){
+
+
+				if(req.body.destroy == 0){
+			User.findOne({username: req.body.username,password:req.body.password},function(err,results){
+					req.session.user_id = results._id;
+					req.session.username = results.username;
+					req.session.save();
+			    res.status(200).send(req.session);
+					res.end();
+				});
+			}
+			else{
+			  if(req.body.destroy == 1){
+			    req.session.destroy();
+					flag = false;
+
+			  }
+
+			}
+			//next();
+
+			});
+
+
+
+app.get('/method', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session method?' + req.session.username);
+          console.log('session method?' + req.session.user_id);
+					var retry = 1;
+
+							if(req.session.username){
+		          	res.sendfile(__dirname + '/method/method.html');
+
+		      		}
+
+								//res.sendfile(__dirname + '/method/loading.html');
+							else{
+      						res.sendfile(__dirname + '/method/loggin.html');
+      			}
+
+
+
+      });
+app.get('/login', function(req, res) {
+          //console.log(req.url);  actual direction
+          console.log('session login?' + req.session.username);
+          console.log('session login?' + req.session.user_id);
+          if(req.session.username){
+          	  res.sendfile(__dirname + '/method/method.html');
+
+          }
+          else{
+          res.sendfile(__dirname + '/method/loggin.html');
+          //res.end("hello world!");
+      		}
+      });
+app.get('/signup', function(req, res,next) {
+          //console.log(req.url);  actual direction
+          console.log('session signup?' + req.session.username);
+          console.log('session signup?' + req.session.user_id);
+          if(req.session.username){
+          	  res.sendfile(__dirname + '/method/method.html');
+
+          }
+          else{
+          res.sendfile(__dirname + '/method/signup.html');
+          //res.end("hello world!");
+      		}
+      });
+app.get('/sessions',function(req,res){
+        if(req.session.username){
+             User.findOne({username: req.session.username,_id: req.session.user_id},function(err, results){
+              if(err){
+                console.log(" Error !!! line 83" + err);
+              }
+              console.log(results);
+              //res.sendfile(__dirname + '/method/method.html');
+							res.json(results);
+             });
+
+      		}
+      	else{
+      		res.sendfile(__dirname + '/method/loggin.html');
+          //res.end("hello world!");
+      			}
+});
 //----------------------------------------------------------------------------------
 //---------------------getting , posting and deleting ---------------------
 
@@ -188,23 +228,3 @@ app.delete('/api/users/:id/:username',uController.delete);
 //app.put('/api/users/:id',uController.update);
 //-------------------------------------------------------------------------
 // -------------------------------Sessions---------------------------------
-app.post('/sessions', function(req,res){
-	if(req.body.destroy == 0){
-User.findOne({username: req.body.username,password:req.body.password},function(err,results){
-		req.session.user_id = results._id;
-		req.session.username = results.username;
-    req.session.save();
-    res.status(200).send(req.session);
-    
-	});
-}
-else{
-  if(req.body.destroy == 1){
-    req.session.destroy();
-
-  }
-	
-}
-
-});
-
