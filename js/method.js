@@ -5,6 +5,7 @@
 		{
 			return {
 				name: "",
+				description: "",
 				id: ""
 			};
 		}]);
@@ -45,7 +46,6 @@ app.controller("UserController",['$scope','$http','serveUsername',function($scop
 						$http.post('/sessions',session);
 						Materialize.toast("Done !",2000);
 						location.href = '/method/loading.html';
-						//location.href = '/method';
 					}
 
 
@@ -147,9 +147,11 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 
 		$scope.problemss = [];
-		$scope.problemName = function(pname,idp){
+		$scope.problemName = function(pname,pdescription,idp){
 			$scope.pName =pname;
+			$scope.pDesc = pdescription;
 			serveProblemName.name = $scope.pName;
+			serveProblemName.description = $scope.pDesc;
 			serveProblemName.id = idp;
 			$scope.results = [];
 		};
@@ -646,6 +648,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			$http.post('/api/problems',{
 					name: this.review.name,
 					user: $scope.username,
+					description: ' ',
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,
@@ -660,6 +663,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 				{
 					name: this.review.name,
 					user: $scope.username,
+					description: ' ',
 					nd: this.review.nd,
 					nc: this.review.nc,
 					na: this.review.na,
@@ -963,7 +967,10 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			$scope.pName = serveProblemName;
 			$scope.editP= function(){
 					var id = $scope.pName.id;
-					var req ={name:$scope.pName.name};
+					var req ={
+						name:$scope.pName.name,
+						description: $scope.pName.description
+					};
 					$http.put('/api/problems/'+id,req);
 					toast6();
 					$scope.refresh();
@@ -971,7 +978,10 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					for(i =0;i<len;i++){
 						var key = $scope.problemss[i].id;
 						if(key == $scope.pName.id ){
-							$scope.problemss[i].push({name: $scope.pName.name});
+							$scope.problemss[i].push({
+								name:$scope.pName.name,
+								description: $scope.pName.description
+							});
 						}
 					}
 					$scope.refresh();

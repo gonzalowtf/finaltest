@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 
 
 module.exports = mongoose.model('Problem',{
-	id: {type: String ,require: true},	
+	id: {type: String ,require: true},
 	user: {type: String, require: true},
 	name: {type : String , require : true},
+	description: {type : String , require : true},
 	nd: {type : Number , require : true},
 	nc: {type : Number , require : true},
 	na: {type : Number , require : true},
@@ -18,7 +19,7 @@ module.exports = mongoose.model('Problem',{
 				require : true} ,
 			fuzzyValue1 : {type : Number , require : true},
 			fuzzyValue2 : {type : Number , require : true},
-			fuzzyValue3: {type : Number , require : true} 
+			fuzzyValue3: {type : Number , require : true}
 		}
 	],
 	criterias:[
@@ -60,7 +61,7 @@ module.exports = mongoose.model('Problem',{
 		}
 					]
 	}
-		
+
 	],
 	selectionsAlternatives:[
 
@@ -73,7 +74,7 @@ module.exports = mongoose.model('Problem',{
 		fuzzyValue2 : {type : Number , require : true},
 		fuzzyValue3: {type : Number , require : true}
 	}
-	
+
 
 
 	]

@@ -18,7 +18,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src = "/js/bootbox.min.js"></script>
-  
+
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -48,14 +48,14 @@
   src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 	}
-	
+
 </style>
 <link rel="stylesheet" type="text/css" href="/method/modals.html">
 </head>
 <body ng-controller = "ProblemsController as pc">
 <nav id = "navigation" class="black" role="navigation">
     <div class="nav-wrapper container">
-      
+
       <ul class="center hide-on-med-and-down">
         <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2 flow-text">Fuzzy Multi-Criteria of Group Decision Making</span></a>
         <a id = "fuzzyUser" href="#!" class="right-align white-text"></a>
@@ -63,14 +63,14 @@
       <ul class="center hide-on-med-and-up">
         <a id="logo-container" href="#" class="brand-logo center"><span class="white-text text-darken-2 flow-text">F.M.C.G.D.M.</span></a>
       </ul>
-      
+
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#" onclick="HowItWorksOpen()"><span class="black-text text-darken-2">How it works ?</span></a></li>
         <li><a href="#" onclick="openPDF()"><span class="black-text text-darken-2">View Doc</span></a></li>
         <li><a id = "user2" ng-click = "destroySession()" href="/login">Log out - {{username}}</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-      
+
     </div>
   </nav>
 
@@ -91,10 +91,10 @@
 
       	<div class="row">
       		<ul class="collection collapsible collapsible-accordion popout" data-collapsible ="accordion">
-        
+
 <li class="bold" ng-repeat = "problem in problemss">
 
-   <a class="collapsible-header  waves-effect waves-teal" ng-click = "problemName(problem.name,problem._id)"><i class="small material-icons">label</i>{{problem.name}}</a>
+   <a class="collapsible-header  waves-effect waves-teal" ng-click = "problemName(problem.name,problem.description,problem._id)"><i class="small material-icons">label</i>{{problem.name}}</a>
              <div class="collapsible-body">
                 <ul>
                 <li><center><a class="btn-floating btn-small black waves-effect waves-light"><i class="large material-icons modal-trigger tooltipped" data-tooltip ="Edit Problem" data-position="right" data-target = "editProblemModal" onclick="editProblemOpen()">mode_edit</i></a>
@@ -103,7 +103,7 @@
                         </a>
                       </center>
                  </li>
-                  
+
                   <li><center>
                   <a class="waves-effect waves-teal" ng-click= "table = 1">
                   <i class="material-icons">perm_identity</i>Decisors({{problem.nd}})</a></center>
@@ -123,7 +123,7 @@
                   Results</a></li></center>
                 </ul>
                 <div class="panel" ng-show = "table == 1">
-                  
+
                   <table class ="responsive-table highlight green lighten-1 z-depth-2 bordered animated fadeIn">
                     <thead>
                       <tr>
@@ -161,12 +161,12 @@
                       <tr ng-repeat = "criteria in problem.criterias">
                         <td>{{criteria.name}}</td>
                         <td>
-                         <ul class="collection">            
-                            <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id == fv.criteriaId">For Decisor {{findDecisor(fv.decisorId)}} this Criteria has a: 
+                         <ul class="collection">
+                            <li class="collection-item" ng-repeat = "fv in problem.selectionsCriterias" ng-show ="criteria._id == fv.criteriaId">For Decisor {{findDecisor(fv.decisorId)}} this Criteria has a:
                           <ul class="collection teal">
                             <li class = "collection-item" ng-repeat = "com in fv.comparations" ng-hide = "com._id == fv.criteriaId || com.fuzzyRating == null">
                                 "{{com.fuzzyRating}}" weight comparing with {{findCriteria(com._id)}}
-                              </li> 
+                              </li>
                             </ul>
                               </li>
                           </ul>
@@ -185,7 +185,7 @@
                           <th><span class = "black-text text-darken-2">Fuzzy Value</span></th>
                           <th><a class="btn-floating btn-small teal darken-2 waves-effect waves-light"><i class="small material-icons modal-trigger tooltipped" data-tooltip="Add New Alternative" data-position="right" data-target= "addAlternativeModal" onclick="addAlternativeOpen()">add</i>
                           </th>
-                      
+
                       </tr>
                     </thead>
                     <tbody>
@@ -219,22 +219,22 @@
                       <tr ng-repeat = "r in results">
                         <td>{{r.pos}}</td>
                         <td>{{r.name}}</td>
-                        <td>{{r.coef}}</td>                        
+                        <td>{{r.coef}}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-              
+
               </li>
-         
+
             </ul>
 
-            </div>  
-          
-      	</div>        
+            </div>
+
       	</div>
-      	
+      	</div>
+
       <div class="row">
   <div class="fixed-action-btn vertical">
     <a class="btn-floating btn-large red">
@@ -247,8 +247,8 @@
     <li><a class="btn-floating cyan accent-1 btn tooltipped" data-position="left" data-delay="50" data-tooltip="How it works? (steps)" onclick="HowItWorksOpen()"><i class="material-icons">dashboard</i></a></li>
       </ul>
   </div>
-      </div>	
-	
+      </div>
+
       	<div class="row">
   <div class="fixed-action-btn horizontal">
     <a class="btn-floating btn-large red">
@@ -302,8 +302,8 @@
                <p class="range-field">
                 <input type="range" id="alternativesQ" min="2" max="200" ng-model = "np.review.na" required></input>
               </p>
-            </div> 
-            </div> 
+            </div>
+            </div>
                 <div class="row">
               <center><button class="btn waves-effect waves-light " type="submit" value="Submit" name="action" >add
             <i class="material-icons right">send</i>
@@ -334,7 +334,7 @@
             <div class="col s6">
               <h6><span>Rate Item</span></h6>
               </div>
-            
+
               <div class="col s6">
                  <select class="browser-default" ng-model = "ad.review.fuzzyRating" required>
                   <option value="" disabled selected>Weight</option>
@@ -346,7 +346,7 @@
                 <div class="row">
                 <center><label>value {{ad.review.fuzzyRating}}</label></center>
                 </div>
-              </div></div>          
+              </div></div>
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -359,7 +359,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 <div id="addCriteriaModal" class="modal">
@@ -389,7 +389,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 <div id="addAlternativeModal" class="modal">
@@ -419,7 +419,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 <div id="eraseProblemModal" class="modal">
@@ -443,16 +443,16 @@
                             <center><button class="btn btn-large waves-effect red waves-light" type="submit" name="action" value = "Submit">
                           <i class="material-icons">delete</i></div>
                         </button></center>
-                        </form>                    
+                        </form>
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 <div id="editProblemModal" class="modal">
     <div class="modal-content">
-      <center><h4>Edit Problem Name</h4></center>
+      <center><h4>Edit Problem</h4></center>
       <form class="col s12" name = "EditProblemForm" ng-controller = "EditProblem" ng-submit ="editP()">
            <div class="row">
               <div class="input-field col s12">
@@ -462,8 +462,13 @@
               <div class="row"></div>
               <div class="row"><center><span class = "grey-text text-lighten-1">This field must have no spaces</span></center></div></div>
             <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea" required ng-model ="pName.description" maxlength="400"></textarea>
+                <label for="textarea1">{{pName.pDescription}}</label>
+              </div>
+            </div>
+            <div class="row"><center><span class = "grey-text text-lighten-1">Problem description: no longer than 400 letters </span></center></div>
            <div class="row"></div>
            <div class="row"></div>
             <div class="row">
@@ -475,7 +480,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 
@@ -498,7 +503,7 @@
             <div class="col s6">
               <h6><span>Rate Item</span></h6>
               </div>
-            
+
               <div class="col s6">
               <select class="browser-default" ng-model="ed.review.fuzzyRating">
                   <option value="" selected>Choose Weight</option>
@@ -510,7 +515,7 @@
                 <div class="row">
                 <center><label>Value {{ed.review.fuzzyRating}} </label></center>
                 </div>
-              </div></div>          
+              </div></div>
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -523,10 +528,10 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
-<div id="eraseDecisorModal" class="modal">                        
+<div id="eraseDecisorModal" class="modal">
                           <div class="modal-content">
                           <form ng-controller = "EraseDecisor as ed" ng-submit ="ed.eraseD()">
                             <h4><center>Delete Decisor {{dname}} {{dsurname}} ?</center></h4>
@@ -567,7 +572,7 @@
                 <center>
                   <select class="browser-default" ng-model = "ec.review.decisor">
                   <option value="" disabled selected>Decisor</option>
-                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>                  
+                  <option ng-repeat = "d in decisors" value = "{{d._id}}">{{d.name}} {{d.surname}}</option>
                 </select>
                 </center>
               </div>
@@ -575,7 +580,7 @@
             <div class="row" ng-repeat ="criteria in criterias" ng-show =" criteria.name != cname">
             <div class="col s4">
               <h6><span><center>This criteria has a</center></span></h6>
-              </div>            
+              </div>
               <div class="col s4">
                 <select class="browser-default" ng-model="criteria.fuzzyRating">
                   <option value="" disabled selected>Weight</option>
@@ -595,9 +600,9 @@
                 </div>
               </div>
                 <div class="col s4">
-                  <h6><span>weight comparing with {{criteria.name}}</span></h6>            
+                  <h6><span>weight comparing with {{criteria.name}}</span></h6>
                 </div>
-              </div>          
+              </div>
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -610,7 +615,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-                      
+
     </div>
 </div>
 <div id="eraseCriteriaModal" class="modal">
@@ -699,7 +704,7 @@
             <div class="row">
             <div class="col s4">
               <h6><span>This alternative has a</span></h6>
-              </div>            
+              </div>
               <div class="col s4">
                 <select class="browser-default" ng-model="ea.review.fuzzyRating">
                   <option value="" selected>Choose Weight</option>
@@ -717,7 +722,7 @@
                 </div>
               </div>
               <div class="col s4"><br>Weight</div>
-              </div>          
+              </div>
             <div class="row"></div>
             <div class="row"></div>
            <div class="row"></div>
@@ -730,7 +735,7 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-                      
+
     </div>
 </div>
 
@@ -743,7 +748,7 @@
         <ul>
         <li><blockquote class = " teal lighten-2"><center>Decisor Weight</center><br> The method needs an abstract valuation of every decisor, making reference to the other members of the group. For example: "this Decisor has a very Important weight, comparing with Decisor 2" </blockquote></li>
         <li><blockquote>
-          <center>Valuation of Criterias</center><br> Our problem has "criterias" that must be valued using Decisiors assessments, comparing them to each other. 
+          <center>Valuation of Criterias</center><br> Our problem has "criterias" that must be valued using Decisiors assessments, comparing them to each other.
         </blockquote></li>
         <li><blockquote class="light-green lighten-2">
           <center>Valuation of alternatives</center><br>Decisors must evaluate each possible solution for the problem, Using Criterias to get Closeness to the definitely solution.
@@ -802,10 +807,10 @@
       <p>
         <ul>
         <li><blockquote class = " lime accent-1"><center>Calculating the best Alternative</center><br>
-        You will get the best Alternative, based on all data you support to us. 
+        You will get the best Alternative, based on all data you support to us.
         </blockquote></li>
         <li><blockquote class="green accent-4">
-          <center>Ranking</center><br> 
+          <center>Ranking</center><br>
           You will get a rated list of all your  alternatives.
         </blockquote></li>
         </ul>
@@ -864,12 +869,12 @@
            <div class="row"></div>
            <div class="row"></div>
            <div class="row"></div>
-           
+
     </div>
 </div>
 
 
-              
+
 
 
 </body>

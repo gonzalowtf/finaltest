@@ -11,7 +11,7 @@ module.exports.list = function (req, res) {
   Problem.find({user:req.params.usr}, function (err, results) {
       res.json(results);
     });
-  
+
 }
 module.exports.delete = function (req, res) {
   var pid = req.params.id;
@@ -28,7 +28,7 @@ module.exports.update = function (req, res) {
   Problem.findById(pid, function (err, results) {
       if(err){
         console.log("err on update");
-      } 
+      }
       //console.log(req.body);
       if(req.body.type == "decisor"){
             if(req.body.action == "edit"){
@@ -48,7 +48,7 @@ module.exports.update = function (req, res) {
                   results.decisors[i].fuzzyValue3 = req.body.fuzzyValue3;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
                 }
               }
@@ -62,19 +62,19 @@ module.exports.update = function (req, res) {
                   if(results.selectionsCriterias[j].decisorId ==req.body._id ){
                       results.selectionsCriterias.splice(j,1);
                   }
-                  
+
                 }
                 for(j=0;j<results.selectionsAlternatives.length;j++){
                   if(results.selectionsAlternatives[j].decisorId ==req.body._id ){
                       results.selectionsAlternatives.splice(j,1);
                   }
-                  
+
                 }
                 results.decisors.splice(i,1);
                 results.nd = results.nd -1;
                 results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
 
                  break;
@@ -82,7 +82,7 @@ module.exports.update = function (req, res) {
             }
            }
             if(req.body.action == "add"){
-                  
+
                   var newD = {
                     name: req.body.name,
                     surname :req.body.surname,
@@ -97,11 +97,11 @@ module.exports.update = function (req, res) {
                   results.nd = results.nd +1;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully added"); 
+                      //console.log("decisor successfully added");
                    });
 
-                         
-           
+
+
                 }
     }
       else
@@ -120,7 +120,7 @@ module.exports.update = function (req, res) {
                   results.criterias[i].fuzzyValue3 = req.body.fuzzyValue3;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
                 }
 
@@ -137,20 +137,20 @@ module.exports.update = function (req, res) {
                       results.selectionsCriterias[j].comparations.splice(z,1);
                         }
                   }
-                
+
                   if(results.selectionsCriterias[j].criteriaId ==req.body._id ){
                       results.selectionsCriterias.splice(j,1);
                   }
-                  
-                  
-                
+
+
+
                 }
                 results.criterias.splice(i,1);
                 results.nc = results.nc -1;
-                               
+
                 results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
 
                  break;
@@ -159,7 +159,7 @@ module.exports.update = function (req, res) {
 
           }
           if(req.body.action == "add"){
-                  
+
                   var newC = {
                     name: req.body.name,
                     fuzzyRating : findCriteriaRating(req.body.fuzzyRating),
@@ -173,11 +173,11 @@ module.exports.update = function (req, res) {
                   results.nc = results.nc +1;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("criteria successfully added"); 
+                      //console.log("criteria successfully added");
                    });
 
-                         
-           
+
+
                 }
         }
         else
@@ -197,7 +197,7 @@ module.exports.update = function (req, res) {
                   results.alternatives[i].fuzzyValue3 = req.body.fuzzyValue3;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
                 }
 
@@ -213,13 +213,13 @@ module.exports.update = function (req, res) {
                   if(results.selectionsAlternatives[j].alternativeId ==req.body._id ){
                       results.selectionsAlternatives.splice(j,1);
                   }
-                  
+
                 }
                 results.alternatives.splice(i,1);
                 results.na = results.na -1;
                 results.save(function (err, result) {
                      res.json(result);
-                      //console.log("decisor successfully updated"); 
+                      //console.log("decisor successfully updated");
                    });
 
                  break;
@@ -227,7 +227,7 @@ module.exports.update = function (req, res) {
             }
             }
              if(req.body.action == "add"){
-                  
+
                   var newA = {
                     name: req.body.name,
                     fuzzyRating : findAlternativeRating(req.body.fuzzyRating),
@@ -241,11 +241,11 @@ module.exports.update = function (req, res) {
                   results.na = results.na +1;
                   results.save(function (err, result) {
                      res.json(result);
-                      //console.log("alternative successfully added"); 
+                      //console.log("alternative successfully added");
                    });
 
-                         
-           
+
+
                 }
           }
           else
@@ -263,12 +263,12 @@ module.exports.update = function (req, res) {
                             console.log("erased match" + result);
                                                   });*/
                         break;
-                      } 
+                      }
                     }
                   }
-                  
 
-            
+
+
               var newCComparations = {
                     decisorId :req.body.decisorId,
                     criteriaId: req.body.criteriaId,
@@ -296,7 +296,7 @@ module.exports.update = function (req, res) {
                                                   });*/
                         break;
                       }
-                      } 
+                      }
                     }
                   }
               var newAChoose = {
@@ -321,15 +321,16 @@ module.exports.update = function (req, res) {
 
       else{
       results.name= req.body.name;
+      results.description = req.body.description;
       //console.log(req.body.name + "just a problem name change request");
       results.save(function (err, result) {
         res.json(result);
-        //console.log("data successfully updated"); 
+        //console.log("data successfully updated");
       });
       }
       /*results.save(function (err, result) {
         res.json(result);
-        //console.log("data successfully updated"); 
+        //console.log("data successfully updated");
       });*/
   });
 }
@@ -339,14 +340,14 @@ module.exports.update = function (req, res) {
   Problem.findById(pid, function (err, results) {
       if(err){
         console.log("err on update");
-      } 
+      }
       //console.log(req.body.name);
-      
+
       results.decisors[req.body.index] = req.body
       //console.log(req.body.name);
       results.save(function (err, result) {
         res.json(result);
-        console.log("decisor info successfully updated"); 
+        console.log("decisor info successfully updated");
       });
   });
 }
@@ -441,7 +442,7 @@ function findAlternativeRating(fuzzyRating){
         if(fuzzyRating == "(9,10,10)"){
           rating = "Extremely High";
         }
-        
+
           return rating;
 }
 function findV1Decisor(fuzzyRating){
@@ -527,7 +528,7 @@ function findV1Decisor(fuzzyRating){
           return 0;
         }
         if(fuzzyRating == "(1,2,3)"){
-      return 1;       
+      return 1;
      }
         if(fuzzyRating == "(2,3,4)"){
           return 2;
@@ -556,7 +557,7 @@ function findV1Decisor(fuzzyRating){
           return 1;
         }
         if(fuzzyRating == "(1,2,3)"){
-      return 2;       
+      return 2;
      }
         if(fuzzyRating == "(2,3,4)"){
           return 3;
@@ -586,7 +587,7 @@ function findV1Decisor(fuzzyRating){
           return 2;
         }
         if(fuzzyRating == "(1,2,3)"){
-      return 3;       
+      return 3;
      }
         if(fuzzyRating == "(2,3,4)"){
           return 4;
