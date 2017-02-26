@@ -70,7 +70,7 @@ function toast5(){
 	eraseProblemClose();
 }
 function toast6(){
-	Materialize.toast("Problem name updated!",3000);
+	Materialize.toast("Problem edited!",3000);
 	editProblemClose();
 }
 function toast7(){
@@ -183,7 +183,7 @@ function eraseAccount(){
 }
 
 function getVar(){
-      
+
       var url = location.search.replace("?",",");
       var arr=url.split("&");
       var obj = {};
@@ -192,5 +192,5 @@ function getVar(){
         obj[x[0]]=x[1];
       }
       return obj;
-      
+
     }
