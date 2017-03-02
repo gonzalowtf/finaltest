@@ -300,7 +300,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 									w2: sqrt2,
 									w3: sqrt3
 								}
-								console.log(decisorSelection);
+								//console.log(decisorSelection);
 								CWeights.push(decisorSelection);
 
 							}
@@ -353,6 +353,7 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 
 
 			}
+			//console.log(CWeights);
 			//alternatives
 			var AWeights = [];
 			for(z =0; z< $scope.problemss.length;z++){
