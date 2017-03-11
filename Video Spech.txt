@@ -1,0 +1,135 @@
+Video Spech
+
+  1{Fuzzy Data for decision managing}
+
+  Hey there! this is fuzzy data for decision managing, a software to resolve a particular kind of problems that every person or group of persons
+  had when they try to figger out whats the best option aviable for a problem that requires a solution, and it s my final test to become an informatic engeneer
+  So..First of all lets see what parts or data theories where needed to develop this:
+    2{Fuzzy Data}
+     {Decision Making}
+    The Whole project is based on the development of a method that allow as to create problems (wich data structure we will whatch soon),
+    so for this development we need to know about the fuzzy data theory and the decision making theory.
+    Fuzzy data or fuzzy logic its a way of using diffuse maths to represent real expressions that cannot be quantificaded so easy.... this means that this theory
+    allow as to represent value judements that a user makes when this one try to manify something for example "Wrong" - "Wright" - "Less" -"More"- "High" - "Low"
+    or whatever
+    The way that we can use this kind of maths is by using the Fuzzy Numbers
+    3{Fuzzy Numbers}
+    these "fuzzy numbers" are numbers arrays that represents an expression.
+    The way that this math theory works is by using gemotric areas of geometric shapes, it could be any of them:
+    {triangles} {squares} {ellipses} {circles} {pentagons} anything....
+    we could use any shape that we want..... but there is a problem.....
+    if we use hexagons for example... we will need a 6 length array to every expression.... this should work as any shape but it would be
+    unnecessary complicated, the best is using 3 lenght arrays or 4 , in this case we will use triangles.
+    4{representacion de un triangulo de ejemplo}
+    So for example if we want to differentiate the triangles "Low" , "Medium" and "High" we should use something like this.
+     {los tres triangulos de ejemplo}
+    As you can see the 3 components of this triangles makes one of them bigger o lower that the other one. and thats pretty simple.
+    Now that we understand fuzzy logic, lets see some of ...
+    5{Decision Making}
+    theory.
+    we will see here some similities with the big data management for data mining aply.
+    this is because when a group of persons has to choose one of many alternatives to solve a problem,
+    they have to use criteria for it , this criteria in a organization , for example, cames from it history, it norms, ir objetives,
+    and all this can came from a process like data mining.
+    So ... for aply this theory to our method we need to set the following components to make it happen :
+
+      6-{decision makers} that we will call "decisors".
+      -{criteria} start points of evaluation.
+      -and the {alternatives} those are our possible solutions to a problem.
+    So we need the decisors making of these selections :
+      7-{decisors weights},
+      -{Criteria comparison},
+      and {Classify alternatives based on criteria}
+      this means that decisors need to differentiate between them.... becouse there could be an "important" decisor on the group,
+      or a "normal" decisor or maybe just the one that is the most important of them.
+      we need criteria comparisons of every decisor because we need to know wich of them are more important to all of them.
+      and finally we need the valuation of every decisor to the alternatives based on the criteria.
+
+     8 {method}
+
+     {loading info}-----{calculate results}
+     So now lets talk about the method itself.... all we just spoke about decision making could be our "part 1" of the method,
+     when the user loads all this info for the method management,
+     The second part, pretends to follow a few steps to manage this data and get the solution we want.
+     So lets talk about this second part:
+
+     {Calculate results}
+
+9     for getting our solution the method works this way:
+{
+    1: establishing the number of decisors and alternatives.
+    2: establishing criterias.
+    3: decisors choose their weights by concense.
+    4: every decisor differentiate every setted criteria with the others.
+    5: getting the consistent weights of criterias.
+    6: every decisor evaluates evey alternative based on the criterias.
+    7: ponderation of the alternatives weights with the consitent weights of each criteria.
+    8: groupal agregation.
+    9: ponderation of the resulting values of step 7 with consistent weights of decisors.
+    10: establishing the max and the min.
+    11: distances between, the final values with the max and the min.
+    12: calculate the final coeficient of the alternatives.
+}
+
+once we got the solution... the method will show us a rated table with the alternatives....
+so for example....
+
+10{Emotional stability.
+Oral communication skills.
+Personality.
+Experience.
+Confidence}
+
+let's assume that we've got a software company.. and we need to add a new programmer to our team. we know there are  3 persons who are the responsible to solve this problem.
+and let's assume that 3 candidates want the job.
+for making a decision, our 3 decisors have set these criterias:
+Emotional stability.
+Oral communication skills.
+Personality.
+Experience.
+Confidence
+According to the method, each decisor must differentiate
+ between each criterion in order to obtain the relevance for the final decision of the same.
+ so here are the comparisons of decisor 1,
+ 11{tabla decisor d1 criterios}
+ as you can see we cannot differentiate a criteria with itself,
+ and for this decisor "emotional stability" has a weak importance compared with "oral communication skills"
+ or "oral communication skills" has a strong importance compared with "emotional stability"
+ 
+ we have to do the same thing for all of them.
+ and then we will do the same for the other 2 decisors
+ 12{tabla decisor d2 criterios}
+ 13{tabla decisor d3 criterios}
+
+
+
+ 14{pesos consistentes de criterios}  and then the method get the consistent weights for each criteria
+ as we can see on this js array
+
+
+now that we have classified the criteria,we need to go forward with alternatives,
+on this case every decisor have to set the weight of each possible programmer compared with a criteria
+15{da1}
+for exaample here for decisor 1 the candidate 1 has a "medium" weight based on "emotional stability"
+16{da2}
+and alllll the same for the rest of candidates
+17{da3}
+
+
+finally we will set the next weights for the decisors:
+18{weights of decisors}
+method will get it consistent weight too
+
+so if we go now to the method....
+
+we have here all data of our example already loaded
+once this is done all we have to do is press on "calculate results" and we will get our solution
+
+19{Calculate results}  For calculating results method use "distances" between the fuzzy numbers,
+                        using the first math form,
+                        then method establish that number (0,0,0) is the lowest fuzzy value
+                        and (1,1,1) the hightest
+                        so the method calculates the distance between every alternative to lowest and the highest vale
+                        with this to values we calculate finally the coeficient fo all posible solution.
+                        so the solution that cloessness to the highest value and remote to the lowest , will be
+                        the best solution. 
