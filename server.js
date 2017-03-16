@@ -117,8 +117,6 @@ mongoose.connect(url2,function(err){
 
 app.get('/', function(req, res) {
           //console.log(req.url);  actual direction
-          console.log('session index?' + req.session.username);
-          console.log('session index?' + req.session.user_id);
           res.sendfile(__dirname + '/index.html');
           //res.end("hello world!");
 
@@ -151,9 +149,7 @@ app.get('/', function(req, res) {
 
 app.get('/method', function(req, res) {
           //console.log(req.url);  actual direction
-          console.log('session method?' + req.session.username);
-          console.log('session method?' + req.session.user_id);
-					var retry = 1;
+          var retry = 1;
 
 							if(req.session.username){
 		          	res.sendfile(__dirname + '/method/method.html');

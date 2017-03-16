@@ -131,12 +131,13 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 					$scope.username =user.data.username;
 					$scope.userID = user.data._id;
 					$scope.problemss = results.data;
-					for(i =0; i< $scope.problemss.length;i++){
+					/*for(i =0; i< $scope.problemss.length;i++){
 						//console.log($scope.problemss[i].criterias);
 						$scope.criterias = $scope.problemss[i].criterias;
 						$scope.decisors =$scope.problemss[i].decisors;
 
 					}
+					*/
 					});
 
 		});
@@ -153,6 +154,19 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			serveProblemName.name = $scope.pName;
 			serveProblemName.description = $scope.pDesc;
 			serveProblemName.id = idp;
+			for(i =0; i< $scope.problemss.length;i++){
+				//console.log($scope.problemss[i].criterias);
+				if($scope.problemss[i]._id == idp ){
+				$scope.criterias = $scope.problemss[i].criterias;
+				$scope.selectionsCriterias =$scope.problemss[i].selectionsCriterias;
+				$scope.selectionsCriterias =$scope.problemss[i].selectionsCriterias;
+				$scope.selectionsAlternatives =$scope.problemss[i].selectionsAlternatives;
+				$scope.decisors =$scope.problemss[i].decisors;
+			}
+			else{
+			}
+			}
+
 			$scope.results = [];
 		};
 
@@ -208,13 +222,13 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 			$scope.cid = criteriaid;
 			$scope.cname = criterianame;
 
-			for(i =0; i< $scope.problemss.length;i++){
+			/*for(i =0; i< $scope.problemss.length;i++){
 				//console.log($scope.problemss[i].criterias);
 				$scope.criterias = $scope.problemss[i].criterias;
 				$scope.decisors =$scope.problemss[i].decisors;
 				$scope.selectionsCriterias =$scope.problemss[i].selectionsCriterias;
 
-			}
+			}*/
 			/*$scope.criterias = $http.get('/api/problems/',{
 				problemID :$scope.pName.id,
 				getType: "criterias"
@@ -224,13 +238,14 @@ app.controller('SignUpController',['$scope','$http','serveUsername',function($sc
 		$scope.alternativeId = function(alternativeid,alternativename){
 			$scope.aid = alternativeid;
 			$scope.aname = alternativename;
-			for(i =0; i< $scope.problemss.length;i++){
+			/*for(i =0; i< $scope.problemss.length;i++){
 				//console.log($scope.problemss[i].criterias);
 				$scope.decisors =$scope.problemss[i].decisors;
 				$scope.selectionsAlternatives =$scope.problemss[i].selectionsAlternatives;
 				// this las line have no use yet
 
 			}
+			*/
 
 		}
 		$scope.destroySession = function(){
